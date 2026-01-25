@@ -319,9 +319,9 @@ namespace CarRentalDAL.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Discriminator", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "a09dda91-f601-4430-bef9-a1a4d300cf66", null, "AppRole", "Admin", "ADMIN" },
-                    { "c96a0ee5-aa02-4a61-8be3-6a518cf0dbf6", null, "AppRole", "Customer", "CUSTOMER" },
-                    { "d18237c2-29f7-48ee-a860-2eacec23d23b", null, "AppRole", "Owner", "OWNER" }
+                    { "15535edd-7b89-469a-9810-10881985635a", null, "AppRole", "Owner", "OWNER" },
+                    { "659e9b30-6efa-43bc-876d-d182169ef7f6", null, "AppRole", "Admin", "ADMIN" },
+                    { "7f92c80f-139e-4235-a05a-f6d7a13ca1f5", null, "AppRole", "Customer", "CUSTOMER" }
                 });
 
             migrationBuilder.InsertData(
@@ -329,9 +329,9 @@ namespace CarRentalDAL.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "05ea6280-2731-4a90-af38-da7a32ff9f09", 0, "b84b2100-b1bc-476d-8594-6b2a0aa1f33f", "owner@system.com", true, false, null, "OWNER@SYSTEM.COM", "OWNER@SYSTEM.COM", "AQAAAAIAAYagAAAAEGW6Ao/MawurlJMMDjz7Dk9kT3Hkk+irzOUpGeG0Ux5npZ6TBZ/CCHtYKXmBdSsh4g==", null, false, "769192ed-af4b-409f-ac43-e0f7e0833cee", false, "owner@system.com" },
-                    { "7af36a73-c373-42eb-9582-6bfef7e832d9", 0, "9df61a77-d9ee-4de7-84ac-f19531c7249b", "customer@system.com", true, false, null, "CUSTOMER@SYSTEM.COM", "CUSTOMER@SYSTEM.COM", "AQAAAAIAAYagAAAAEIs5WgG3A9fkL9HxVfTfG18lQjUFFLt/xhOM7oXYF4aYvR/ZKmdSye3yQYul6TjvlQ==", null, false, "8bcc45cf-477a-4133-9985-3567172dd64a", false, "customer@system.com" },
-                    { "fdbe7929-2d9f-48ae-b982-37e69faf67b8", 0, "b06c1eae-6ad7-4d07-b2a4-dab3f996de41", "admin@system.com", true, false, null, "ADMIN@SYSTEM.COM", "ADMIN@SYSTEM.COM", "AQAAAAIAAYagAAAAEL1xMMDonxjxPsv4hvQ2hjeyCYkv0x0+UktBnvRFWo8cqAGK1tqSfAi66ut9In/QGA==", null, false, "2250e572-7a04-4ab9-84f9-b62faf3ee343", false, "admin@system.com" }
+                    { "62af906a-7709-4a6d-9a7c-c5d7fac7050e", 0, "c43da616-3330-4773-b966-57fab86ecb7f", "owner@system.com", true, false, null, "OWNER@SYSTEM.COM", "OWNER@SYSTEM.COM", "AQAAAAIAAYagAAAAEKIwjJHzOxziiP0KTlsmoKghso6NZAsN8kIMSQbPN50KcsIeLRCpeNaphvBRcKEkhQ==", null, false, "a894097a-e692-465d-af9c-97c03512d8c2", false, "owner@system.com" },
+                    { "79d00890-30de-448f-846e-c73b8710819a", 0, "63c5a544-62e0-41a8-ac1a-d47f24aee752", "admin@system.com", true, false, null, "ADMIN@SYSTEM.COM", "ADMIN@SYSTEM.COM", "AQAAAAIAAYagAAAAEEN0Ao4N1p1nEAQz0qZb7QVuOsLPtH2EHVZj345/cy2hdptt564D4IW9SSJ54TM7kA==", null, false, "b253da3a-81fd-495c-b3c3-ca7072b7b672", false, "admin@system.com" },
+                    { "c36445bc-5d66-4694-a3be-db09c8346b00", 0, "aa51737f-29ac-4c8d-8ab8-58ace5057dc4", "customer@system.com", true, false, null, "CUSTOMER@SYSTEM.COM", "CUSTOMER@SYSTEM.COM", "AQAAAAIAAYagAAAAEFcw13Gp0XUtkC1T1GVI3bNwf0qpOCPz40ph6RI+N8m5DbkO5Sf7RiTRskxXt6PBtQ==", null, false, "41b54eb6-6f2e-4e42-b8fd-2666e1a2bd51", false, "customer@system.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -339,9 +339,9 @@ namespace CarRentalDAL.Migrations
                 columns: new[] { "RoleId", "UserId" },
                 values: new object[,]
                 {
-                    { "d18237c2-29f7-48ee-a860-2eacec23d23b", "05ea6280-2731-4a90-af38-da7a32ff9f09" },
-                    { "c96a0ee5-aa02-4a61-8be3-6a518cf0dbf6", "7af36a73-c373-42eb-9582-6bfef7e832d9" },
-                    { "a09dda91-f601-4430-bef9-a1a4d300cf66", "fdbe7929-2d9f-48ae-b982-37e69faf67b8" }
+                    { "15535edd-7b89-469a-9810-10881985635a", "62af906a-7709-4a6d-9a7c-c5d7fac7050e" },
+                    { "659e9b30-6efa-43bc-876d-d182169ef7f6", "79d00890-30de-448f-846e-c73b8710819a" },
+                    { "7f92c80f-139e-4235-a05a-f6d7a13ca1f5", "c36445bc-5d66-4694-a3be-db09c8346b00" }
                 });
 
             migrationBuilder.InsertData(
@@ -349,24 +349,24 @@ namespace CarRentalDAL.Migrations
                 columns: new[] { "Id", "Brand", "Capacity", "Color", "ModelYear", "Name", "OwnerUserId", "PlateNumber", "Rate", "Status" },
                 values: new object[,]
                 {
-                    { 1, "Toyota", 5, "White", 2021, "Toyota Corolla", "05ea6280-2731-4a90-af38-da7a32ff9f09", "ABC-123", 50m, "Available" },
-                    { 2, "Honda", 5, "Black", 2022, "Honda Civic", "05ea6280-2731-4a90-af38-da7a32ff9f09", "XYZ-456", 60m, "Available" }
+                    { 1, "Toyota", 5, "White", 2021, "Toyota Corolla", "62af906a-7709-4a6d-9a7c-c5d7fac7050e", "ABC-123", 50m, "Available" },
+                    { 2, "Honda", 5, "Black", 2022, "Honda Civic", "62af906a-7709-4a6d-9a7c-c5d7fac7050e", "XYZ-456", 60m, "Available" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Rentals",
                 columns: new[] { "Id", "ActualDate", "CarId", "CustomerUserId", "OwnerUserId", "RentalDate", "ReturnDate", "Status" },
-                values: new object[] { 1, null, 1, "7af36a73-c373-42eb-9582-6bfef7e832d9", "05ea6280-2731-4a90-af38-da7a32ff9f09", new DateTime(2026, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2026, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "Active" });
+                values: new object[] { 1, null, 1, "c36445bc-5d66-4694-a3be-db09c8346b00", "62af906a-7709-4a6d-9a7c-c5d7fac7050e", new DateTime(2026, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2026, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "Active" });
 
             migrationBuilder.InsertData(
                 table: "Reviews",
                 columns: new[] { "Id", "CarId", "CustomerUserId", "Date", "Score", "Text", "Title" },
-                values: new object[] { 1, 1, "7af36a73-c373-42eb-9582-6bfef7e832d9", new DateTime(2026, 1, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, null, "Great car!" });
+                values: new object[] { 1, 1, "c36445bc-5d66-4694-a3be-db09c8346b00", new DateTime(2026, 1, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, null, "Great car!" });
 
             migrationBuilder.InsertData(
                 table: "Payments",
                 columns: new[] { "Id", "AdminUserId", "Amount", "PaymentDate", "PaymentType", "RentalId" },
-                values: new object[] { 1, "fdbe7929-2d9f-48ae-b982-37e69faf67b8", 150m, new DateTime(2026, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Deposit", 1 });
+                values: new object[] { 1, "79d00890-30de-448f-846e-c73b8710819a", 150m, new DateTime(2026, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Deposit", 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

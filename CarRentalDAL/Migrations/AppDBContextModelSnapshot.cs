@@ -89,49 +89,49 @@ namespace CarRentalDAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "fdbe7929-2d9f-48ae-b982-37e69faf67b8",
+                            Id = "79d00890-30de-448f-846e-c73b8710819a",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b06c1eae-6ad7-4d07-b2a4-dab3f996de41",
+                            ConcurrencyStamp = "63c5a544-62e0-41a8-ac1a-d47f24aee752",
                             Email = "admin@system.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@SYSTEM.COM",
                             NormalizedUserName = "ADMIN@SYSTEM.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEL1xMMDonxjxPsv4hvQ2hjeyCYkv0x0+UktBnvRFWo8cqAGK1tqSfAi66ut9In/QGA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEN0Ao4N1p1nEAQz0qZb7QVuOsLPtH2EHVZj345/cy2hdptt564D4IW9SSJ54TM7kA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2250e572-7a04-4ab9-84f9-b62faf3ee343",
+                            SecurityStamp = "b253da3a-81fd-495c-b3c3-ca7072b7b672",
                             TwoFactorEnabled = false,
                             UserName = "admin@system.com"
                         },
                         new
                         {
-                            Id = "05ea6280-2731-4a90-af38-da7a32ff9f09",
+                            Id = "62af906a-7709-4a6d-9a7c-c5d7fac7050e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b84b2100-b1bc-476d-8594-6b2a0aa1f33f",
+                            ConcurrencyStamp = "c43da616-3330-4773-b966-57fab86ecb7f",
                             Email = "owner@system.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "OWNER@SYSTEM.COM",
                             NormalizedUserName = "OWNER@SYSTEM.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGW6Ao/MawurlJMMDjz7Dk9kT3Hkk+irzOUpGeG0Ux5npZ6TBZ/CCHtYKXmBdSsh4g==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKIwjJHzOxziiP0KTlsmoKghso6NZAsN8kIMSQbPN50KcsIeLRCpeNaphvBRcKEkhQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "769192ed-af4b-409f-ac43-e0f7e0833cee",
+                            SecurityStamp = "a894097a-e692-465d-af9c-97c03512d8c2",
                             TwoFactorEnabled = false,
                             UserName = "owner@system.com"
                         },
                         new
                         {
-                            Id = "7af36a73-c373-42eb-9582-6bfef7e832d9",
+                            Id = "c36445bc-5d66-4694-a3be-db09c8346b00",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9df61a77-d9ee-4de7-84ac-f19531c7249b",
+                            ConcurrencyStamp = "aa51737f-29ac-4c8d-8ab8-58ace5057dc4",
                             Email = "customer@system.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "CUSTOMER@SYSTEM.COM",
                             NormalizedUserName = "CUSTOMER@SYSTEM.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEIs5WgG3A9fkL9HxVfTfG18lQjUFFLt/xhOM7oXYF4aYvR/ZKmdSye3yQYul6TjvlQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFcw13Gp0XUtkC1T1GVI3bNwf0qpOCPz40ph6RI+N8m5DbkO5Sf7RiTRskxXt6PBtQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "8bcc45cf-477a-4133-9985-3567172dd64a",
+                            SecurityStamp = "41b54eb6-6f2e-4e42-b8fd-2666e1a2bd51",
                             TwoFactorEnabled = false,
                             UserName = "customer@system.com"
                         });
@@ -193,7 +193,7 @@ namespace CarRentalDAL.Migrations
                             Color = "White",
                             ModelYear = 2021,
                             Name = "Toyota Corolla",
-                            OwnerUserId = "05ea6280-2731-4a90-af38-da7a32ff9f09",
+                            OwnerUserId = "62af906a-7709-4a6d-9a7c-c5d7fac7050e",
                             PlateNumber = "ABC-123",
                             Rate = 50m,
                             Status = "Available"
@@ -206,7 +206,7 @@ namespace CarRentalDAL.Migrations
                             Color = "Black",
                             ModelYear = 2022,
                             Name = "Honda Civic",
-                            OwnerUserId = "05ea6280-2731-4a90-af38-da7a32ff9f09",
+                            OwnerUserId = "62af906a-7709-4a6d-9a7c-c5d7fac7050e",
                             PlateNumber = "XYZ-456",
                             Rate = 60m,
                             Status = "Available"
@@ -276,7 +276,7 @@ namespace CarRentalDAL.Migrations
                         new
                         {
                             Id = 1,
-                            AdminUserId = "fdbe7929-2d9f-48ae-b982-37e69faf67b8",
+                            AdminUserId = "79d00890-30de-448f-846e-c73b8710819a",
                             Amount = 150m,
                             PaymentDate = new DateTime(2026, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PaymentType = "Deposit",
@@ -331,8 +331,8 @@ namespace CarRentalDAL.Migrations
                         {
                             Id = 1,
                             CarId = 1,
-                            CustomerUserId = "7af36a73-c373-42eb-9582-6bfef7e832d9",
-                            OwnerUserId = "05ea6280-2731-4a90-af38-da7a32ff9f09",
+                            CustomerUserId = "c36445bc-5d66-4694-a3be-db09c8346b00",
+                            OwnerUserId = "62af906a-7709-4a6d-9a7c-c5d7fac7050e",
                             RentalDate = new DateTime(2026, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ReturnDate = new DateTime(2026, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Active"
@@ -379,7 +379,7 @@ namespace CarRentalDAL.Migrations
                         {
                             Id = 1,
                             CarId = 1,
-                            CustomerUserId = "7af36a73-c373-42eb-9582-6bfef7e832d9",
+                            CustomerUserId = "c36445bc-5d66-4694-a3be-db09c8346b00",
                             Date = new DateTime(2026, 1, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Score = 5,
                             Title = "Great car!"
@@ -538,18 +538,18 @@ namespace CarRentalDAL.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "fdbe7929-2d9f-48ae-b982-37e69faf67b8",
-                            RoleId = "a09dda91-f601-4430-bef9-a1a4d300cf66"
+                            UserId = "79d00890-30de-448f-846e-c73b8710819a",
+                            RoleId = "659e9b30-6efa-43bc-876d-d182169ef7f6"
                         },
                         new
                         {
-                            UserId = "05ea6280-2731-4a90-af38-da7a32ff9f09",
-                            RoleId = "d18237c2-29f7-48ee-a860-2eacec23d23b"
+                            UserId = "62af906a-7709-4a6d-9a7c-c5d7fac7050e",
+                            RoleId = "15535edd-7b89-469a-9810-10881985635a"
                         },
                         new
                         {
-                            UserId = "7af36a73-c373-42eb-9582-6bfef7e832d9",
-                            RoleId = "c96a0ee5-aa02-4a61-8be3-6a518cf0dbf6"
+                            UserId = "c36445bc-5d66-4694-a3be-db09c8346b00",
+                            RoleId = "7f92c80f-139e-4235-a05a-f6d7a13ca1f5"
                         });
                 });
 
@@ -581,19 +581,19 @@ namespace CarRentalDAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "a09dda91-f601-4430-bef9-a1a4d300cf66",
+                            Id = "659e9b30-6efa-43bc-876d-d182169ef7f6",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "d18237c2-29f7-48ee-a860-2eacec23d23b",
+                            Id = "15535edd-7b89-469a-9810-10881985635a",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         },
                         new
                         {
-                            Id = "c96a0ee5-aa02-4a61-8be3-6a518cf0dbf6",
+                            Id = "7f92c80f-139e-4235-a05a-f6d7a13ca1f5",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
