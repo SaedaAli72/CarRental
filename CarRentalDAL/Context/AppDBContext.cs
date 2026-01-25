@@ -1,0 +1,255 @@
+﻿using CarRentalDAL.Entities;
+using CarRentalDAL.Enums;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Reflection.Emit;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CarRentalDAL.Context
+{
+    public class AppDBContext :IdentityDbContext<AppUser>
+    {
+        public AppDBContext(DbContextOptions<AppDBContext> options):base(options)
+        {
+            
+        }
+
+        public DbSet<AppUser> Users { get; set; } 
+        public DbSet<AppRole> Roles { get; set; } 
+        public DbSet<Car> Cars { get; set; }
+        public DbSet<Rental> Rentals { get; set; }
+        public DbSet<Review> Reviews { get; set; }
+        public DbSet<Payment> Payments { get; set;}
+        public DbSet<UserDocument> UserDocuments { get; set; }
+        public DbSet<CarImage> CarImages { get; set; }
+
+        
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+            #region Relations
+
+            #region User-Car
+            builder.Entity<AppUser>()
+                    .HasMany(u => u.Cars)
+                    .WithOne(c => c.OwnerUser)
+                    .HasForeignKey(c => c.OwnerUserId)
+                    .OnDelete(DeleteBehavior.NoAction);
+            #endregion
+
+            #region User-Rental-Owner
+            builder.Entity<AppUser>()
+                    .HasMany(u => u.OwnerRentals)
+                    .WithOne(r => r.OwnerUser)
+                    .HasForeignKey(r => r.OwnerUserId)
+                    .OnDelete(DeleteBehavior.NoAction);
+            #endregion
+
+            #region User-Rental-Customer
+            builder.Entity<AppUser>()
+                    .HasMany(u => u.CustomerRentals)
+                    .WithOne(r => r.CustomerUser)
+                    .HasForeignKey(r => r.CustomerUserId)
+                    .OnDelete(DeleteBehavior.NoAction);
+            #endregion
+
+            #region User-Payment
+            builder.Entity<AppUser>()
+                    .HasMany(u => u.Payments)
+                    .WithOne(p => p.AdminUser)
+                    .HasForeignKey(p => p.AdminUserId)
+                    .OnDelete(DeleteBehavior.NoAction);
+            #endregion
+
+            #region User-Review
+            builder.Entity<AppUser>()
+                    .HasMany(u => u.Reviews)
+                    .WithOne(r => r.CustomerUser)
+                    .HasForeignKey(r => r.CustomerUserId)
+                    .OnDelete(DeleteBehavior.NoAction);
+            #endregion
+
+            #region User-Document
+            builder.Entity<AppUser>()
+                    .HasMany(u => u.UserDocuments)
+                    .WithOne(d => d.AppUser)
+                    .HasForeignKey(d => d.AppUserId)
+                    .OnDelete(DeleteBehavior.NoAction);
+            #endregion
+
+            #region Car-Rental
+            builder.Entity<Car>()
+                    .HasMany(c => c.Rentals)
+                    .WithOne(r => r.Car)
+                    .HasForeignKey(r => r.CarId)
+                    .OnDelete(DeleteBehavior.NoAction);
+            #endregion
+
+            #region Car-Review
+            builder.Entity<Car>()
+                    .HasMany(c => c.Reviews)
+                    .WithOne(r => r.Car)
+                    .HasForeignKey(r => r.CarId)
+                    .OnDelete(DeleteBehavior.NoAction);
+            #endregion
+
+            #region Car-Image
+            builder.Entity<Car>()
+                    .HasMany(c => c.CarImages)
+                    .WithOne(i => i.Car)
+                    .HasForeignKey(i => i.CarId)
+                    .OnDelete(DeleteBehavior.NoAction);
+            #endregion
+
+            #region Rental-Payment
+            builder.Entity<Rental>()
+                    .HasMany(r => r.Payments)
+                    .WithOne(p => p.Rental)
+                    .HasForeignKey(p => p.RentalId)
+                    .OnDelete(DeleteBehavior.NoAction);
+            #endregion
+
+            #endregion
+
+            // =================== Roles ===================
+            var adminRoleId = Guid.NewGuid().ToString();
+            var ownerRoleId = Guid.NewGuid().ToString();
+            var customerRoleId = Guid.NewGuid().ToString();
+
+            builder.Entity<AppRole>().HasData(
+                new AppRole { Id = adminRoleId, Name = "Admin", NormalizedName = "ADMIN" },
+                new AppRole { Id = ownerRoleId, Name = "Owner", NormalizedName = "OWNER" },
+                new AppRole { Id = customerRoleId, Name = "Customer", NormalizedName = "CUSTOMER" }
+            );
+
+            // =================== Users ===================
+            var adminUserId = Guid.NewGuid().ToString();
+            var ownerUserId = Guid.NewGuid().ToString();
+            var customerUserId = Guid.NewGuid().ToString();
+
+            var hasher = new PasswordHasher<AppUser>();
+
+            builder.Entity<AppUser>().HasData(
+                new AppUser
+                {
+                    Id = adminUserId,
+                    UserName = "admin@system.com",
+                    NormalizedUserName = "ADMIN@SYSTEM.COM",
+                    Email = "admin@system.com",
+                    NormalizedEmail = "ADMIN@SYSTEM.COM",
+                    EmailConfirmed = true,
+                    PasswordHash = hasher.HashPassword(null, "Admin@123"),
+                    SecurityStamp = Guid.NewGuid().ToString()
+                },
+                new AppUser
+                {
+                    Id = ownerUserId,
+                    UserName = "owner@system.com",
+                    NormalizedUserName = "OWNER@SYSTEM.COM",
+                    Email = "owner@system.com",
+                    NormalizedEmail = "OWNER@SYSTEM.COM",
+                    EmailConfirmed = true,
+                    PasswordHash = hasher.HashPassword(null, "Owner@123"),
+                    SecurityStamp = Guid.NewGuid().ToString()
+                },
+                new AppUser
+                {
+                    Id = customerUserId,
+                    UserName = "customer@system.com",
+                    NormalizedUserName = "CUSTOMER@SYSTEM.COM",
+                    Email = "customer@system.com",
+                    NormalizedEmail = "CUSTOMER@SYSTEM.COM",
+                    EmailConfirmed = true,
+                    PasswordHash = hasher.HashPassword(null, "Customer@123"),
+                    SecurityStamp = Guid.NewGuid().ToString()
+                }
+            );
+
+            // =================== Assign Roles to Users ===================
+            builder.Entity<IdentityUserRole<string>>().HasData(
+                new IdentityUserRole<string> { UserId = adminUserId, RoleId = adminRoleId },
+                new IdentityUserRole<string> { UserId = ownerUserId, RoleId = ownerRoleId },
+                new IdentityUserRole<string> { UserId = customerUserId, RoleId = customerRoleId }
+            );
+
+            // =================== Cars ===================
+            builder.Entity<Car>().HasData(
+                new Car
+                {
+                    Id = 1,
+                    Name = "Toyota Corolla",
+                    Brand = "Toyota",
+                    ModelYear = 2021,
+                    PlateNumber = "ABC-123",
+                    Color = "White",
+                    Capacity = 5,
+                    Rate = 50,
+                    Status = CarStatus.Available,
+                    OwnerUserId = ownerUserId
+                },
+                new Car
+                {
+                    Id = 2,
+                    Name = "Honda Civic",
+                    Brand = "Honda",
+                    ModelYear = 2022,
+                    PlateNumber = "XYZ-456",
+                    Color = "Black",
+                    Capacity = 5,
+                    Rate = 60,
+                    Status = CarStatus.Available,
+                    OwnerUserId = ownerUserId
+                }
+            );
+
+            // =================== Rentals ===================
+            builder.Entity<Rental>().HasData(
+                new Rental
+                {
+                    Id = 1,
+                    CarId = 1,
+                    CustomerUserId = customerUserId,
+                    OwnerUserId = ownerUserId,
+                    RentalDate = new DateTime(2026, 1, 20),
+                    ReturnDate = new DateTime(2026, 1, 25),
+                    ActualDate = null,
+                    Status = RentalStatus.Active
+                }
+            );
+
+            // =================== Payments ===================
+            builder.Entity<Payment>().HasData(
+                new Payment
+                {
+                    Id = 1,
+                    RentalId = 1,
+                    Amount = 150,
+                    PaymentDate = new DateTime(2026, 1, 20),
+                    PaymentType = PaymentType.Deposit,
+                    AdminUserId = adminUserId
+                }
+            );
+
+            // =================== Reviews ===================
+            builder.Entity<Review>().HasData(
+                new Review
+                {
+                    Id = 1,
+                    CarId = 1,
+                    CustomerUserId = customerUserId,
+                    Title = "Great car!",
+                    Score = 5,
+                    Date = new DateTime(2026, 1, 22)
+                }
+            );
+        }
+    }
+}
