@@ -9,19 +9,16 @@ namespace CarRentalDAL.Entities
 {
     public class Payment
     {
-        public int Id { get; set; }
+        public string Id { get; set; } = Guid.NewGuid().ToString();
         public decimal Amount { get; set; }
         public DateTime PaymentDate { get; set; }
         //public decimal AddedCharges { get; set; } // not needed 
         public PaymentType PaymentType { get; set; } //enum =? Deposit - Rent - latefee
 
-        #region AdminUser
-        public string AdminUserId { get; set; }
-        public AppUser AdminUser { get; set; }
-        #endregion
+      
 
         #region Rental
-        public int RentalId { get; set; }
+        public string RentalId { get; set; }
         public Rental Rental { get; set; } 
         #endregion
     }

@@ -4,7 +4,7 @@ namespace CarRentalDAL.Entities
 {
     public class Rental
     {
-        public int Id { get; set; }
+        public string Id { get; set; } = Guid.NewGuid().ToString();
         public DateTime RentalDate { get; set; }
         public DateTime? ActualDate { get; set; }
         public DateTime ReturnDate { get; set; }
@@ -21,7 +21,7 @@ namespace CarRentalDAL.Entities
         #endregion
 
         #region Car
-        public int CarId { get; set; }
+        public string CarId { get; set; }
         public Car Car { get; set; }
         #endregion
 

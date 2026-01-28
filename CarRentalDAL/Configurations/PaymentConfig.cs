@@ -13,6 +13,11 @@ namespace CarRentalDAL.Configurations
     {
         public void Configure(EntityTypeBuilder<Payment> builder)
         {
+            builder.HasKey(p => p.Id);
+            builder.Property(p => p.Id)
+                .IsRequired()
+                .HasMaxLength(36);
+
             builder.Property(p => p.PaymentType)
                 .HasConversion<string>();
         }

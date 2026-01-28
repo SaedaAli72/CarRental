@@ -8,12 +8,12 @@ namespace CarRentalDAL.Entities
 {
     public class CarImage
     {
-        public int Id { get; set; }
+        public string Id { get; set; } = Guid.NewGuid().ToString();
         public string Description { get; set; }
         public string ImagePath { get; set; }
 
         #region Car
-        public int CarId { get; set; }
+        public string CarId { get; set; }
         public Car Car { get; set; } 
         #endregion
     }

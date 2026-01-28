@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace CarRentalDAL.Migrations
 {
     /// <inheritdoc />
-    public partial class initialCreate : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -29,7 +29,7 @@ namespace CarRentalDAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUsers",
+                name: "Users",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -50,11 +50,11 @@ namespace CarRentalDAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetRoleClaims",
+                name: "RoleClaims",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -65,96 +65,11 @@ namespace CarRentalDAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetRoleClaims", x => x.Id);
+                    table.PrimaryKey("PK_RoleClaims", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
+                        name: "FK_RoleClaims_AspNetRoles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUserClaims",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUserClaims", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AspNetUserClaims_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUserLogins",
-                columns: table => new
-                {
-                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUserLogins", x => new { x.LoginProvider, x.ProviderKey });
-                    table.ForeignKey(
-                        name: "FK_AspNetUserLogins_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUserRoles",
-                columns: table => new
-                {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUserRoles", x => new { x.UserId, x.RoleId });
-                    table.ForeignKey(
-                        name: "FK_AspNetUserRoles_AspNetRoles_RoleId",
-                        column: x => x.RoleId,
-                        principalTable: "AspNetRoles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_AspNetUserRoles_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUserTokens",
-                columns: table => new
-                {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
-                    table.ForeignKey(
-                        name: "FK_AspNetUserTokens_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -163,8 +78,7 @@ namespace CarRentalDAL.Migrations
                 name: "Cars",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Brand = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ModelYear = table.Column<int>(type: "int", nullable: false),
@@ -179,18 +93,38 @@ namespace CarRentalDAL.Migrations
                 {
                     table.PrimaryKey("PK_Cars", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Cars_AspNetUsers_OwnerUserId",
+                        name: "FK_Cars_Users_OwnerUserId",
                         column: x => x.OwnerUserId,
-                        principalTable: "AspNetUsers",
+                        principalTable: "Users",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserClaims",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserClaims", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserClaims_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "UserDocuments",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
                     FilePath = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DocumentType = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
@@ -199,21 +133,84 @@ namespace CarRentalDAL.Migrations
                 {
                     table.PrimaryKey("PK_UserDocuments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserDocuments_AspNetUsers_AppUserId",
+                        name: "FK_UserDocuments_Users_AppUserId",
                         column: x => x.AppUserId,
-                        principalTable: "AspNetUsers",
+                        principalTable: "Users",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserLogins",
+                columns: table => new
+                {
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserLogins", x => new { x.LoginProvider, x.ProviderKey });
+                    table.ForeignKey(
+                        name: "FK_UserLogins_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserRoles",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserRoles", x => new { x.UserId, x.RoleId });
+                    table.ForeignKey(
+                        name: "FK_UserRoles_AspNetRoles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserRoles_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserTokens",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
+                    table.ForeignKey(
+                        name: "FK_UserTokens_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "CarImages",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CarId = table.Column<int>(type: "int", nullable: false)
+                    CarId = table.Column<string>(type: "nvarchar(36)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -229,33 +226,32 @@ namespace CarRentalDAL.Migrations
                 name: "Rentals",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
                     RentalDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ActualDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ReturnDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CustomerUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     OwnerUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CarId = table.Column<int>(type: "int", nullable: false)
+                    CarId = table.Column<string>(type: "nvarchar(36)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Rentals", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Rentals_AspNetUsers_CustomerUserId",
-                        column: x => x.CustomerUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Rentals_AspNetUsers_OwnerUserId",
-                        column: x => x.OwnerUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
                         name: "FK_Rentals_Cars_CarId",
                         column: x => x.CarId,
                         principalTable: "Cars",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Rentals_Users_CustomerUserId",
+                        column: x => x.CustomerUserId,
+                        principalTable: "Users",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Rentals_Users_OwnerUserId",
+                        column: x => x.OwnerUserId,
+                        principalTable: "Users",
                         principalColumn: "Id");
                 });
 
@@ -263,27 +259,26 @@ namespace CarRentalDAL.Migrations
                 name: "Reviews",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Text = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Score = table.Column<int>(type: "int", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CustomerUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CarId = table.Column<int>(type: "int", nullable: false)
+                    CarId = table.Column<string>(type: "nvarchar(36)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Reviews", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Reviews_AspNetUsers_CustomerUserId",
-                        column: x => x.CustomerUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
                         name: "FK_Reviews_Cars_CarId",
                         column: x => x.CarId,
                         principalTable: "Cars",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Reviews_Users_CustomerUserId",
+                        column: x => x.CustomerUserId,
+                        principalTable: "Users",
                         principalColumn: "Id");
                 });
 
@@ -291,26 +286,25 @@ namespace CarRentalDAL.Migrations
                 name: "Payments",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
                     Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     PaymentDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PaymentType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AdminUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    RentalId = table.Column<int>(type: "int", nullable: false)
+                    RentalId = table.Column<string>(type: "nvarchar(36)", nullable: false),
+                    AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Payments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Payments_AspNetUsers_AdminUserId",
-                        column: x => x.AdminUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
                         name: "FK_Payments_Rentals_RentalId",
                         column: x => x.RentalId,
                         principalTable: "Rentals",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Payments_Users_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "Users",
                         principalColumn: "Id");
                 });
 
@@ -319,29 +313,19 @@ namespace CarRentalDAL.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Discriminator", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "a09dda91-f601-4430-bef9-a1a4d300cf66", null, "AppRole", "Admin", "ADMIN" },
-                    { "c96a0ee5-aa02-4a61-8be3-6a518cf0dbf6", null, "AppRole", "Customer", "CUSTOMER" },
-                    { "d18237c2-29f7-48ee-a860-2eacec23d23b", null, "AppRole", "Owner", "OWNER" }
+                    { "46e250d8-05c9-44bc-830e-8fdf06180595", null, "AppRole", "Customer", "CUSTOMER" },
+                    { "666a7310-dbcc-42c8-8423-b36a993d59b0", null, "AppRole", "Admin", "ADMIN" },
+                    { "ede35c35-7f98-4e88-bb00-0b5884196880", null, "AppRole", "Owner", "OWNER" }
                 });
 
             migrationBuilder.InsertData(
-                table: "AspNetUsers",
+                table: "Users",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "05ea6280-2731-4a90-af38-da7a32ff9f09", 0, "b84b2100-b1bc-476d-8594-6b2a0aa1f33f", "owner@system.com", true, false, null, "OWNER@SYSTEM.COM", "OWNER@SYSTEM.COM", "AQAAAAIAAYagAAAAEGW6Ao/MawurlJMMDjz7Dk9kT3Hkk+irzOUpGeG0Ux5npZ6TBZ/CCHtYKXmBdSsh4g==", null, false, "769192ed-af4b-409f-ac43-e0f7e0833cee", false, "owner@system.com" },
-                    { "7af36a73-c373-42eb-9582-6bfef7e832d9", 0, "9df61a77-d9ee-4de7-84ac-f19531c7249b", "customer@system.com", true, false, null, "CUSTOMER@SYSTEM.COM", "CUSTOMER@SYSTEM.COM", "AQAAAAIAAYagAAAAEIs5WgG3A9fkL9HxVfTfG18lQjUFFLt/xhOM7oXYF4aYvR/ZKmdSye3yQYul6TjvlQ==", null, false, "8bcc45cf-477a-4133-9985-3567172dd64a", false, "customer@system.com" },
-                    { "fdbe7929-2d9f-48ae-b982-37e69faf67b8", 0, "b06c1eae-6ad7-4d07-b2a4-dab3f996de41", "admin@system.com", true, false, null, "ADMIN@SYSTEM.COM", "ADMIN@SYSTEM.COM", "AQAAAAIAAYagAAAAEL1xMMDonxjxPsv4hvQ2hjeyCYkv0x0+UktBnvRFWo8cqAGK1tqSfAi66ut9In/QGA==", null, false, "2250e572-7a04-4ab9-84f9-b62faf3ee343", false, "admin@system.com" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "AspNetUserRoles",
-                columns: new[] { "RoleId", "UserId" },
-                values: new object[,]
-                {
-                    { "d18237c2-29f7-48ee-a860-2eacec23d23b", "05ea6280-2731-4a90-af38-da7a32ff9f09" },
-                    { "c96a0ee5-aa02-4a61-8be3-6a518cf0dbf6", "7af36a73-c373-42eb-9582-6bfef7e832d9" },
-                    { "a09dda91-f601-4430-bef9-a1a4d300cf66", "fdbe7929-2d9f-48ae-b982-37e69faf67b8" }
+                    { "11fe7915-da52-4c82-83a8-95c5debc4e21", 0, "f9f346c1-1391-41d9-96cb-850e52bd6ce4", "admin@system.com", true, false, null, "ADMIN@SYSTEM.COM", "ADMIN@SYSTEM.COM", "AQAAAAIAAYagAAAAELFQUpUzTkPb2Ft/YJMq2Aql7g4+zwdqi3h3c5+T0JStY6EOZxaF1JgkD1FVQir/YQ==", null, false, "209c8236-91a3-4d1d-b44e-1a0e1a031fb6", false, "admin@system.com" },
+                    { "31280881-2ec3-4e44-82bf-c84ecf54e100", 0, "ce3e0b4d-20d3-4d6a-ba9d-fcf52d0c4510", "owner@system.com", true, false, null, "OWNER@SYSTEM.COM", "OWNER@SYSTEM.COM", "AQAAAAIAAYagAAAAEPal0oZIWTuQtnkDWAk4tnjIKkR5srDUPwQ0rh5JeBaSC69qI5FoF4TU+edkq8gYgw==", null, false, "8735926a-ded3-4ea2-b59e-47955887e77e", false, "owner@system.com" },
+                    { "dd7ac551-be9d-4467-a896-edd3841cc505", 0, "3dddb528-054c-404d-8333-5b815d0a4f14", "customer@system.com", true, false, null, "CUSTOMER@SYSTEM.COM", "CUSTOMER@SYSTEM.COM", "AQAAAAIAAYagAAAAEASyW4dlsbHX1qawXcziiqoAM4xebGW1+ku5f7wX8ugYDcEeam2x7ujQyjCtcEF/vw==", null, false, "386d116e-424b-481a-860d-facab318c23a", false, "customer@system.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -349,29 +333,34 @@ namespace CarRentalDAL.Migrations
                 columns: new[] { "Id", "Brand", "Capacity", "Color", "ModelYear", "Name", "OwnerUserId", "PlateNumber", "Rate", "Status" },
                 values: new object[,]
                 {
-                    { 1, "Toyota", 5, "White", 2021, "Toyota Corolla", "05ea6280-2731-4a90-af38-da7a32ff9f09", "ABC-123", 50m, "Available" },
-                    { 2, "Honda", 5, "Black", 2022, "Honda Civic", "05ea6280-2731-4a90-af38-da7a32ff9f09", "XYZ-456", 60m, "Available" }
+                    { "3e4030fb-3e05-4a64-887d-fc6698f0276d", "Honda", 5, "Black", 2022, "Honda Civic", "31280881-2ec3-4e44-82bf-c84ecf54e100", "XYZ-456", 60m, "Available" },
+                    { "ac50f2e7-19c7-4e41-a71e-324bf5f2fea2", "Toyota", 5, "White", 2021, "Toyota Corolla", "31280881-2ec3-4e44-82bf-c84ecf54e100", "ABC-123", 50m, "Available" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "UserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[,]
+                {
+                    { "666a7310-dbcc-42c8-8423-b36a993d59b0", "11fe7915-da52-4c82-83a8-95c5debc4e21" },
+                    { "ede35c35-7f98-4e88-bb00-0b5884196880", "31280881-2ec3-4e44-82bf-c84ecf54e100" },
+                    { "46e250d8-05c9-44bc-830e-8fdf06180595", "dd7ac551-be9d-4467-a896-edd3841cc505" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Rentals",
                 columns: new[] { "Id", "ActualDate", "CarId", "CustomerUserId", "OwnerUserId", "RentalDate", "ReturnDate", "Status" },
-                values: new object[] { 1, null, 1, "7af36a73-c373-42eb-9582-6bfef7e832d9", "05ea6280-2731-4a90-af38-da7a32ff9f09", new DateTime(2026, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2026, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "Active" });
+                values: new object[] { "8031f399-7e8c-415b-84e6-fae85a703150", null, "ac50f2e7-19c7-4e41-a71e-324bf5f2fea2", "dd7ac551-be9d-4467-a896-edd3841cc505", "31280881-2ec3-4e44-82bf-c84ecf54e100", new DateTime(2026, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2026, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "Active" });
 
             migrationBuilder.InsertData(
                 table: "Reviews",
                 columns: new[] { "Id", "CarId", "CustomerUserId", "Date", "Score", "Text", "Title" },
-                values: new object[] { 1, 1, "7af36a73-c373-42eb-9582-6bfef7e832d9", new DateTime(2026, 1, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, null, "Great car!" });
+                values: new object[] { "8031f399-7e8c-415b-84e6-fae85a703150", "ac50f2e7-19c7-4e41-a71e-324bf5f2fea2", "dd7ac551-be9d-4467-a896-edd3841cc505", new DateTime(2026, 1, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, null, "Great car!" });
 
             migrationBuilder.InsertData(
                 table: "Payments",
-                columns: new[] { "Id", "AdminUserId", "Amount", "PaymentDate", "PaymentType", "RentalId" },
-                values: new object[] { 1, "fdbe7929-2d9f-48ae-b982-37e69faf67b8", 150m, new DateTime(2026, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Deposit", 1 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetRoleClaims_RoleId",
-                table: "AspNetRoleClaims",
-                column: "RoleId");
+                columns: new[] { "Id", "Amount", "AppUserId", "PaymentDate", "PaymentType", "RentalId" },
+                values: new object[] { "c4958ce0-6ea7-4f0f-8985-08e274e8570c", 150m, null, new DateTime(2026, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Deposit", "8031f399-7e8c-415b-84e6-fae85a703150" });
 
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
@@ -379,33 +368,6 @@ namespace CarRentalDAL.Migrations
                 column: "NormalizedName",
                 unique: true,
                 filter: "[NormalizedName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUserClaims_UserId",
-                table: "AspNetUserClaims",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUserLogins_UserId",
-                table: "AspNetUserLogins",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUserRoles_RoleId",
-                table: "AspNetUserRoles",
-                column: "RoleId");
-
-            migrationBuilder.CreateIndex(
-                name: "EmailIndex",
-                table: "AspNetUsers",
-                column: "NormalizedEmail");
-
-            migrationBuilder.CreateIndex(
-                name: "UserNameIndex",
-                table: "AspNetUsers",
-                column: "NormalizedUserName",
-                unique: true,
-                filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CarImages_CarId",
@@ -418,9 +380,9 @@ namespace CarRentalDAL.Migrations
                 column: "OwnerUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Payments_AdminUserId",
+                name: "IX_Payments_AppUserId",
                 table: "Payments",
-                column: "AdminUserId");
+                column: "AppUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Payments_RentalId",
@@ -453,29 +415,46 @@ namespace CarRentalDAL.Migrations
                 column: "CustomerUserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_RoleClaims_RoleId",
+                table: "RoleClaims",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserClaims_UserId",
+                table: "UserClaims",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserDocuments_AppUserId",
                 table: "UserDocuments",
                 column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserLogins_UserId",
+                table: "UserLogins",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserRoles_RoleId",
+                table: "UserRoles",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "EmailIndex",
+                table: "Users",
+                column: "NormalizedEmail");
+
+            migrationBuilder.CreateIndex(
+                name: "UserNameIndex",
+                table: "Users",
+                column: "NormalizedUserName",
+                unique: true,
+                filter: "[NormalizedUserName] IS NOT NULL");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "AspNetRoleClaims");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUserClaims");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUserLogins");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUserRoles");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUserTokens");
-
             migrationBuilder.DropTable(
                 name: "CarImages");
 
@@ -486,19 +465,34 @@ namespace CarRentalDAL.Migrations
                 name: "Reviews");
 
             migrationBuilder.DropTable(
+                name: "RoleClaims");
+
+            migrationBuilder.DropTable(
+                name: "UserClaims");
+
+            migrationBuilder.DropTable(
                 name: "UserDocuments");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoles");
+                name: "UserLogins");
+
+            migrationBuilder.DropTable(
+                name: "UserRoles");
+
+            migrationBuilder.DropTable(
+                name: "UserTokens");
 
             migrationBuilder.DropTable(
                 name: "Rentals");
 
             migrationBuilder.DropTable(
+                name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
                 name: "Cars");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Users");
         }
     }
 }

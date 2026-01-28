@@ -8,7 +8,7 @@ namespace CarRentalDAL.Entities
 {
     public class UserDocument
     {
-        public int Id { get; set; }
+        public string Id { get; set; } = Guid.NewGuid().ToString();
         public string FilePath { get; set; }
         public string DocumentType { get; set; } //enum
 

@@ -84,54 +84,54 @@ namespace CarRentalDAL.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.ToTable("AspNetUsers", (string)null);
+                    b.ToTable("Users", (string)null);
 
                     b.HasData(
                         new
                         {
-                            Id = "fdbe7929-2d9f-48ae-b982-37e69faf67b8",
+                            Id = "11fe7915-da52-4c82-83a8-95c5debc4e21",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b06c1eae-6ad7-4d07-b2a4-dab3f996de41",
+                            ConcurrencyStamp = "f9f346c1-1391-41d9-96cb-850e52bd6ce4",
                             Email = "admin@system.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@SYSTEM.COM",
                             NormalizedUserName = "ADMIN@SYSTEM.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEL1xMMDonxjxPsv4hvQ2hjeyCYkv0x0+UktBnvRFWo8cqAGK1tqSfAi66ut9In/QGA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELFQUpUzTkPb2Ft/YJMq2Aql7g4+zwdqi3h3c5+T0JStY6EOZxaF1JgkD1FVQir/YQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2250e572-7a04-4ab9-84f9-b62faf3ee343",
+                            SecurityStamp = "209c8236-91a3-4d1d-b44e-1a0e1a031fb6",
                             TwoFactorEnabled = false,
                             UserName = "admin@system.com"
                         },
                         new
                         {
-                            Id = "05ea6280-2731-4a90-af38-da7a32ff9f09",
+                            Id = "31280881-2ec3-4e44-82bf-c84ecf54e100",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b84b2100-b1bc-476d-8594-6b2a0aa1f33f",
+                            ConcurrencyStamp = "ce3e0b4d-20d3-4d6a-ba9d-fcf52d0c4510",
                             Email = "owner@system.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "OWNER@SYSTEM.COM",
                             NormalizedUserName = "OWNER@SYSTEM.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGW6Ao/MawurlJMMDjz7Dk9kT3Hkk+irzOUpGeG0Ux5npZ6TBZ/CCHtYKXmBdSsh4g==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPal0oZIWTuQtnkDWAk4tnjIKkR5srDUPwQ0rh5JeBaSC69qI5FoF4TU+edkq8gYgw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "769192ed-af4b-409f-ac43-e0f7e0833cee",
+                            SecurityStamp = "8735926a-ded3-4ea2-b59e-47955887e77e",
                             TwoFactorEnabled = false,
                             UserName = "owner@system.com"
                         },
                         new
                         {
-                            Id = "7af36a73-c373-42eb-9582-6bfef7e832d9",
+                            Id = "dd7ac551-be9d-4467-a896-edd3841cc505",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9df61a77-d9ee-4de7-84ac-f19531c7249b",
+                            ConcurrencyStamp = "3dddb528-054c-404d-8333-5b815d0a4f14",
                             Email = "customer@system.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "CUSTOMER@SYSTEM.COM",
                             NormalizedUserName = "CUSTOMER@SYSTEM.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEIs5WgG3A9fkL9HxVfTfG18lQjUFFLt/xhOM7oXYF4aYvR/ZKmdSye3yQYul6TjvlQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEASyW4dlsbHX1qawXcziiqoAM4xebGW1+ku5f7wX8ugYDcEeam2x7ujQyjCtcEF/vw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "8bcc45cf-477a-4133-9985-3567172dd64a",
+                            SecurityStamp = "386d116e-424b-481a-860d-facab318c23a",
                             TwoFactorEnabled = false,
                             UserName = "customer@system.com"
                         });
@@ -139,11 +139,9 @@ namespace CarRentalDAL.Migrations
 
             modelBuilder.Entity("CarRentalDAL.Entities.Car", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
 
                     b.Property<string>("Brand")
                         .IsRequired()
@@ -187,26 +185,26 @@ namespace CarRentalDAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = "ac50f2e7-19c7-4e41-a71e-324bf5f2fea2",
                             Brand = "Toyota",
                             Capacity = 5,
                             Color = "White",
                             ModelYear = 2021,
                             Name = "Toyota Corolla",
-                            OwnerUserId = "05ea6280-2731-4a90-af38-da7a32ff9f09",
+                            OwnerUserId = "31280881-2ec3-4e44-82bf-c84ecf54e100",
                             PlateNumber = "ABC-123",
                             Rate = 50m,
                             Status = "Available"
                         },
                         new
                         {
-                            Id = 2,
+                            Id = "3e4030fb-3e05-4a64-887d-fc6698f0276d",
                             Brand = "Honda",
                             Capacity = 5,
                             Color = "Black",
                             ModelYear = 2022,
                             Name = "Honda Civic",
-                            OwnerUserId = "05ea6280-2731-4a90-af38-da7a32ff9f09",
+                            OwnerUserId = "31280881-2ec3-4e44-82bf-c84ecf54e100",
                             PlateNumber = "XYZ-456",
                             Rate = 60m,
                             Status = "Available"
@@ -215,14 +213,13 @@ namespace CarRentalDAL.Migrations
 
             modelBuilder.Entity("CarRentalDAL.Entities.CarImage", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CarId")
-                        .HasColumnType("int");
+                    b.Property<string>("CarId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(36)");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -241,18 +238,15 @@ namespace CarRentalDAL.Migrations
 
             modelBuilder.Entity("CarRentalDAL.Entities.Payment", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("AdminUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
 
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("PaymentDate")
                         .HasColumnType("datetime2");
@@ -261,12 +255,13 @@ namespace CarRentalDAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RentalId")
-                        .HasColumnType("int");
+                    b.Property<string>("RentalId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(36)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AdminUserId");
+                    b.HasIndex("AppUserId");
 
                     b.HasIndex("RentalId");
 
@@ -275,28 +270,26 @@ namespace CarRentalDAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            AdminUserId = "fdbe7929-2d9f-48ae-b982-37e69faf67b8",
+                            Id = "c4958ce0-6ea7-4f0f-8985-08e274e8570c",
                             Amount = 150m,
                             PaymentDate = new DateTime(2026, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PaymentType = "Deposit",
-                            RentalId = 1
+                            RentalId = "8031f399-7e8c-415b-84e6-fae85a703150"
                         });
                 });
 
             modelBuilder.Entity("CarRentalDAL.Entities.Rental", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
 
                     b.Property<DateTime?>("ActualDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CarId")
-                        .HasColumnType("int");
+                    b.Property<string>("CarId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(36)");
 
                     b.Property<string>("CustomerUserId")
                         .IsRequired()
@@ -329,10 +322,10 @@ namespace CarRentalDAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            CarId = 1,
-                            CustomerUserId = "7af36a73-c373-42eb-9582-6bfef7e832d9",
-                            OwnerUserId = "05ea6280-2731-4a90-af38-da7a32ff9f09",
+                            Id = "8031f399-7e8c-415b-84e6-fae85a703150",
+                            CarId = "ac50f2e7-19c7-4e41-a71e-324bf5f2fea2",
+                            CustomerUserId = "dd7ac551-be9d-4467-a896-edd3841cc505",
+                            OwnerUserId = "31280881-2ec3-4e44-82bf-c84ecf54e100",
                             RentalDate = new DateTime(2026, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ReturnDate = new DateTime(2026, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Active"
@@ -341,14 +334,13 @@ namespace CarRentalDAL.Migrations
 
             modelBuilder.Entity("CarRentalDAL.Entities.Review", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CarId")
-                        .HasColumnType("int");
+                    b.Property<string>("CarId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(36)");
 
                     b.Property<string>("CustomerUserId")
                         .IsRequired()
@@ -377,9 +369,9 @@ namespace CarRentalDAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            CarId = 1,
-                            CustomerUserId = "7af36a73-c373-42eb-9582-6bfef7e832d9",
+                            Id = "8031f399-7e8c-415b-84e6-fae85a703150",
+                            CarId = "ac50f2e7-19c7-4e41-a71e-324bf5f2fea2",
+                            CustomerUserId = "dd7ac551-be9d-4467-a896-edd3841cc505",
                             Date = new DateTime(2026, 1, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Score = 5,
                             Title = "Great car!"
@@ -388,11 +380,9 @@ namespace CarRentalDAL.Migrations
 
             modelBuilder.Entity("CarRentalDAL.Entities.UserDocument", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
 
                     b.Property<string>("AppUserId")
                         .IsRequired()
@@ -471,7 +461,7 @@ namespace CarRentalDAL.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetRoleClaims", (string)null);
+                    b.ToTable("RoleClaims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -496,7 +486,7 @@ namespace CarRentalDAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserClaims", (string)null);
+                    b.ToTable("UserClaims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -518,7 +508,7 @@ namespace CarRentalDAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserLogins", (string)null);
+                    b.ToTable("UserLogins", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
@@ -533,23 +523,23 @@ namespace CarRentalDAL.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUserRoles", (string)null);
+                    b.ToTable("UserRoles", (string)null);
 
                     b.HasData(
                         new
                         {
-                            UserId = "fdbe7929-2d9f-48ae-b982-37e69faf67b8",
-                            RoleId = "a09dda91-f601-4430-bef9-a1a4d300cf66"
+                            UserId = "11fe7915-da52-4c82-83a8-95c5debc4e21",
+                            RoleId = "666a7310-dbcc-42c8-8423-b36a993d59b0"
                         },
                         new
                         {
-                            UserId = "05ea6280-2731-4a90-af38-da7a32ff9f09",
-                            RoleId = "d18237c2-29f7-48ee-a860-2eacec23d23b"
+                            UserId = "31280881-2ec3-4e44-82bf-c84ecf54e100",
+                            RoleId = "ede35c35-7f98-4e88-bb00-0b5884196880"
                         },
                         new
                         {
-                            UserId = "7af36a73-c373-42eb-9582-6bfef7e832d9",
-                            RoleId = "c96a0ee5-aa02-4a61-8be3-6a518cf0dbf6"
+                            UserId = "dd7ac551-be9d-4467-a896-edd3841cc505",
+                            RoleId = "46e250d8-05c9-44bc-830e-8fdf06180595"
                         });
                 });
 
@@ -569,7 +559,7 @@ namespace CarRentalDAL.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("AspNetUserTokens", (string)null);
+                    b.ToTable("UserTokens", (string)null);
                 });
 
             modelBuilder.Entity("CarRentalDAL.Entities.AppRole", b =>
@@ -581,19 +571,19 @@ namespace CarRentalDAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "a09dda91-f601-4430-bef9-a1a4d300cf66",
+                            Id = "666a7310-dbcc-42c8-8423-b36a993d59b0",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "d18237c2-29f7-48ee-a860-2eacec23d23b",
+                            Id = "ede35c35-7f98-4e88-bb00-0b5884196880",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         },
                         new
                         {
-                            Id = "c96a0ee5-aa02-4a61-8be3-6a518cf0dbf6",
+                            Id = "46e250d8-05c9-44bc-830e-8fdf06180595",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -623,19 +613,15 @@ namespace CarRentalDAL.Migrations
 
             modelBuilder.Entity("CarRentalDAL.Entities.Payment", b =>
                 {
-                    b.HasOne("CarRentalDAL.Entities.AppUser", "AdminUser")
+                    b.HasOne("CarRentalDAL.Entities.AppUser", null)
                         .WithMany("Payments")
-                        .HasForeignKey("AdminUserId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .HasForeignKey("AppUserId");
 
                     b.HasOne("CarRentalDAL.Entities.Rental", "Rental")
                         .WithMany("Payments")
                         .HasForeignKey("RentalId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
-
-                    b.Navigation("AdminUser");
 
                     b.Navigation("Rental");
                 });

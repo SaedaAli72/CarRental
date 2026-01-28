@@ -4,7 +4,7 @@ namespace CarRentalDAL.Entities
 {
     public class Car
     {
-        public int Id { get; set; }
+        public string Id { get; set; } = Guid.NewGuid().ToString();
         public string Name { get; set; }
         public string Brand { get; set; }
         public int ModelYear { get; set; }

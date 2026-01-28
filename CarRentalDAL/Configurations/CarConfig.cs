@@ -13,6 +13,10 @@ namespace CarRentalDAL.Configurations
     {
         public void Configure(EntityTypeBuilder<Car> builder)
         {
+            builder.HasKey(c => c.Id);
+            builder.Property(c => c.Id)
+                .IsRequired()
+                .HasMaxLength(36);
             builder.Property(c => c.Status)
                 .HasConversion<string>();
         }

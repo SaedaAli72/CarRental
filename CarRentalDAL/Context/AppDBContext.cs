@@ -35,6 +35,14 @@ namespace CarRentalDAL.Context
             base.OnModelCreating(builder);
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
+            builder.Entity<AppUser>().ToTable("Users");
+            builder.Entity<IdentityUserRole<string>>().ToTable("UserRoles");
+            builder.Entity<IdentityUserClaim<string>>().ToTable("UserClaims");
+            builder.Entity<IdentityUserLogin<string>>().ToTable("UserLogins");
+            builder.Entity<IdentityRoleClaim<string>>().ToTable("RoleClaims");
+            builder.Entity<IdentityUserToken<string>>().ToTable("UserTokens");
+
+
             #region Relations
 
             #region User-Car
@@ -61,13 +69,7 @@ namespace CarRentalDAL.Context
                     .OnDelete(DeleteBehavior.NoAction);
             #endregion
 
-            #region User-Payment
-            builder.Entity<AppUser>()
-                    .HasMany(u => u.Payments)
-                    .WithOne(p => p.AdminUser)
-                    .HasForeignKey(p => p.AdminUserId)
-                    .OnDelete(DeleteBehavior.NoAction);
-            #endregion
+            
 
             #region User-Review
             builder.Entity<AppUser>()
@@ -181,10 +183,13 @@ namespace CarRentalDAL.Context
             );
 
             // =================== Cars ===================
+
+            var car1Id = Guid.NewGuid().ToString();
+            var car2Id = Guid.NewGuid().ToString();
             builder.Entity<Car>().HasData(
                 new Car
                 {
-                    Id = 1,
+                    Id = car1Id,
                     Name = "Toyota Corolla",
                     Brand = "Toyota",
                     ModelYear = 2021,
@@ -197,7 +202,7 @@ namespace CarRentalDAL.Context
                 },
                 new Car
                 {
-                    Id = 2,
+                    Id = car2Id,
                     Name = "Honda Civic",
                     Brand = "Honda",
                     ModelYear = 2022,
@@ -211,11 +216,13 @@ namespace CarRentalDAL.Context
             );
 
             // =================== Rentals ===================
+            var rental1Id = Guid.NewGuid().ToString();
+
             builder.Entity<Rental>().HasData(
                 new Rental
                 {
-                    Id = 1,
-                    CarId = 1,
+                    Id = rental1Id,
+                    CarId = car1Id,
                     CustomerUserId = customerUserId,
                     OwnerUserId = ownerUserId,
                     RentalDate = new DateTime(2026, 1, 20),
@@ -226,24 +233,25 @@ namespace CarRentalDAL.Context
             );
 
             // =================== Payments ===================
+            var payment1Id = Guid.NewGuid().ToString();
             builder.Entity<Payment>().HasData(
                 new Payment
                 {
-                    Id = 1,
-                    RentalId = 1,
+                    Id = payment1Id,
+                    RentalId = rental1Id,
                     Amount = 150,
                     PaymentDate = new DateTime(2026, 1, 20),
                     PaymentType = PaymentType.Deposit,
-                    AdminUserId = adminUserId
                 }
             );
 
             // =================== Reviews ===================
+            var review1Id = Guid.NewGuid().ToString();
             builder.Entity<Review>().HasData(
                 new Review
                 {
-                    Id = 1,
-                    CarId = 1,
+                    Id = rental1Id,
+                    CarId = car1Id,
                     CustomerUserId = customerUserId,
                     Title = "Great car!",
                     Score = 5,

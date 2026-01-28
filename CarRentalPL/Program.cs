@@ -1,4 +1,5 @@
 using CarRentalDAL.Context;
+using CarRentalDAL.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 
 namespace CarRentalPL
@@ -16,6 +17,7 @@ namespace CarRentalPL
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             var app = builder.Build();
 
@@ -36,7 +38,7 @@ namespace CarRentalPL
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=test}/{action=Index}/{id?}");
 
             app.Run();
         }
