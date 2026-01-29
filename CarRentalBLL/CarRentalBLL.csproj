@@ -15,12 +15,9 @@
     <Folder Include="ViewModels\Car\" />
     <Folder Include="Services\Interface\" />
     <Folder Include="ViewModels\CarImage\" />
-    <Folder Include="ViewModels\Customer\" />
     <Folder Include="ViewModels\Review\" />
-    <Folder Include="ViewModels\Owner\" />
     <Folder Include="ViewModels\Payment\" />
     <Folder Include="ViewModels\UserDocument\" />
-    <Folder Include="ViewModels\Admin\" />
     <Folder Include="ViewModels\Rental\" />
   </ItemGroup>
 
