@@ -1,0 +1,113 @@
+﻿@model IEnumerable<CarRentalBLL.ViewModels.Car.CarCardVM>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<form asp-action="Index" method="get">
+    <p>
+        Search by Name: <input type="text" name="searchTerm" value="@ViewData["SearchTerm"]" />
+        <div class=" w-25">
+
+        Search by min price : <input type="Range" class="form-range" min="100" max="3000" name="minPrice" id="priceRange" value="@ViewData["MinPrice"]" step="100" />
+        <output for="priceRange" id="rangeValue" aria-hidden="true"></output>
+        </div>
+
+        
+        <input type="submit" value="Search" class="btn btn-primary" />
+    </p>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CarImage)
+            </th>
+            @* <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th> *@
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Brand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModelYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Color)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PricePerDay)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                Categoty Name
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                    <img src="@item.CarImage" alt="Car Image" style="width:100px;height:auto;" />
+                </td>
+            @* <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td> *@
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Brand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModelYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Color)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PricePerDay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.Name)
+            </td>
+
+            <td>
+                @* @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) | *@
+                    <a asp-action="Details" class="btn btn-primary" asp-controller="Car" asp-route-id="@item.Id">Details</a> 
+                @* @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }) *@
+            </td>
+        </tr>
+
+
+}
+    </tbody>
+</table>
+
+<script>
+    //  function submitForm() {
+
+    //     document.getElementById("searchForm").submit();
+    // }
+    // This is an example script, please modify as needed
+    const rangeInput = document.getElementById('priceRange');
+    const rangeOutput = document.getElementById('rangeValue');
+
+    // Set initial value
+    rangeOutput.textContent = rangeInput.value;
+
+    rangeInput.addEventListener('input', function() {
+      rangeOutput.textContent = this.value;
+    });
+</script>

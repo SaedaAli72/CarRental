@@ -1,3 +1,5 @@
+using CarRentalBLL.Services;
+using CarRentalBLL.Services.Interface;
 using CarRentalDAL.Context;
 using CarRentalDAL.Entities;
 using CarRentalDAL.UnitOfWork;
@@ -19,6 +21,7 @@ namespace CarRentalPL
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            builder.Services.AddScoped<ICarService,CarService>();
             builder.Services.AddIdentity<AppUser, AppRole>()
                .AddEntityFrameworkStores<AppDBContext>();
 

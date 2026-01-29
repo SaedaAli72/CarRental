@@ -17,6 +17,7 @@ namespace CarRentalDAL.UnitOfWork
         IGenericRepo<Payment> payments { get; }
         IGenericRepo<UserDocument> userDocuments { get; }
         IGenericRepo<Review> reviews { get; }
+        IGenericRepo<Category> categories { get; }
         int Save();
     }
 }

@@ -11,9 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Mapping\" />
-    <Folder Include="ViewModels\Car\" />
-    <Folder Include="Services\Interface\" />
     <Folder Include="ViewModels\CarImage\" />
     <Folder Include="ViewModels\Review\" />
     <Folder Include="ViewModels\Payment\" />
