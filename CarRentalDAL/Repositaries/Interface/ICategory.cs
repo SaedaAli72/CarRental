@@ -4,13 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarRentalDAL.Enums
+namespace CarRentalDAL.Repositaries.Interface
 {
-    public enum CarStatus
+    public interface ICategory : IRepositary<CarRentalDAL.Entities.Category>
     {
-        Available,
-        Rented,
-        Maintenance,
 
     }
 }

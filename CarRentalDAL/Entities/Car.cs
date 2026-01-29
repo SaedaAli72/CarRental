@@ -12,11 +12,17 @@ namespace CarRentalDAL.Entities
         public string Color { get; set; }
         public int Capacity { get; set; }
         public decimal Rate { get; set; } //to car from all user
+        public decimal PricePerDay { get; set; }
         public CarStatus Status { get; set; } //Enum
 
         #region OwnerUser
         public string OwnerUserId { get; set; }
-        public AppUser OwnerUser { get; set; } 
+        public AppUser OwnerUser { get; set; }
+        #endregion
+
+        #region Category
+        public string CategoryId { get; set; }
+        public Category Category { get; set; }
         #endregion
 
         public ICollection<Rental> Rentals { get; set; }

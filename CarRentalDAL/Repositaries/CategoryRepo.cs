@@ -4,13 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarRentalDAL.Enums
+namespace CarRentalDAL.Repositaries
 {
-    public enum CarStatus
+    internal class CategoryRepo
     {
-        Available,
-        Rented,
-        Maintenance,
-
     }
 }

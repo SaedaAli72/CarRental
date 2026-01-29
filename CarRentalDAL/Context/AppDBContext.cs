@@ -28,8 +28,9 @@ namespace CarRentalDAL.Context
         public DbSet<Payment> Payments { get; set;}
         public DbSet<UserDocument> UserDocuments { get; set; }
         public DbSet<CarImage> CarImages { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
-        
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -69,8 +70,6 @@ namespace CarRentalDAL.Context
                     .OnDelete(DeleteBehavior.NoAction);
             #endregion
 
-            
-
             #region User-Review
             builder.Entity<AppUser>()
                     .HasMany(u => u.Reviews)
@@ -84,6 +83,14 @@ namespace CarRentalDAL.Context
                     .HasMany(u => u.UserDocuments)
                     .WithOne(d => d.AppUser)
                     .HasForeignKey(d => d.AppUserId)
+                    .OnDelete(DeleteBehavior.NoAction);
+            #endregion
+
+            #region Car-Category
+            builder.Entity<Category>()
+                    .HasMany(c => c.Cars)
+                    .WithOne(c => c.Category)
+                    .HasForeignKey(c => c.CategoryId)
                     .OnDelete(DeleteBehavior.NoAction);
             #endregion
 
@@ -181,6 +188,25 @@ namespace CarRentalDAL.Context
                 new IdentityUserRole<string> { UserId = ownerUserId, RoleId = ownerRoleId },
                 new IdentityUserRole<string> { UserId = customerUserId, RoleId = customerRoleId }
             );
+            // =================== Categories ===================
+            var sedanCategoryId = Guid.NewGuid().ToString();
+            var suvCategoryId = Guid.NewGuid().ToString();
+
+
+            builder.Entity<Category>().HasData(
+                new Category
+                {
+                    Id = sedanCategoryId,
+                    Name = "Sedan",
+                },
+                new Category
+                {
+                    Id = suvCategoryId,
+                    Name = "SUV",
+                }
+
+            );
+
 
             // =================== Cars ===================
 
@@ -198,7 +224,8 @@ namespace CarRentalDAL.Context
                     Capacity = 5,
                     Rate = 50,
                     Status = CarStatus.Available,
-                    OwnerUserId = ownerUserId
+                    OwnerUserId = ownerUserId,
+                    CategoryId = sedanCategoryId
                 },
                 new Car
                 {
@@ -212,6 +239,7 @@ namespace CarRentalDAL.Context
                     Rate = 60,
                     Status = CarStatus.Available,
                     OwnerUserId = ownerUserId
+                    , CategoryId = suvCategoryId
                 }
             );
 
