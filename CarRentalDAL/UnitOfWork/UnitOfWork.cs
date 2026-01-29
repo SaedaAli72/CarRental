@@ -23,6 +23,8 @@ namespace CarRentalDAL.UnitOfWork
             payments = new GenericRepo<Payment>(context);
             userDocuments = new GenericRepo<UserDocument>(context);
             reviews = new GenericRepo<Review>(context);
+            categories = new GenericRepo<Category>(context);
+
         }
 
         public IGenericRepo<Car> cars { get; private set; }
@@ -38,6 +40,7 @@ namespace CarRentalDAL.UnitOfWork
         public IGenericRepo<UserDocument> userDocuments { get; private set; }
 
         public IGenericRepo<Review> reviews { get; private set; }
+        public IGenericRepo<Category> categories { get; private set; }
 
         public int Save()
         {

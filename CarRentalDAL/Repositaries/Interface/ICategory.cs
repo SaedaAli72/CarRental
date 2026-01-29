@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CarRentalDAL.Repositaries.Interface
 {
-    public interface ICategory : IRepositary<CarRentalDAL.Entities.Category>
+    public interface ICategory : IGenericRepo<CarRentalDAL.Entities.Category>
     {
 
     }
