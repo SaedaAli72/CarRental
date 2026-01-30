@@ -1,4 +1,5 @@
 ﻿using CarRentalBLL.Mapping.Car;
+using CarRentalBLL.Mapping.Category;
 using CarRentalBLL.Services.Interface;
 using CarRentalBLL.ViewModels.Car;
 using CarRentalDAL.Entities;
@@ -127,10 +128,45 @@ namespace CarRentalBLL.Services
                 return false;
             }
         }
-        public bool UpdateCar(Car car)
+        public bool UpdateCar(EditCarVM carvm)
         {
             try
             {
+                Car car = _unitOfWork.cars.GetAll().Include(c => c.CarImages).FirstOrDefault(c => c.Id == carvm.Id);
+
+                if (car == null)
+                    return false;
+
+                carvm.MapToCarEntity(car);
+
+                if (carvm.DeletedImageIds != null && carvm.DeletedImageIds.Any())
+                {
+                    var imagesToDelete = car.CarImages
+                        .Where(i => carvm.DeletedImageIds.Contains(i.Id))
+                        .ToList();
+
+                    foreach (var img in imagesToDelete)
+                    {
+                        DeleteImageFile(img.ImagePath);
+                        _unitOfWork.carImages.Delete(img);
+                    }
+                }
+
+                if (carvm.CarImages != null && carvm.CarImages.Any())
+                {
+                    foreach (var img in carvm.CarImages)
+                    {
+                        car.CarImages.Add(new CarImage
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            ImagePath = UploadImage(img),
+                            CarId = car.Id
+                        });
+                    }
+                }
+
+
+
                 _unitOfWork.cars.Update(car);
                 return _unitOfWork.Save() > 0;
             }
@@ -139,5 +175,45 @@ namespace CarRentalBLL.Services
                 return false;
             }
         }
+
+
+
+
+        public EditCarVM GetCarByIdForEdit(string carId)
+        {
+            var car = _unitOfWork.cars.GetAll()
+                .Include(c => c.CarImages)
+                .Include(c => c.Category)
+                .FirstOrDefault(c => c.Id == carId);
+            if (car == null)
+                return null;
+            var carVM = car.MatpToEditCarVm();
+            var categories = _unitOfWork.categories.GetAll().ToList(); // ToCategoryVM
+            carVM.Categories = categories.Select(cat => cat.ToCategoryVM()).ToList();
+            return carVM;
+        }
+
+
+        // for edit
+        private void DeleteImageFile(string imagePath)
+        {
+            if (string.IsNullOrEmpty(imagePath))
+                return;
+
+            
+            var fullPath = Path.Combine(
+                Directory.GetCurrentDirectory(),
+                "wwwroot",
+                imagePath.Replace("/", Path.DirectorySeparatorChar.ToString())
+            );
+
+            if (File.Exists(fullPath))
+            {
+                File.Delete(fullPath);
+            }
+        }
+
+
+
     }
 }

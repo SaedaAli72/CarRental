@@ -1,6 +1,7 @@
 ﻿using CarRentalBLL.Services.Interface;
 using CarRentalBLL.ViewModels.Car;
 using CarRentalDAL.Entities;
+using CarRentalDAL.Migrations;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -16,6 +17,9 @@ namespace CarRentalPL.Controllers
             _carService = carService;
             _categoryService = categoryService;
         }
+
+
+
         public IActionResult Index(string? searchTerm,int? minPrice)
         {
             searchTerm = searchTerm?.Trim().ToLower();
@@ -39,6 +43,7 @@ namespace CarRentalPL.Controllers
             var cars = _carService.GetAllAvailableCars(func);
             return View("index",cars);
         }
+
         public IActionResult Details(string id)
         {
             var car = _carService.GetCarById(id);
@@ -72,7 +77,31 @@ namespace CarRentalPL.Controllers
             }
             carVM.Categories = _categoryService.GetAllCategories(null);
             return View("Create",carVM);
-        }   
+        }
+
+        [HttpGet]
+        public IActionResult Edit(string id)
+        {
+            EditCarVM carCardvm = _carService.GetCarByIdForEdit(id);
+
+            return View("Edit", carCardvm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(string id , EditCarVM carvm)
+        {
+            if (ModelState.IsValid)
+            {
+                _carService.UpdateCar(carvm);
+                return RedirectToAction("Index");
+            }
+            carvm.Categories = _categoryService.GetAllCategories(null);
+            return View("Edit", carvm);
+        }
+         
+        
+
     }
 
 }

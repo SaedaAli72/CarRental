@@ -1,19 +1,20 @@
-﻿using CarRentalBLL.ViewModels.Category;
-using CarRentalDAL.Entities;
-using CarRentalDAL.Enums;
-using Microsoft.AspNetCore.Http;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CarRentalBLL.ViewModels.CarImage;
+using CarRentalBLL.ViewModels.Category;
+using CarRentalDAL.Entities;
+using CarRentalDAL.Enums;
+using Microsoft.AspNetCore.Http;
 
 namespace CarRentalBLL.ViewModels.Car
 {
-    public class CreateCarVM
+    public class EditCarVM
     {
-        //public string Id { get; set; } = Guid.NewGuid().ToString();
+        public string Id { get; set; } 
         public string Name { get; set; }
         public string Brand { get; set; }
         [Range(2000, 2026)]
@@ -25,7 +26,7 @@ namespace CarRentalBLL.ViewModels.Car
         //public decimal Rate { get; set; } //to car from all user
         [Range(0, 3000)]
         public decimal PricePerDay { get; set; }
-        //public CarStatus Status { get; set; } //Enum
+        public CarStatus Status { get; set; } //Enum
 
         #region OwnerUser
         //public string OwnerUserId { get; set; }
@@ -33,11 +34,14 @@ namespace CarRentalBLL.ViewModels.Car
         #endregion
 
         #region Category
+
         [Display(Name = "Category")]
         public string CategoryId { get; set; }
         //public Category Category { get; set; }
         #endregion
-        public List<IFormFile> CarImages { get; set; }
+        public List<IFormFile>? CarImages { get; set; }
+        public List<string>? DeletedImageIds { get; set; }   //  
+        public List<CarImageVM>? ExistingImages { get; set; } // 
         public ICollection<CategoryVM>? Categories { get; set; }
     }
 }
