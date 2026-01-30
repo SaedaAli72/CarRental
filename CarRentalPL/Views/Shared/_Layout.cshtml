@@ -26,10 +26,17 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="car" asp-action="index">Car</a>
+                        </li>
+                        <li class="nav-item">
                             <a asp-controller="Auth" asp-action="Register" asp-route-role="Customer" class="btn btn-primary mx-3">Customer</a>
                         </li>
                         <li class="nav-item">
                             <a asp-controller="Auth" asp-action="Register" asp-route-role="Owner" class="btn btn-success">Owner</a>
+                         </li>
+                        <li class="nav-item">
+                            <a asp-controller="Auth" asp-action="Login" class="btn btn-dark mx-3 ">Login</a>
+                        </li>
 
                     </ul>
                 </div>
