@@ -21,7 +21,7 @@ namespace CarRentalBLL.ViewModels.Car
 
         #region Category
         //public string CategoryId { get; set; }
-        public Category Category { get; set; }
+        public CarRentalDAL.Entities.Category Category { get; set; }
         #endregion
     }
 }

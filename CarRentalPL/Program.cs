@@ -22,6 +22,7 @@ namespace CarRentalPL
             });
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<ICarService,CarService>();
+            builder.Services.AddScoped<ICaregotyService, CategoryService>();
             builder.Services.AddIdentity<AppUser, AppRole>()
                .AddEntityFrameworkStores<AppDBContext>();
 

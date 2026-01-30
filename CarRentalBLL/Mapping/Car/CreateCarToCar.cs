@@ -19,9 +19,7 @@ namespace CarRentalBLL.Mapping.Car
                 Color = createCarVM.Color,
                 Capacity = createCarVM.Capacity,
                 PricePerDay = createCarVM.PricePerDay,
-                OwnerUserId = createCarVM.OwnerUserId,
                 CategoryId = createCarVM.CategoryId,
-                CarImages = createCarVM.CarImages
             };
         }
     }

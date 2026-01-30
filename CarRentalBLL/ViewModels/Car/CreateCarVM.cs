@@ -1,6 +1,7 @@
 ﻿using CarRentalBLL.ViewModels.Category;
 using CarRentalDAL.Entities;
 using CarRentalDAL.Enums;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -27,7 +28,7 @@ namespace CarRentalBLL.ViewModels.Car
         //public CarStatus Status { get; set; } //Enum
 
         #region OwnerUser
-        public string OwnerUserId { get; set; }
+        //public string OwnerUserId { get; set; }
         //public AppUser OwnerUser { get; set; }
         #endregion
 
@@ -35,7 +36,7 @@ namespace CarRentalBLL.ViewModels.Car
         public string CategoryId { get; set; }
         //public Category Category { get; set; }
         #endregion
-        public ICollection<CarImage> CarImages { get; set; }
-        public ICollection<CategoryVM> Categories { get; set; }
+        public List<IFormFile> CarImages { get; set; }
+        public ICollection<CategoryVM>? Categories { get; set; }
     }
 }

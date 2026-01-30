@@ -1,7 +1,9 @@
 ﻿using CarRentalBLL.Services.Interface;
 using CarRentalBLL.ViewModels.Car;
 using CarRentalDAL.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace CarRentalPL.Controllers
 {
@@ -51,6 +53,7 @@ namespace CarRentalPL.Controllers
            return _carService.RemoveCar(id)? RedirectToAction("Index") : RedirectToAction("Error");
         }
         [HttpGet]
+        [Authorize(Roles = "Owner")]    
         public IActionResult Create()
         {
             CreateCarVM carVM = new CreateCarVM();
@@ -63,8 +66,11 @@ namespace CarRentalPL.Controllers
         {
             if (ModelState.IsValid)
             {
-                return _carService.AddCar(carVM) ? RedirectToAction("Index") : RedirectToAction("Error");
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+                return _carService.AddCar(carVM,userId) ? RedirectToAction("Index") : RedirectToAction("Error");
             }
+            carVM.Categories = _categoryService.GetAllCategories(null);
             return View("Create",carVM);
         }   
     }
