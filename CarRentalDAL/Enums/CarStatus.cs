@@ -11,6 +11,6 @@ namespace CarRentalDAL.Enums
         Available,
         Rented,
         Maintenance,
-
+        binding
     }
 }

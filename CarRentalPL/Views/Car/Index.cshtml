@@ -6,6 +6,8 @@
 
 <h1>Index</h1>
 
+
+
 <form asp-action="Index" method="get">
     <p>
         Search by Name: <input type="text" name="searchTerm" value="@ViewData["SearchTerm"]" />
@@ -85,7 +87,9 @@
 
             <td>
                 @* @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) | *@
-                    <a asp-action="Details" class="btn btn-primary" asp-controller="Car" asp-route-id="@item.Id">Details</a> 
+                    <a asp-action="Details" class="btn btn-primary" asp-controller="Car" asp-route-id="@item.Id">Details</a>
+                    @* <a asp-action="Edit" class="btn btn-secondary" asp-controller="Car" asp-route-id="@item.Id">Edit</a> *@
+                    <a asp-action="Delete" class="btn btn-danger" asp-controller="Car" asp-route-id="@item.Id">Delete</a>
                 @* @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }) *@
             </td>
         </tr>
@@ -94,6 +98,7 @@
 }
     </tbody>
 </table>
+<a asp-action="Create" class="btn btn-primary">Create New</a>
 
 <script>
     //  function submitForm() {

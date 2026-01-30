@@ -1,0 +1,41 @@
+﻿using CarRentalBLL.ViewModels.Category;
+using CarRentalDAL.Entities;
+using CarRentalDAL.Enums;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CarRentalBLL.ViewModels.Car
+{
+    public class CreateCarVM
+    {
+        //public string Id { get; set; } = Guid.NewGuid().ToString();
+        public string Name { get; set; }
+        public string Brand { get; set; }
+        [Range(2000, 2026)]
+        public int ModelYear { get; set; }
+        public string PlateNumber { get; set; }
+        public string Color { get; set; }
+        public int Capacity { get; set; }
+        //[Range(0, 5)]
+        //public decimal Rate { get; set; } //to car from all user
+        [Range(0, 3000)]
+        public decimal PricePerDay { get; set; }
+        //public CarStatus Status { get; set; } //Enum
+
+        #region OwnerUser
+        public string OwnerUserId { get; set; }
+        //public AppUser OwnerUser { get; set; }
+        #endregion
+
+        #region Category
+        public string CategoryId { get; set; }
+        //public Category Category { get; set; }
+        #endregion
+        public ICollection<CarImage> CarImages { get; set; }
+        public ICollection<CategoryVM> Categories { get; set; }
+    }
+}

@@ -1,4 +1,5 @@
 ﻿using CarRentalBLL.Services.Interface;
+using CarRentalBLL.ViewModels.Car;
 using CarRentalDAL.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,9 +8,11 @@ namespace CarRentalPL.Controllers
     public class CarController : Controller
     {
         private readonly ICarService _carService;
-        public CarController(ICarService carService)
+        private readonly ICaregotyService _categoryService;
+        public CarController(ICarService carService, ICaregotyService categoryService)
         {
             _carService = carService;
+            _categoryService = categoryService;
         }
         public IActionResult Index(string? searchTerm,int? minPrice)
         {
@@ -31,7 +34,7 @@ namespace CarRentalPL.Controllers
             ViewData["MinPrice"] = minPrice;
 
 
-            var cars = _carService.GetAllCars(func);
+            var cars = _carService.GetAllAvailableCars(func);
             return View("index",cars);
         }
         public IActionResult Details(string id)
@@ -39,5 +42,31 @@ namespace CarRentalPL.Controllers
             var car = _carService.GetCarById(id);
             return View("Details",car);
         }
+        public IActionResult Error()
+        {
+            return View("Error");
+        }
+        public IActionResult Remove(string id)
+        {
+           return _carService.RemoveCar(id)? RedirectToAction("Index") : RedirectToAction("Error");
+        }
+        [HttpGet]
+        public IActionResult Create()
+        {
+            CreateCarVM carVM = new CreateCarVM();
+            carVM.Categories = _categoryService.GetAllCategories(null);
+            return View("Create", carVM);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(CarRentalBLL.ViewModels.Car.CreateCarVM carVM)
+        {
+            if (ModelState.IsValid)
+            {
+                return _carService.AddCar(carVM) ? RedirectToAction("Index") : RedirectToAction("Error");
+            }
+            return View("Create",carVM);
+        }   
     }
+
 }
