@@ -20,6 +20,9 @@ namespace CarRentalDAL.Configurations
 
             builder.Property(p => p.PaymentType)
                 .HasConversion<string>();
+
+            builder.Property(p => p.Id)
+                .HasDefaultValueSql("NEWID()");
         }
     }
 }

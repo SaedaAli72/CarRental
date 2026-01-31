@@ -56,14 +56,16 @@ namespace CarRentalPL.Controllers
             return View(vM);
         }
         [HttpGet]
-        public IActionResult Login()
+        public IActionResult Login(string returnUrl = null)
         {
-            return View("Login");
+            var vm = new LoginVM();
+            ViewBag.ReturnUrl = returnUrl;
+            return View("Login", vm);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginVM vM)
+        public async Task<IActionResult> Login(LoginVM vM, string returnUrl = null)
         {
             if (ModelState.IsValid)
             {
@@ -74,6 +76,10 @@ namespace CarRentalPL.Controllers
                     if (isPasswordValid)
                     {
                          await _signInManager.SignInAsync(user, vM.RememberMe);
+                        if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                        {
+                            return Redirect(returnUrl);
+                        }
                         return RedirectToAction("Index", "test");
                     }
                 }

@@ -13,19 +13,19 @@ using System.Threading.Tasks;
 
 namespace CarRentalDAL.Context
 {
-    public class AppDBContext :IdentityDbContext<AppUser>
+    public class AppDBContext : IdentityDbContext<AppUser>
     {
-        public AppDBContext(DbContextOptions<AppDBContext> options):base(options)
+        public AppDBContext(DbContextOptions<AppDBContext> options) : base(options)
         {
-            
+
         }
 
-        public DbSet<AppUser> Users { get; set; } 
-        public DbSet<AppRole> Roles { get; set; } 
+        public DbSet<AppUser> Users { get; set; }
+        public DbSet<AppRole> Roles { get; set; }
         public DbSet<Car> Cars { get; set; }
         public DbSet<Rental> Rentals { get; set; }
         public DbSet<Review> Reviews { get; set; }
-        public DbSet<Payment> Payments { get; set;}
+        public DbSet<Payment> Payments { get; set; }
         public DbSet<UserDocument> UserDocuments { get; set; }
         public DbSet<CarImage> CarImages { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -129,9 +129,9 @@ namespace CarRentalDAL.Context
             #endregion
 
             // =================== Roles ===================
-            var adminRoleId = Guid.NewGuid().ToString();
-            var ownerRoleId = Guid.NewGuid().ToString();
-            var customerRoleId = Guid.NewGuid().ToString();
+            var adminRoleId = "11111111-1111-1111-1111-111111111111";
+            var ownerRoleId = "22222222-2222-2222-2222-222222222222";
+            var customerRoleId = "33333333-3333-3333-3333-333333333333";
 
             builder.Entity<AppRole>().HasData(
                 new AppRole { Id = adminRoleId, Name = "Admin", NormalizedName = "ADMIN" },
@@ -140,47 +140,56 @@ namespace CarRentalDAL.Context
             );
 
             // =================== Users ===================
-            var adminUserId = Guid.NewGuid().ToString();
-            var ownerUserId = Guid.NewGuid().ToString();
-            var customerUserId = Guid.NewGuid().ToString();
-
-            var hasher = new PasswordHasher<AppUser>();
+            var adminUserId = "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa";
+            var ownerUserId = "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb";
+            var customerUserId = "cccccccc-cccc-cccc-cccc-cccccccccccc";
 
             builder.Entity<AppUser>().HasData(
-                new AppUser
-                {
-                    Id = adminUserId,
-                    UserName = "admin@system.com",
-                    NormalizedUserName = "ADMIN@SYSTEM.COM",
-                    Email = "admin@system.com",
-                    NormalizedEmail = "ADMIN@SYSTEM.COM",
-                    EmailConfirmed = true,
-                    PasswordHash = hasher.HashPassword(null, "Admin@123"),
-                    SecurityStamp = Guid.NewGuid().ToString()
-                },
-                new AppUser
-                {
-                    Id = ownerUserId,
-                    UserName = "owner@system.com",
-                    NormalizedUserName = "OWNER@SYSTEM.COM",
-                    Email = "owner@system.com",
-                    NormalizedEmail = "OWNER@SYSTEM.COM",
-                    EmailConfirmed = true,
-                    PasswordHash = hasher.HashPassword(null, "Owner@123"),
-                    SecurityStamp = Guid.NewGuid().ToString()
-                },
-                new AppUser
-                {
-                    Id = customerUserId,
-                    UserName = "customer@system.com",
-                    NormalizedUserName = "CUSTOMER@SYSTEM.COM",
-                    Email = "customer@system.com",
-                    NormalizedEmail = "CUSTOMER@SYSTEM.COM",
-                    EmailConfirmed = true,
-                    PasswordHash = hasher.HashPassword(null, "Customer@123"),
-                    SecurityStamp = Guid.NewGuid().ToString()
-                }
-            );
+    new AppUser
+    {
+        Id = adminUserId,
+        UserName = "admin@system.com",
+        NormalizedUserName = "ADMIN@SYSTEM.COM",
+        Email = "admin@system.com",
+        NormalizedEmail = "ADMIN@SYSTEM.COM",
+        EmailConfirmed = true,
+
+        PasswordHash = "AQAAAAIAAYagAAAAEOl6JGZ198pti7st7mJa1W3L0b8KVHVlMGLiiytti9xCL4XI1nRWhe8l4u/QJqLwDQ==",
+
+        SecurityStamp = "11111111-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+        ConcurrencyStamp = "11111111-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
+    },
+
+    new AppUser
+    {
+        Id = ownerUserId,
+        UserName = "owner@system.com",
+        NormalizedUserName = "OWNER@SYSTEM.COM",
+        Email = "owner@system.com",
+        NormalizedEmail = "OWNER@SYSTEM.COM",
+        EmailConfirmed = true,
+
+        PasswordHash = "AQAAAAIAAYagAAAAEBYwFmzVidPhWNw1v2E8afkWSRpELnVYYU/7vKpa3gaXAR8b7EDvgq79Mz7yFGV0KA==",
+
+        SecurityStamp = "22222222-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+        ConcurrencyStamp = "22222222-cccc-cccc-cccc-cccccccccccc"
+    },
+
+    new AppUser
+    {
+        Id = customerUserId,
+        UserName = "customer@system.com",
+        NormalizedUserName = "CUSTOMER@SYSTEM.COM",
+        Email = "customer@system.com",
+        NormalizedEmail = "CUSTOMER@SYSTEM.COM",
+        EmailConfirmed = true,
+
+        PasswordHash = "AQAAAAIAAYagAAAAELJ1/UFD9Y1BhqFWI+dbif+nQapSLxpuROK1dx70bO7Qk193rSbwDSdxLMslVVrnEw==",
+
+        SecurityStamp = "33333333-cccc-cccc-cccc-cccccccccccc",
+        ConcurrencyStamp = "33333333-dddd-dddd-dddd-dddddddddddd"
+    }
+);
 
             // =================== Assign Roles to Users ===================
             builder.Entity<IdentityUserRole<string>>().HasData(
@@ -189,8 +198,8 @@ namespace CarRentalDAL.Context
                 new IdentityUserRole<string> { UserId = customerUserId, RoleId = customerRoleId }
             );
             // =================== Categories ===================
-            var sedanCategoryId = Guid.NewGuid().ToString();
-            var suvCategoryId = Guid.NewGuid().ToString();
+            var sedanCategoryId = new Guid("dddddddd-1111-1111-1111-111111111111");
+            var suvCategoryId = new Guid("eeeeeeee-2222-2222-2222-222222222222");
 
 
             builder.Entity<Category>().HasData(
@@ -210,8 +219,8 @@ namespace CarRentalDAL.Context
 
             // =================== Cars ===================
 
-            var car1Id = Guid.NewGuid().ToString();
-            var car2Id = Guid.NewGuid().ToString();
+            var car1Id = new Guid("aaaaaaaa-3333-3333-3333-333333333333");
+            var car2Id = new Guid("bbbbbbbb-4444-4444-4444-444444444444");
             builder.Entity<Car>().HasData(
                 new Car
                 {
@@ -239,12 +248,13 @@ namespace CarRentalDAL.Context
                     Rate = 60,
                     Status = CarStatus.Available,
                     OwnerUserId = ownerUserId
-                    , CategoryId = suvCategoryId
+                    ,
+                    CategoryId = suvCategoryId
                 }
             );
 
             // =================== Rentals ===================
-            var rental1Id = Guid.NewGuid().ToString();
+            var rental1Id = new Guid("aaaaaaaa-5555-5555-5555-555555555555");
 
             builder.Entity<Rental>().HasData(
                 new Rental
@@ -261,7 +271,7 @@ namespace CarRentalDAL.Context
             );
 
             // =================== Payments ===================
-            var payment1Id = Guid.NewGuid().ToString();
+            var payment1Id = new Guid("aaaaaaaa-6666-6666-6666-666666666666");
             builder.Entity<Payment>().HasData(
                 new Payment
                 {
@@ -274,11 +284,11 @@ namespace CarRentalDAL.Context
             );
 
             // =================== Reviews ===================
-            var review1Id = Guid.NewGuid().ToString();
+            var review1Id = new Guid("aaaaaaaa-7777-7777-7777-777777777777");
             builder.Entity<Review>().HasData(
                 new Review
                 {
-                    Id = rental1Id,
+                    Id = review1Id,
                     CarId = car1Id,
                     CustomerUserId = customerUserId,
                     Title = "Great car!",

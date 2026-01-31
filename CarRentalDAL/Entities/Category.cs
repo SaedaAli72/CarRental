@@ -8,7 +8,7 @@ namespace CarRentalDAL.Entities
 {
     public class Category
     {
-        public string Id { get; set; } = Guid.NewGuid().ToString();
+        public Guid Id { get; set; }
         public string Name { get; set; }
 
         public ICollection<Car> Cars { get; set; }

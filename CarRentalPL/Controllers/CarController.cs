@@ -1,7 +1,6 @@
 ﻿using CarRentalBLL.Services.Interface;
 using CarRentalBLL.ViewModels.Car;
 using CarRentalDAL.Entities;
-using CarRentalDAL.Migrations;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -44,7 +43,7 @@ namespace CarRentalPL.Controllers
             return View("index",cars);
         }
 
-        public IActionResult Details(string id)
+        public IActionResult Details(Guid id)
         {
             var car = _carService.GetCarById(id);
             return View("Details",car);
@@ -53,7 +52,7 @@ namespace CarRentalPL.Controllers
         {
             return View("Error");
         }
-        public IActionResult Remove(string id)
+        public IActionResult Remove(Guid id)
         {
            return _carService.RemoveCar(id)? RedirectToAction("Index") : RedirectToAction("Error");
         }
@@ -80,7 +79,7 @@ namespace CarRentalPL.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(string id)
+        public IActionResult Edit(Guid id)
         {
             EditCarVM carCardvm = _carService.GetCarByIdForEdit(id);
 

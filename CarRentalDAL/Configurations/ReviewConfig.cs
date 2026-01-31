@@ -18,6 +18,8 @@ namespace CarRentalDAL.Configurations
                .IsRequired()
                .HasMaxLength(36);
 
+            builder.Property(r => r.Id)
+                .HasDefaultValueSql("NEWID()");
         }
     }
 }

@@ -11,11 +11,11 @@ namespace CarRentalBLL.Services.Interface
     public interface ICarService
     {
         ICollection<CarCardVM> GetAllCars(Func<Car, bool>? func);
-        CarCardVM GetCarById(string id);
+        CarCardVM GetCarById(Guid id);
         ICollection<CarCardVM> GetAllAvailableCars(Func<Car, bool>? func);
         bool AddCar(CreateCarVM car,string OwnerId);
-        bool RemoveCar(string id);
+        bool RemoveCar(Guid id);
         bool UpdateCar(EditCarVM carvm);
-        EditCarVM GetCarByIdForEdit(string carId);
+        EditCarVM GetCarByIdForEdit(Guid carId);
     }
 }

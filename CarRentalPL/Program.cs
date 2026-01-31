@@ -23,8 +23,15 @@ namespace CarRentalPL
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<ICarService,CarService>();
             builder.Services.AddScoped<ICaregotyService, CategoryService>();
+            builder.Services.AddScoped<IRentalService, RentalService>();
             builder.Services.AddIdentity<AppUser, AppRole>()
                .AddEntityFrameworkStores<AppDBContext>();
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Auth/Login";
+                options.AccessDeniedPath = "/Auth/AccessDenied";
+            });
+
 
             var app = builder.Build();
 
@@ -40,6 +47,8 @@ namespace CarRentalPL
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

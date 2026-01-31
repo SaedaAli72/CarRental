@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -31,9 +32,17 @@ namespace CarRentalDAL.Repositaries
             return _context.Set<T>();
         }
 
-        public T GetById(string id)
+        public T GetById(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[]? includes)
         {
-           return _context.Set<T>().Find(id);
+            IQueryable<T> query = _context.Set<T>();
+
+            if (includes is not null)
+                foreach (var include in includes)
+                {
+                    query = query.Include(include);
+                }
+
+            return query.FirstOrDefault(predicate);
         }
 
         public int Save()

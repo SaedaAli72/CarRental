@@ -8,7 +8,7 @@ namespace CarRentalBLL.ViewModels.CarImage
 {
     public class CarImageVM
     {
-        public string Id { get; set; }
+        public Guid Id { get; set; }
         public string ImagePath { get; set; }
     }
 }

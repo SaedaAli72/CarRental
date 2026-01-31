@@ -9,7 +9,7 @@ namespace CarRentalDAL.Entities
 {
     public class Payment
     {
-        public string Id { get; set; } = Guid.NewGuid().ToString();
+        public Guid Id { get; set; }
         public decimal Amount { get; set; }
         public DateTime PaymentDate { get; set; }
         //public decimal AddedCharges { get; set; } // not needed 
@@ -18,7 +18,7 @@ namespace CarRentalDAL.Entities
       
 
         #region Rental
-        public string RentalId { get; set; }
+        public Guid RentalId { get; set; }
         public Rental Rental { get; set; } 
         #endregion
     }

@@ -1,8 +1,14 @@
-﻿using CarRentalDAL.Enums;
+﻿using CarRentalDAL.Entities;
+using CarRentalDAL.Enums;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace CarRentalDAL.Entities
+namespace CarRentalBLL.ViewModels.Rental
 {
-    public class Rental
+    public class RentalCardVM
     {
         public Guid Id { get; set; }
         public DateTime RentalDate { get; set; }
@@ -12,19 +18,19 @@ namespace CarRentalDAL.Entities
 
         #region CustomerUser
         public string CustomerUserId { get; set; }
-        public AppUser CustomerUser { get; set; }
+        //public AppUser CustomerUser { get; set; }
         #endregion
 
         #region OwnerUser
         public string OwnerUserId { get; set; }
-        public AppUser OwnerUser { get; set; }
+        //public AppUser OwnerUser { get; set; }
         #endregion
 
         #region Car
-        public Guid CarId { get; set; }
-        public Car Car { get; set; }
+        //public Guid CarId { get; set; }
+        public CarRentalDAL.Entities.Car Car { get; set; }
         #endregion
 
-        public ICollection<Payment> Payments { get; set; }
+
     }
 }

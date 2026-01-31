@@ -20,6 +20,9 @@ namespace CarRentalDAL.Configurations
 
             builder.Property(d => d.DocumentType)
                 .HasConversion<string>();
+
+            builder.Property(ud => ud.Id)
+                .HasDefaultValueSql("NEWID()");
         }
     }
 }

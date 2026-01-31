@@ -23,7 +23,7 @@ namespace CarRentalBLL.Services
             _unitOfWork = unitOfWork;
         }
 
-        public CarCardVM GetCarById(string id)
+        public CarCardVM GetCarById(Guid id)
         {
             return _unitOfWork.cars.GetAll().Include(c => c.Category).Include(c => c.CarImages).FirstOrDefault(c => c.Id == id).ToCarCard();
         }
@@ -61,7 +61,7 @@ namespace CarRentalBLL.Services
                         {
                             car.CarImages.Add(new CarImage
                             {
-                                Id = Guid.NewGuid().ToString(),
+                                Id = Guid.NewGuid(),
                                 ImagePath = imagePath,
                                 Description = $"{carVM.Name} Image",
                                 CarId = car.Id
@@ -101,11 +101,11 @@ namespace CarRentalBLL.Services
         }
 
 
-        public bool RemoveCar(string carId)
+        public bool RemoveCar(Guid carId)
         {
             try
             {
-                Car car = _unitOfWork.cars.GetById(carId);
+                Car car = _unitOfWork.cars.GetById(c => c.Id == carId);
                 List<CarImage> carImages = _unitOfWork.carImages.GetAll().Where(ci => ci.CarId == carId).ToList();
                 if (carImages != null && carImages.Any())
                 {
@@ -142,7 +142,7 @@ namespace CarRentalBLL.Services
                 if (carvm.DeletedImageIds != null && carvm.DeletedImageIds.Any())
                 {
                     var imagesToDelete = car.CarImages
-                        .Where(i => carvm.DeletedImageIds.Contains(i.Id))
+                        .Where(i => carvm.DeletedImageIds.Contains(i.Id.ToString()))
                         .ToList();
 
                     foreach (var img in imagesToDelete)
@@ -158,7 +158,7 @@ namespace CarRentalBLL.Services
                     {
                         car.CarImages.Add(new CarImage
                         {
-                            Id = Guid.NewGuid().ToString(),
+                            Id = Guid.NewGuid(),
                             ImagePath = UploadImage(img),
                             CarId = car.Id
                         });
@@ -179,7 +179,7 @@ namespace CarRentalBLL.Services
 
 
 
-        public EditCarVM GetCarByIdForEdit(string carId)
+        public EditCarVM GetCarByIdForEdit(Guid carId)
         {
             var car = _unitOfWork.cars.GetAll()
                 .Include(c => c.CarImages)

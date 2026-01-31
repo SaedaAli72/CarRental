@@ -8,7 +8,7 @@ namespace CarRentalDAL.Entities
 {
     public class Review
     {
-        public string Id { get; set; } = Guid.NewGuid().ToString();
+        public Guid Id { get; set; }
         public string? Title { get; set; }
         public string? Text { get; set; }
         public int Score { get; set; } //to car from one user
@@ -20,7 +20,7 @@ namespace CarRentalDAL.Entities
         #endregion
 
         #region Car
-        public string CarId { get; set; }
+        public Guid CarId { get; set; }
         public Car Car { get; set; } 
         #endregion
     }

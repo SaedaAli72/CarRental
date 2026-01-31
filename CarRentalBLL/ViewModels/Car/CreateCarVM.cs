@@ -34,7 +34,7 @@ namespace CarRentalBLL.ViewModels.Car
 
         #region Category
         [Display(Name = "Category")]
-        public string CategoryId { get; set; }
+        public Guid CategoryId { get; set; }
         //public Category Category { get; set; }
         #endregion
         public List<IFormFile> CarImages { get; set; }

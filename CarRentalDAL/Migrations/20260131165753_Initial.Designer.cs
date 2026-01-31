@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarRentalDAL.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20260129154405_car")]
-    partial class car
+    [Migration("20260131165753_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -92,49 +92,49 @@ namespace CarRentalDAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "c1203171-e3e9-491f-89e0-6aec11e957fc",
+                            Id = "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9e8e55b4-36b2-45e6-abcc-b9223542021c",
+                            ConcurrencyStamp = "11111111-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
                             Email = "admin@system.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@SYSTEM.COM",
                             NormalizedUserName = "ADMIN@SYSTEM.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHCNpTxIOu6tqGAZDoT21Jdl3qO/2PCs+2zaGZELtrkZ6afoZhANBP3+ChS3lyrMcg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOl6JGZ198pti7st7mJa1W3L0b8KVHVlMGLiiytti9xCL4XI1nRWhe8l4u/QJqLwDQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f92ae652-fd95-4fda-bf6c-6d0a3b1d9ac3",
+                            SecurityStamp = "11111111-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
                             TwoFactorEnabled = false,
                             UserName = "admin@system.com"
                         },
                         new
                         {
-                            Id = "7cf13b3a-78a8-481b-8122-ddba91b49088",
+                            Id = "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "51469f7b-2e9f-4dfd-abfb-c329699f5386",
+                            ConcurrencyStamp = "22222222-cccc-cccc-cccc-cccccccccccc",
                             Email = "owner@system.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "OWNER@SYSTEM.COM",
                             NormalizedUserName = "OWNER@SYSTEM.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAECKalDP5JHyG2GhvCswePMdtZvpBX8uAxvmZwvntF6VdnDn33tnvquuoKyw3ZJGFsQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBYwFmzVidPhWNw1v2E8afkWSRpELnVYYU/7vKpa3gaXAR8b7EDvgq79Mz7yFGV0KA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b8bbcbaf-c038-4301-9ed1-a7c6886d874f",
+                            SecurityStamp = "22222222-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
                             TwoFactorEnabled = false,
                             UserName = "owner@system.com"
                         },
                         new
                         {
-                            Id = "09975295-832f-46fd-a9cb-31a1c2c0c377",
+                            Id = "cccccccc-cccc-cccc-cccc-cccccccccccc",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b99445e6-fd43-4f2a-a6d2-424095206d37",
+                            ConcurrencyStamp = "33333333-dddd-dddd-dddd-dddddddddddd",
                             Email = "customer@system.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "CUSTOMER@SYSTEM.COM",
                             NormalizedUserName = "CUSTOMER@SYSTEM.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAED1KbdZLmwSCrWXe0NBpdMKEmCwH506fO73JpIAvyOHI+VSVXxSM9lx36BXKdj+8Ig==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELJ1/UFD9Y1BhqFWI+dbif+nQapSLxpuROK1dx70bO7Qk193rSbwDSdxLMslVVrnEw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3b21c891-0010-4c7a-8553-2fc8f9aa1a63",
+                            SecurityStamp = "33333333-cccc-cccc-cccc-cccccccccccc",
                             TwoFactorEnabled = false,
                             UserName = "customer@system.com"
                         });
@@ -142,9 +142,11 @@ namespace CarRentalDAL.Migrations
 
             modelBuilder.Entity("CarRentalDAL.Entities.Car", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWID()");
 
                     b.Property<string>("Brand")
                         .IsRequired()
@@ -153,9 +155,8 @@ namespace CarRentalDAL.Migrations
                     b.Property<int>("Capacity")
                         .HasColumnType("int");
 
-                    b.Property<string>("CategoryId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Color")
                         .IsRequired()
@@ -197,14 +198,14 @@ namespace CarRentalDAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "fcf41895-17a5-456f-98b6-735d450c872c",
+                            Id = new Guid("aaaaaaaa-3333-3333-3333-333333333333"),
                             Brand = "Toyota",
                             Capacity = 5,
-                            CategoryId = "bc0bfb10-e1ef-4342-a148-d330040a76dc",
+                            CategoryId = new Guid("dddddddd-1111-1111-1111-111111111111"),
                             Color = "White",
                             ModelYear = 2021,
                             Name = "Toyota Corolla",
-                            OwnerUserId = "7cf13b3a-78a8-481b-8122-ddba91b49088",
+                            OwnerUserId = "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
                             PlateNumber = "ABC-123",
                             PricePerDay = 0m,
                             Rate = 50m,
@@ -212,14 +213,14 @@ namespace CarRentalDAL.Migrations
                         },
                         new
                         {
-                            Id = "0b64407f-8140-4fa1-98ae-0f0786ed07cf",
+                            Id = new Guid("bbbbbbbb-4444-4444-4444-444444444444"),
                             Brand = "Honda",
                             Capacity = 5,
-                            CategoryId = "eeb7eb13-3409-4e84-af49-68b79c039c1d",
+                            CategoryId = new Guid("eeeeeeee-2222-2222-2222-222222222222"),
                             Color = "Black",
                             ModelYear = 2022,
                             Name = "Honda Civic",
-                            OwnerUserId = "7cf13b3a-78a8-481b-8122-ddba91b49088",
+                            OwnerUserId = "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
                             PlateNumber = "XYZ-456",
                             PricePerDay = 0m,
                             Rate = 60m,
@@ -229,13 +230,14 @@ namespace CarRentalDAL.Migrations
 
             modelBuilder.Entity("CarRentalDAL.Entities.CarImage", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWID()");
 
-                    b.Property<string>("CarId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(36)");
+                    b.Property<Guid>("CarId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -254,8 +256,10 @@ namespace CarRentalDAL.Migrations
 
             modelBuilder.Entity("CarRentalDAL.Entities.Category", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWID()");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -268,21 +272,23 @@ namespace CarRentalDAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "bc0bfb10-e1ef-4342-a148-d330040a76dc",
+                            Id = new Guid("dddddddd-1111-1111-1111-111111111111"),
                             Name = "Sedan"
                         },
                         new
                         {
-                            Id = "eeb7eb13-3409-4e84-af49-68b79c039c1d",
+                            Id = new Guid("eeeeeeee-2222-2222-2222-222222222222"),
                             Name = "SUV"
                         });
                 });
 
             modelBuilder.Entity("CarRentalDAL.Entities.Payment", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWID()");
 
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
@@ -297,9 +303,8 @@ namespace CarRentalDAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RentalId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(36)");
+                    b.Property<Guid>("RentalId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -312,26 +317,27 @@ namespace CarRentalDAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "db324d05-59d5-4ec1-91d8-09d0f8843103",
+                            Id = new Guid("aaaaaaaa-6666-6666-6666-666666666666"),
                             Amount = 150m,
                             PaymentDate = new DateTime(2026, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PaymentType = "Deposit",
-                            RentalId = "85d1c997-4623-427e-a965-fcd6f8e0fad4"
+                            RentalId = new Guid("aaaaaaaa-5555-5555-5555-555555555555")
                         });
                 });
 
             modelBuilder.Entity("CarRentalDAL.Entities.Rental", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWID()");
 
                     b.Property<DateTime?>("ActualDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("CarId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(36)");
+                    b.Property<Guid>("CarId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CustomerUserId")
                         .IsRequired()
@@ -364,10 +370,10 @@ namespace CarRentalDAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "85d1c997-4623-427e-a965-fcd6f8e0fad4",
-                            CarId = "fcf41895-17a5-456f-98b6-735d450c872c",
-                            CustomerUserId = "09975295-832f-46fd-a9cb-31a1c2c0c377",
-                            OwnerUserId = "7cf13b3a-78a8-481b-8122-ddba91b49088",
+                            Id = new Guid("aaaaaaaa-5555-5555-5555-555555555555"),
+                            CarId = new Guid("aaaaaaaa-3333-3333-3333-333333333333"),
+                            CustomerUserId = "cccccccc-cccc-cccc-cccc-cccccccccccc",
+                            OwnerUserId = "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
                             RentalDate = new DateTime(2026, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ReturnDate = new DateTime(2026, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Status = "Active"
@@ -376,13 +382,14 @@ namespace CarRentalDAL.Migrations
 
             modelBuilder.Entity("CarRentalDAL.Entities.Review", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWID()");
 
-                    b.Property<string>("CarId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(36)");
+                    b.Property<Guid>("CarId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CustomerUserId")
                         .IsRequired()
@@ -411,9 +418,9 @@ namespace CarRentalDAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "85d1c997-4623-427e-a965-fcd6f8e0fad4",
-                            CarId = "fcf41895-17a5-456f-98b6-735d450c872c",
-                            CustomerUserId = "09975295-832f-46fd-a9cb-31a1c2c0c377",
+                            Id = new Guid("aaaaaaaa-7777-7777-7777-777777777777"),
+                            CarId = new Guid("aaaaaaaa-3333-3333-3333-333333333333"),
+                            CustomerUserId = "cccccccc-cccc-cccc-cccc-cccccccccccc",
                             Date = new DateTime(2026, 1, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Score = 5,
                             Title = "Great car!"
@@ -422,9 +429,11 @@ namespace CarRentalDAL.Migrations
 
             modelBuilder.Entity("CarRentalDAL.Entities.UserDocument", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWID()");
 
                     b.Property<string>("AppUserId")
                         .IsRequired()
@@ -570,18 +579,18 @@ namespace CarRentalDAL.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "c1203171-e3e9-491f-89e0-6aec11e957fc",
-                            RoleId = "4b4fddfa-56b9-4304-9e42-975d2742d427"
+                            UserId = "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+                            RoleId = "11111111-1111-1111-1111-111111111111"
                         },
                         new
                         {
-                            UserId = "7cf13b3a-78a8-481b-8122-ddba91b49088",
-                            RoleId = "673736a1-629e-4f4e-bf64-3925da9db1b4"
+                            UserId = "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+                            RoleId = "22222222-2222-2222-2222-222222222222"
                         },
                         new
                         {
-                            UserId = "09975295-832f-46fd-a9cb-31a1c2c0c377",
-                            RoleId = "4fc7a5c2-d937-468c-898f-9c0947ab5e84"
+                            UserId = "cccccccc-cccc-cccc-cccc-cccccccccccc",
+                            RoleId = "33333333-3333-3333-3333-333333333333"
                         });
                 });
 
@@ -613,19 +622,19 @@ namespace CarRentalDAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "4b4fddfa-56b9-4304-9e42-975d2742d427",
+                            Id = "11111111-1111-1111-1111-111111111111",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "673736a1-629e-4f4e-bf64-3925da9db1b4",
+                            Id = "22222222-2222-2222-2222-222222222222",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         },
                         new
                         {
-                            Id = "4fc7a5c2-d937-468c-898f-9c0947ab5e84",
+                            Id = "33333333-3333-3333-3333-333333333333",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });

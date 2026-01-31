@@ -14,7 +14,7 @@ namespace CarRentalBLL.ViewModels.Car
 {
     public class EditCarVM
     {
-        public string Id { get; set; } 
+        public Guid Id { get; set; } 
         public string Name { get; set; }
         public string Brand { get; set; }
         [Range(2000, 2026)]
@@ -36,7 +36,7 @@ namespace CarRentalBLL.ViewModels.Car
         #region Category
 
         [Display(Name = "Category")]
-        public string CategoryId { get; set; }
+        public Guid CategoryId { get; set; }
         //public Category Category { get; set; }
         #endregion
         public List<IFormFile>? CarImages { get; set; }
