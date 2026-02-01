@@ -11,7 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModels\Review\" />
     <Folder Include="ViewModels\Payment\" />
     <Folder Include="ViewModels\UserDocument\" />
   </ItemGroup>

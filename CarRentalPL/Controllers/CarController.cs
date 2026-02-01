@@ -44,6 +44,7 @@ namespace CarRentalPL.Controllers
             return View("index",cars);
         }
 
+        // change return type from carcardvm to CarDetailsWithReviewVM
         public IActionResult Details(Guid id)
         {
             var car = _carService.GetCarById(id);

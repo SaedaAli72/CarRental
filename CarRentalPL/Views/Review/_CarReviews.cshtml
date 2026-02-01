@@ -1,0 +1,38 @@
+﻿@model IEnumerable<CarRentalBLL.ViewModels.Review.ReviewVM>
+
+@{
+    ViewData["Title"] = "CarDetailsReviews";
+}
+
+<h4>Reviews</h4>
+
+@if (Model == null || !Model.Any())
+{
+    <p class="text-muted">No comments yet.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Score)</th>
+                <th>@Html.DisplayNameFor(model => model.Title)</th>
+                <th>@Html.DisplayNameFor(model => model.Text)</th>
+                <th>@Html.DisplayNameFor(model => model.CustomerName)</th>
+                <th>@Html.DisplayNameFor(model => model.Date)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Score</td>
+                    <td>@item.Title</td>
+                    <td>@item.Text</td>
+                    <td>@item.CustomerName</td>
+                    <td>@item.Date</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
