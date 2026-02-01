@@ -1,5 +1,8 @@
-﻿using CarRentalBLL.Services.Interface;
+﻿using CarRentalBLL.Services;
+using CarRentalBLL.Services.Interface;
 using CarRentalBLL.ViewModels.Rental;
+using CarRentalDAL.Entities;
+using CarRentalDAL.Enums;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -8,6 +11,7 @@ namespace CarRentalPL.Controllers
     public class RentalController : Controller
     {
         private readonly IRentalService _rentalService;
+        private readonly ICarService _carService;
 
         public RentalController(IRentalService rentalService)
         {
@@ -46,7 +50,10 @@ namespace CarRentalPL.Controllers
             bool isCreated = _rentalService.AddRental(rentalVm, userId);
             if (isCreated)
             {
-                return RedirectToAction("Index", "Car");
+                bool carstatus = _carService.ChangeCarStatus(rentalVm.CarId, CarStatus.Rented);
+                if (carstatus)
+                    return RedirectToAction("Index", "Car");
+                return RedirectToAction("Error", "Home");
             }
             else
             {

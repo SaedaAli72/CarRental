@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using CarRentalDAL.Enums;
 
 namespace CarRentalBLL.Services
 {
@@ -35,6 +36,7 @@ namespace CarRentalBLL.Services
             string OwnerId = car.OwnerUserId;
             rental.CustomerUserId = userId;
             rental.OwnerUserId = OwnerId;
+            //car.Status =CarStatus.Rented;
             _unitOfWork.rentals.Add(rental);
             return _unitOfWork.Save() > 0;
 

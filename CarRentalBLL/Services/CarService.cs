@@ -213,7 +213,22 @@ namespace CarRentalBLL.Services
             }
         }
 
+        public bool ChangeCarStatus(Guid CarId, CarStatus carStatus)
+        {
+            Car car = _unitOfWork.cars.GetById(c => c.Id == CarId);
+            if (car == null)
+                return false;
+            car.Status = carStatus;
+            _unitOfWork.cars.Update(car);
+            return _unitOfWork.Save() > 0;
+        }
 
-
+        public CarStatus? GetCarStatus(Guid CarId)
+        {
+            Car car = _unitOfWork.cars.GetById(c => c.Id == CarId);
+            if (car == null)
+                return null;
+            return car.Status;
+        }
     }
 }

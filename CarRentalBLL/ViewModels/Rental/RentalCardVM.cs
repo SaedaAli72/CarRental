@@ -10,7 +10,6 @@ namespace CarRentalBLL.ViewModels.Rental
 {
     public class RentalCardVM
     {
-        public Guid Id { get; set; }
         public DateTime RentalDate { get; set; }
         public DateTime? ActualDate { get; set; }
         public DateTime ReturnDate { get; set; }

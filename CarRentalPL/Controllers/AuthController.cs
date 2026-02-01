@@ -92,5 +92,11 @@ namespace CarRentalPL.Controllers
             return View(vM);
 
         }
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "test");
+        }
+
     }
 }

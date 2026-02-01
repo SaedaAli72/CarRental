@@ -1,5 +1,6 @@
 ﻿using CarRentalBLL.ViewModels.Car;
 using CarRentalDAL.Entities;
+using CarRentalDAL.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,5 +18,7 @@ namespace CarRentalBLL.Services.Interface
         bool RemoveCar(Guid id);
         bool UpdateCar(EditCarVM carvm);
         EditCarVM GetCarByIdForEdit(Guid carId);
+        bool ChangeCarStatus(Guid CarId, CarStatus carStatus);
+        CarStatus? GetCarStatus(Guid CarId);
     }
 }

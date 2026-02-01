@@ -1,6 +1,7 @@
 ﻿using CarRentalBLL.Services.Interface;
 using CarRentalBLL.ViewModels.Car;
 using CarRentalDAL.Entities;
+using CarRentalDAL.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -39,7 +40,7 @@ namespace CarRentalPL.Controllers
             ViewData["MinPrice"] = minPrice;
 
 
-            var cars = _carService.GetAllAvailableCars(func);
+            var cars = _carService.GetAllCars(func);
             return View("index",cars);
         }
 
@@ -100,7 +101,18 @@ namespace CarRentalPL.Controllers
         }
          
         
-
+        public bool ChangeCarStatus(Guid CarId,CarStatus carStatus)
+        {
+            bool carstatus = _carService.ChangeCarStatus(CarId, carStatus);
+            if (carstatus)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 
 }
