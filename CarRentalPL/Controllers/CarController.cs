@@ -89,7 +89,7 @@ namespace CarRentalPL.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(string id , EditCarVM carvm)
+        public IActionResult Edit(Guid id , EditCarVM carvm)
         {
             if (ModelState.IsValid)
             {

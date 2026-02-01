@@ -97,7 +97,7 @@ namespace CarRentalBLL.Services
             {
                 file.CopyTo(fileStream);
             }
-            return "/uploads/cars/" + uniqueFileName;
+            return "uploads/cars/" + uniqueFileName;
         }
 
 
@@ -142,7 +142,7 @@ namespace CarRentalBLL.Services
                 if (carvm.DeletedImageIds != null && carvm.DeletedImageIds.Any())
                 {
                     var imagesToDelete = car.CarImages
-                        .Where(i => carvm.DeletedImageIds.Contains(i.Id.ToString()))
+                        .Where(i => carvm.DeletedImageIds.Contains(i.Id))
                         .ToList();
 
                     foreach (var img in imagesToDelete)
@@ -153,15 +153,21 @@ namespace CarRentalBLL.Services
                 }
 
                 if (carvm.CarImages != null && carvm.CarImages.Any())
+
                 {
+                    car.CarImages ??= new List<CarImage>();
                     foreach (var img in carvm.CarImages)
                     {
-                        car.CarImages.Add(new CarImage
+                        var newImage = new CarImage
                         {
                             Id = Guid.NewGuid(),
                             ImagePath = UploadImage(img),
+                            Description = $"{carvm.Name} Image",
                             CarId = car.Id
-                        });
+                        };
+
+                        car.CarImages.Add(newImage);
+                        _unitOfWork.carImages.Add(newImage);
                     }
                 }
 
