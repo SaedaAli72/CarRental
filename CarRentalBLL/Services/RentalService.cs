@@ -36,7 +36,7 @@ namespace CarRentalBLL.Services
             string OwnerId = car.OwnerUserId;
             rental.CustomerUserId = userId;
             rental.OwnerUserId = OwnerId;
-            car.Status =CarStatus.Rented;
+            //car.Status =CarStatus.Rented;
             _unitOfWork.rentals.Add(rental);
             return _unitOfWork.Save() > 0;
 
