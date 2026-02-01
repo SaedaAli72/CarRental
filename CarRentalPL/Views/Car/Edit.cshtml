@@ -13,13 +13,39 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
            
                 <input asp-for="Id" type="hidden" class="form-control" />
+                <div class="mb-3">
+                    <label>Existing Images</label>
+                    <div>
+                        @if (Model.ExistingImages != null && Model.ExistingImages.Any())
+                        {
+                            foreach (var img in Model.ExistingImages)
+                            {
+                                <div style="display:inline-block; margin:10px;">
+                                    <img src="@Url.Content("~/" + img.ImagePath)" width="150" height="120" />
+
+                                    <div>
+                                        <input type="checkbox"
+                                               name="DeletedImageIds"
+                                               value="@img.Id" />
+                                        <label>Delete</label>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+
+                   
             
             </div>
+                <div class="mb-3">
+                    <label>Add New Images</label>
+                    <input type="file" asp-for="CarImages" multiple class="form-control" />
+                </div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />

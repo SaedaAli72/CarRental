@@ -40,7 +40,7 @@ namespace CarRentalBLL.ViewModels.Car
         //public Category Category { get; set; }
         #endregion
         public List<IFormFile>? CarImages { get; set; }
-        public List<string>? DeletedImageIds { get; set; }   //  
+        public List<Guid>? DeletedImageIds { get; set; }   //  
         public List<CarImageVM>? ExistingImages { get; set; } // 
         public ICollection<CategoryVM>? Categories { get; set; }
     }

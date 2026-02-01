@@ -50,10 +50,10 @@ namespace CarRentalPL.Controllers
             bool isCreated = _rentalService.AddRental(rentalVm, userId);
             if (isCreated)
             {
-                bool carstatus = _carService.ChangeCarStatus(rentalVm.CarId, CarStatus.Rented);
-                if (carstatus)
+                //bool carstatus = _carService.ChangeCarStatus(rentalVm.CarId, CarStatus.Rented);
+                //if (carstatus)
                     return RedirectToAction("Index", "Car");
-                return RedirectToAction("Error", "Home");
+                //return RedirectToAction("Error", "Home");
             }
             else
             {

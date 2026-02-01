@@ -13,6 +13,7 @@ namespace CarRentalBLL.Mapping.Car
             this ViewModels.Car.EditCarVM vm,
             CarRentalDAL.Entities.Car car)
         {
+
             car.Name = vm.Name;
             car.Brand = vm.Brand;
             car.ModelYear = vm.ModelYear;
@@ -28,6 +29,7 @@ namespace CarRentalBLL.Mapping.Car
         public static EditCarVM MatpToEditCarVm(this CarRentalDAL.Entities.Car car)
         {
             return new EditCarVM {
+                Id = car.Id,
                 Name = car.Name,
                 Brand = car.Brand,
                 ModelYear = car.ModelYear,
