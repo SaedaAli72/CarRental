@@ -1,5 +1,6 @@
 ﻿using CarRentalBLL.Mapping.Car;
 using CarRentalBLL.Mapping.Category;
+using CarRentalBLL.Mapping.Reviews;
 using CarRentalBLL.Services.Interface;
 using CarRentalBLL.ViewModels.Car;
 using CarRentalDAL.Entities;
@@ -23,9 +24,13 @@ namespace CarRentalBLL.Services
             _unitOfWork = unitOfWork;
         }
 
-        public CarCardVM GetCarById(Guid id)
+        public CarDetailsWithReviewVM GetCarById(Guid id)
         {
-            return _unitOfWork.cars.GetAll().Include(c => c.Category).Include(c => c.CarImages).FirstOrDefault(c => c.Id == id).ToCarCard();
+            //return _unitOfWork.cars.GetAll().Include(c => c.Category).Include(c => c.CarImages).FirstOrDefault(c => c.Id == id).ToCarCard();
+            CarDetailsWithReviewVM CarDetails =_unitOfWork.cars.GetById(c=>c.Id==id, c => c.Category, c => c.CarImages).MapToCarDetailsWithReviewVM();
+            CarDetails.Reviews= _unitOfWork.reviews.GetAll().Include(r => r.CustomerUser).Where(r => r.CarId == id).Select(r => r.MapToReviewVM()).ToList();
+            return CarDetails;
+
         }
 
         ICollection<CarCardVM> ICarService.GetAllCars(Func<Car, bool>? func = null)

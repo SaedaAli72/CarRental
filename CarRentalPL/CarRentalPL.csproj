@@ -18,4 +18,8 @@
     <ProjectReference Include="..\CarRentalBLL\CarRentalBLL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Review\" />
+  </ItemGroup>
+
 </Project>

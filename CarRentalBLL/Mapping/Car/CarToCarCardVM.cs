@@ -31,23 +31,23 @@ namespace CarRentalBLL.Mapping.Car
             return carCardVM;
         }
 
-        public static CarDetailsWithReviewVM ToCarCardWithReview(this CarRentalDAL.Entities.Car car)
-        {
-            var carCardWithReviewVM = new CarDetailsWithReviewVM()
-            {
-                Id = car.Id,
-                Name = car.Name,
-                Brand = car.Brand,
-                ModelYear = car.ModelYear,
-                Color = car.Color,
-                PricePerDay = car.PricePerDay,
-                Status = car.Status,
-                //CategoryId = car.Category.Id,
-                Category = car.Category,
-                CarImage = car.CarImages.FirstOrDefault()?.ImagePath,
-                Reviews = car.Reviews.Select(r => r.MapToReviewVM()).ToList()
-            };
-            return carCardWithReviewVM;
-        }
+        //public static CarDetailsWithReviewVM ToCarCardWithReview(this CarRentalDAL.Entities.Car car)
+        //{
+        //    var carCardWithReviewVM = new CarDetailsWithReviewVM()
+        //    {
+        //        Id = car.Id,
+        //        Name = car.Name,
+        //        Brand = car.Brand,
+        //        ModelYear = car.ModelYear,
+        //        Color = car.Color,
+        //        PricePerDay = car.PricePerDay,
+        //        Status = car.Status,
+        //        //CategoryId = car.Category.Id,
+        //        Category = car.Category,
+        //        CarImage = car.CarImages.FirstOrDefault()?.ImagePath,
+        //        Reviews = car.Reviews.Select(r => r.MapToReviewVM()).ToList()
+        //    };
+        //    return carCardWithReviewVM;
+        //}
     }
 }

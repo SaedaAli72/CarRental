@@ -1,4 +1,5 @@
-﻿using CarRentalBLL.ViewModels.Review;
+﻿using CarRentalBLL.ViewModels.CarImage;
+using CarRentalBLL.ViewModels.Review;
 using CarRentalDAL.Enums;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace CarRentalBLL.ViewModels.Car
         public string Color { get; set; }
         public decimal PricePerDay { get; set; }
         public CarStatus Status { get; set; } //Enum
-        public string? CarImage { get; set; }
+        public ICollection<CarImageVM> CarImages { get; set; }
 
         #region Category
         //public string CategoryId { get; set; }

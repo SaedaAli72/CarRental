@@ -1,0 +1,13 @@
+﻿.car-slider-main {
+    height: 420px; 
+}
+
+.car-slider-thumb {
+    height: 90px;
+}
+.car-slider-main img,
+.car-slider-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; 
+ }
