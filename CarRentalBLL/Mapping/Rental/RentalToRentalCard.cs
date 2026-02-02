@@ -1,4 +1,5 @@
 ﻿using CarRentalBLL.ViewModels.Rental;
+using CarRentalDAL.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,12 +15,14 @@ namespace CarRentalBLL.Mapping.Rental
             if (rental == null) return null;
             return new ViewModels.Rental.RentalCardVM
             {
+                Id = rental.Id,
                 RentalDate = rental.RentalDate,
                 ReturnDate = rental.ReturnDate,
                 Status = rental.Status,
                 ActualDate = rental.ActualDate,
                 CustomerUserId = rental.CustomerUserId,
-                OwnerUserId = rental.OwnerUserId
+                OwnerUserId = rental.OwnerUserId,
+                Car = rental.Car
             };
         }
 
@@ -28,14 +31,29 @@ namespace CarRentalBLL.Mapping.Rental
             if(rentalVm == null) return null;
             return new CarRentalDAL.Entities.Rental
             {
+                Id = rentalVm.Id,
                 RentalDate = rentalVm.RentalDate,
                 ReturnDate = rentalVm.ReturnDate,
                 Status = rentalVm.Status,
                 ActualDate = rentalVm.ActualDate,
                 CustomerUserId = rentalVm.CustomerUserId,
-                OwnerUserId = rentalVm.OwnerUserId
+                OwnerUserId = rentalVm.OwnerUserId,
+                Car = rentalVm.Car
+
             };
         }
+        public static void MapToRental(this RentalCardVM rentalVm, CarRentalDAL.Entities.Rental rental)
+        {
+            if (rentalVm == null) return;
+            rental.RentalDate = rentalVm.RentalDate;
+            rental.ReturnDate = rentalVm.ReturnDate;
+            rental.Status = rentalVm.Status;
+            rental.ActualDate = rentalVm.ActualDate;
+            rental.CustomerUserId = rentalVm.CustomerUserId;
+            rental.OwnerUserId = rentalVm.OwnerUserId;
+            rental.Car = rentalVm.Car;
+        }
+
 
     }
 }

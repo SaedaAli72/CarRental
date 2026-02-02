@@ -24,6 +24,7 @@ namespace CarRentalPL
             builder.Services.AddScoped<ICarService,CarService>();
             builder.Services.AddScoped<ICaregotyService, CategoryService>();
             builder.Services.AddScoped<IRentalService, RentalService>();
+            builder.Services.AddScoped<IReviewService, ReviewService>();
             builder.Services.AddIdentity<AppUser, AppRole>()
                .AddEntityFrameworkStores<AppDBContext>();
             builder.Services.ConfigureApplicationCookie(options =>

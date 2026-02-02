@@ -73,6 +73,14 @@ namespace CarRentalBLL.Services
 
             return rentalCardVM;
         }
+        public EditRentalVM GetRentalByIdForEdit(Guid id)
+        {
+            EditRentalVM editRentalVM = _unitOfWork.rentals
+                                .GetById(r => r.Id == id, r => r.Car, r => r.CustomerUser)
+                                .MapToEditRentalVM();
+
+            return editRentalVM;
+        }
 
         public ICollection<RentalCardVM> GetUserRentals(string userId)
         {
@@ -90,6 +98,17 @@ namespace CarRentalBLL.Services
         {
             Rental rental = _unitOfWork.rentals.GetById(r => r.Id == id);
             _unitOfWork.rentals.Delete(rental);
+            return _unitOfWork.Save() > 0;
+        }
+        public bool UpdateRental(EditRentalVM rentalVm)
+        {
+            Rental rental = _unitOfWork.rentals.GetById(r => r.Id == rentalVm.Id);
+            if (rental == null)
+            {
+                return false;
+            }
+            rentalVm.MapToRental(rental);
+            _unitOfWork.rentals.Update(rental);
             return _unitOfWork.Save() > 0;
         }
     }

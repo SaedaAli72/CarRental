@@ -1,17 +1,18 @@
-﻿@model IEnumerable<CarRentalBLL.ViewModels.Rental.RentalCardVM>
+﻿@using CarRentalBLL.ViewModels.Rental
+@model IEnumerable<RentalCardVM>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "MyRentals";
 }
 
-<h1>Index</h1>
+<h1>MyRentals</h1>
 
 <p>
+    <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-           
             <th>
                 @Html.DisplayNameFor(model => model.RentalDate)
             </th>
@@ -36,7 +37,6 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-           
             <td>
                 @Html.DisplayFor(modelItem => item.RentalDate)
             </td>
@@ -56,11 +56,10 @@
                 @Html.DisplayFor(modelItem => item.OwnerUserId)
             </td>
             <td>
-
-                    <a asp-action="Edit" class="btn btn-warning" asp-controller="Rental" asp-route-id="@item.Id">Edit</a>
-                    @* <a asp-action="Remove" class="btn btn-danger" asp-controller="" asp-route-id="@item.Id">Delete</a> *@
-              @*   @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }) *@
+                    <a asp-action="AddReview" asp-controller="Review" asp-route-carId="@item.Car.Id">Add Review</a>
+                @* @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) | *@
+                @* @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) | *@
+                @* @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }) *@
             </td>
         </tr>
 }

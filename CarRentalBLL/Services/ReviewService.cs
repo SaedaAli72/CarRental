@@ -1,6 +1,7 @@
 ﻿using CarRentalBLL.Mapping.Reviews;
 using CarRentalBLL.Services.Interface;
 using CarRentalBLL.ViewModels.Review;
+using CarRentalDAL.Entities;
 using CarRentalDAL.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,20 +12,27 @@ using System.Threading.Tasks;
 
 namespace CarRentalBLL.Services
 {
-    internal class ReviewService :IReviewService
+    public class ReviewService :IReviewService
     {
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public ReviewService(UnitOfWork unitOfWork)
+        public ReviewService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
+        }
+
+        public bool AddReview(CreateReviewVM reviewVm)
+        {
+            Review review = reviewVm.MapToReviewEntity();
+            _unitOfWork.reviews.Add(review);
+            return _unitOfWork.Save() > 0;
+
         }
 
         public List<ReviewVM> GetCarDetailReviews(Guid carId)
         {
             List<ReviewVM> reviews = _unitOfWork.reviews.GetAll().Include(r=>r.CustomerUser).Where(r=>r.CarId == carId).Select(r=>r.MapToReviewVM()).ToList();
             return reviews;
-
         }
     }
 }

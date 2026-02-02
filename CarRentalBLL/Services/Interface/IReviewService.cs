@@ -11,5 +11,7 @@ namespace CarRentalBLL.Services.Interface
     public interface IReviewService
     {
         List<ReviewVM> GetCarDetailReviews(Guid carId);
+        bool AddReview(CreateReviewVM reviewVm);
+
     }
 }
