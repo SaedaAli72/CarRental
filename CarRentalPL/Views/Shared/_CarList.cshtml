@@ -21,7 +21,14 @@
                     <div class="car-price">
                         @Model.PricePerDay EGP <span>/ day</span>
                     </div>
-                    <a asp-action="Details" asp-controller="Car" asp-route-id="@Model.Id" class="btn btn-primary-custom w-100">Book Now</a>
+                    <div class="d-flex justify-content-between">
+                <a asp-action="Details" asp-controller="Car" asp-route-id="@Model.Id" class="btn btn-primary-custom w-45">Details</a>
+                @if (!User.IsInRole("Admin") && !User.IsInRole("Owner")){
+                    <a asp-action="Create" asp-controller="Rental" asp-route-id="@Model.Id" class="btn btn-primary-custom w-45">Book Now</a>
+                }
+
+                    </div>
+
                 </div>
             </div>
         </div>

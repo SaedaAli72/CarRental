@@ -2,15 +2,107 @@
 
 @{
     ViewData["Title"] = "Index";
+    SelectList options = new SelectList(ViewBag.Categories, "Id", "Name");
+    SelectList options2 = new SelectList(ViewBag.Brands);
+
 }
 
-<h1>Index</h1>
+@section Styles {
+    <link rel="stylesheet" href="~/css/Cars-Page.css" />
+}
+
+<!-- Page Header -->
+<section class="page-header">
+    <div class="container">
+        <h1 class="page-title">Our Vehicles</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Test" style="color: rgba(255,255,255,0.8); text-decoration: none;">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Vehicles</li>
+            </ol>
+        </nav>
+
+    </div>
+</section>
+
+<!-- Filter Section -->
+<section class="container mt-4">
+    <div class="filter-section">
+
+        <h4 class="filter-title">Filter Vehicles</h4>
+            <form asp-action="Index" method="get">
+        <div class="row justify-content-center g-3">
+                <div class="col-md-4">
+                    <label class="form-label">Search by Name :</label>
+                    <input type="text" placeholder="Search by Name" class="form-control" name="searchTerm" value="@ViewData["SearchTerm"]" />
+
+                </div>
+            <div class="col-md-4">
+                    <label name="CategoryId" class="form-label">Category</label>
+                    <select name="CategoryId" asp-items="options" class="form-select">
+                    <option selected value="">All Categories</option>
+                    </select>
+            </div>
+            <div class="col-md-4">
+                    <label name="Brands" class="form-label">Brand</label>
+                    <select name="Brands" asp-items="options2" class="form-select">
+                    <option selected value="">All Brands</option>
+                </select>
+            </div>
+       
+            <div class="col-md-12">
+                    <input type="submit" value="Search" class="btn btn-primary-custom w-100" />
+
+                </div>
+
+        </div>
+          </form>
+    </div>
+</section>
+
+<!-- Vehicles Section -->
+<section class="vehicles-section">
+    <div class="container">
+        <div class="section-header">
+            <span class="results-count">Showing 12 of 48 vehicles</span>
+            @if (User.IsInRole("Owner"))
+            {
+
+                <a asp-action="Create" class="btn btn-primary-custom">Create New</a>
+            }
+        </div>
+
+        <div class="row">
+           
+            @foreach(var item in Model)
+            {
+                <partial name="_CarList" model="item" />
+            }
+
+        </div>
+
+        <!-- Pagination -->
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</section>
 
 
-
+@* 
 <form asp-action="Index" method="get">
     <p>
-        Search by Name: <input type="text" name="searchTerm" value="@ViewData["SearchTerm"]" />
         <div class=" w-25">
 
         Search by min price : <input type="Range" class="form-range" min="100" max="3000" name="minPrice" id="priceRange" value="@ViewData["MinPrice"]" step="100" />
@@ -20,91 +112,10 @@
         
         <input type="submit" value="Search" class="btn btn-primary" />
     </p>
-</form>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CarImage)
-            </th>
-            @* <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th> *@
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Brand)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ModelYear)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Color)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PricePerDay)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                Categoty Name
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                    <img src="@item.CarImage" alt="Car Image" style="width:100px;height:auto;" />
-                </td>
-            @* <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td> *@
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Brand)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ModelYear)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Color)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PricePerDay)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.Name)
-            </td>
-
-            <td>
-                @* @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) | *@
-                    @if (User.IsInRole("Admin") || User.IsInRole("Owner")){
-                        <a asp-action="Edit" class="btn btn-warning" asp-controller="Car" asp-route-id="@item.Id">Edit</a>
-                        <a asp-action="Remove" class="btn btn-danger" asp-controller="Car" asp-route-id="@item.Id">Delete</a>
-
-                        }
-                    <a asp-action="Details" class="btn btn-primary" asp-controller="Car" asp-route-id="@item.Id">Details</a>
-
-                @* @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }) *@
-            </td>
-        </tr>
+</form> *@
 
 
-}
-    </tbody>
-</table>
-<a asp-action="Create" class="btn btn-primary">Create New</a>
-
-<script>
+@* <script>
     //  function submitForm() {
 
     //     document.getElementById("searchForm").submit();
@@ -119,4 +130,4 @@
     rangeInput.addEventListener('input', function() {
       rangeOutput.textContent = this.value;
     });
-</script>
+</script> *@

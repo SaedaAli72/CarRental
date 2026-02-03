@@ -31,6 +31,7 @@ namespace CarRentalPL.Controllers
             return View("Details",rental);
         }
         [HttpGet]
+        [Authorize(Roles ="Customer")]
         public IActionResult Create(Guid carId)
         {
             var rentalVm = new CreateRentalVm
@@ -41,6 +42,8 @@ namespace CarRentalPL.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Customer")]
+
         public IActionResult Create(CreateRentalVm rentalVm)
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;

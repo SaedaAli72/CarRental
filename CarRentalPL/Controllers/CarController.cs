@@ -20,8 +20,10 @@ namespace CarRentalPL.Controllers
 
 
 
-        public IActionResult Index(string? searchTerm,int? minPrice)
+        public IActionResult Index(string? searchTerm,int? minPrice,Guid CategoryId)
         {
+            
+
             searchTerm = searchTerm?.Trim().ToLower();
             Func<Car,bool>? func = null;
             if (!string.IsNullOrEmpty(searchTerm) && minPrice.HasValue)
@@ -38,6 +40,10 @@ namespace CarRentalPL.Controllers
             }
             ViewData["SearchTerm"] = searchTerm;
             ViewData["MinPrice"] = minPrice;
+            var Categories = _categoryService.GetAllCategories(null);
+            ViewData["Categories"] = Categories;
+            var brands = _carService.GetAllCars(null).Select(c => c.Brand).Distinct().ToList();
+            ViewData["Brands"] = brands;
 
 
             var cars = _carService.GetAllCars(func);

@@ -20,9 +20,12 @@ namespace CarRentalBLL.ViewModels.Car
         public CarStatus Status { get; set; } //Enum
         public string? CarImage { get; set; }
 
+
         #region Category
         //public string CategoryId { get; set; }
         public CarRentalDAL.Entities.Category Category { get; set; }
         #endregion
+
+        public List<CarRentalDAL.Entities.Category> Categories { get; set; }
     }
 }
