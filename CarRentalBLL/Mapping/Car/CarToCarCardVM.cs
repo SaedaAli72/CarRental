@@ -22,6 +22,7 @@ namespace CarRentalBLL.Mapping.Car
                 ModelYear = car.ModelYear,
                 Color = car.Color,
                 PricePerDay = car.PricePerDay,
+                Capacity = car.Capacity,
                 Status = car.Status,
                 //CategoryId = car.Category.Id,
                 Category = car.Category,

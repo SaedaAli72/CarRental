@@ -100,8 +100,11 @@
 </div>
 </div>
 <div>
-    @* @if (!User.IsInRole("Admin")&&)) *@
-    <a asp-action="Create" asp-controller="Rental" class="btn btn-primary" asp-route-carId="@Model.Id">Rent</a>
+    @if (User.IsInRole("Customer")&& User.Identities.Any(i => i.IsAuthenticated))
+    {
+        <a asp-action="Create" asp-controller="Rental" class="btn btn-primary" asp-route-carId="@Model.Id">Rent</a>
+
+    }
 
     <a asp-action="Index" class="btn btn-primary">Back to List</a>
 </div>

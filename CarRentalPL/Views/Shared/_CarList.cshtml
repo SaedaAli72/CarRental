@@ -1,0 +1,31 @@
+﻿@model CarRentalBLL.ViewModels.Car.CarCardVM
+
+
+
+
+        <div class="col-lg-4 col-md-6">
+            <div class="car-card">
+                <img src="@Model.CarImage" alt="@Model.Name" class="car-image">
+                <div class="car-body">
+                    <h3 class="car-title">@Model.Name</h3>
+                    <div class="car-specs">
+                        <div class="car-spec-item">
+                            <i class="fas fa-users"></i>
+                    <span>@Model.Capacity Seats</span>
+                        </div>
+                        <div class="car-spec-item">
+                            <i class="fas fa-cog"></i>
+                            <span>@Model.ModelYear</span>
+                        </div>
+                    </div>
+                    <div class="car-price">
+                        @Model.PricePerDay EGP <span>/ day</span>
+                    </div>
+                    <a asp-action="Details" asp-controller="Car" asp-route-id="@Model.Id" class="btn btn-primary-custom w-100">Book Now</a>
+                </div>
+            </div>
+        </div>
+
+
+
+ 
