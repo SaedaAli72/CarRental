@@ -21,7 +21,9 @@ namespace CarRentalBLL.Mapping.Rental
                 Status = rental.Status,
                 ActualDate = rental.ActualDate,
                 CustomerUserId = rental.CustomerUserId,
+                CustomerUser = rental.CustomerUser?.UserName,
                 OwnerUserId = rental.OwnerUserId,
+                OwnerUser = rental.OwnerUser?.UserName,
                 Car = rental.Car
             };
         }

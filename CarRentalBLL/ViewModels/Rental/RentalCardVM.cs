@@ -18,12 +18,12 @@ namespace CarRentalBLL.ViewModels.Rental
 
         #region CustomerUser
         public string CustomerUserId { get; set; }
-        //public AppUser CustomerUser { get; set; }
+        public string CustomerUser { get; set; }
         #endregion
 
         #region OwnerUser
         public string OwnerUserId { get; set; }
-        //public AppUser OwnerUser { get; set; }
+        public string OwnerUser { get; set; }
         #endregion
 
         #region Car

@@ -47,6 +47,7 @@ namespace CarRentalBLL.Services
             ICollection<RentalCardVM> rentalCardVMs = _unitOfWork.rentals.GetAll()
                 .Include(r => r.Car)
                 .Include(r => r.CustomerUser)
+                .Include(r => r.OwnerUser)
                 .Where(r => r.CarId == carId)
                 .Select(r => r.MapToRentalCardVM())
                 .ToList();
@@ -59,6 +60,7 @@ namespace CarRentalBLL.Services
             ICollection<RentalCardVM> rentalCardVMs = _unitOfWork.rentals.GetAll()
                 .Include(r => r.Car)
                 .Include(r => r.CustomerUser)
+                .Include(r=> r.OwnerUser)
                 .Select(r => r.MapToRentalCardVM())
                 .ToList();
 
