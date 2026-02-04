@@ -2,37 +2,65 @@
 
 @{
     ViewData["Title"] = "CarDetailsReviews";
+
 }
 
-<h4>Reviews</h4>
+@section Styles {
 
-@if (Model == null || !Model.Any())
-{
-    <p class="text-muted">No comments yet.</p>
+
 }
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>@Html.DisplayNameFor(model => model.Score)</th>
-                <th>@Html.DisplayNameFor(model => model.Title)</th>
-                <th>@Html.DisplayNameFor(model => model.Text)</th>
-                <th>@Html.DisplayNameFor(model => model.CustomerName)</th>
-                <th>@Html.DisplayNameFor(model => model.Date)</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
+
+
+
+<div class="container my-5">
+    <div class="reviews-container">
+        <div class="reviews-header">
+            <h2>Customer Reviews</h2>
+
+        </div>
+
+        <div class="reviews-list">
+            @foreach(var review in Model)
             {
-                <tr>
-                    <td>@item.Score</td>
-                    <td>@item.Title</td>
-                    <td>@item.Text</td>
-                    <td>@item.CustomerName</td>
-                    <td>@item.Date</td>
-                </tr>
+                
+            <div class="review-card">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <div class="reviewer-avatar">C</div>
+                            <div class="reviewer-details">
+                                <div class="reviewer-name">@review.CustomerName</div>
+                               
+                            </div>
+                        </div>
+                        <div class="review-meta">
+                            <div class="review-rating">
+                                <span class="rating-stars">
+                                    @for (int i = 1; i <= 5; i++)
+                                    {
+                                        if (i <= review.Score)
+                                        {
+                                            <span class="star filled">★</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="star">☆</span>
+                                        }
+                                    }
+                                </span>
+                               
+                                <span class="rating-number">@review.Score</span>
+                            </div>
+                            <div class="review-date">@review.Date</div>
+                        </div>
+                    </div>
+                    <div class="review-title">@review.Title</div>
+                    <div class="review-text">@review.Text</div>
+             </div>
+
+                <!-- Add more review cards here as needed -->
             }
-        </tbody>
-    </table>
-}
+            </div>
+        </div>
+    </div>
+
+
