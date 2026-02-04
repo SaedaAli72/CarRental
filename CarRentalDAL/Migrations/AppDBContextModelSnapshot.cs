@@ -190,7 +190,7 @@ namespace CarRentalDAL.Migrations
 
                     b.HasIndex("OwnerUserId");
 
-                    b.ToTable("Cars", (string)null);
+                    b.ToTable("Cars");
 
                     b.HasData(
                         new
@@ -248,7 +248,7 @@ namespace CarRentalDAL.Migrations
 
                     b.HasIndex("CarId");
 
-                    b.ToTable("CarImages", (string)null);
+                    b.ToTable("CarImages");
                 });
 
             modelBuilder.Entity("CarRentalDAL.Entities.Category", b =>
@@ -264,7 +264,7 @@ namespace CarRentalDAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
 
                     b.HasData(
                         new
@@ -309,7 +309,7 @@ namespace CarRentalDAL.Migrations
 
                     b.HasIndex("RentalId");
 
-                    b.ToTable("Payments", (string)null);
+                    b.ToTable("Payments");
 
                     b.HasData(
                         new
@@ -362,7 +362,7 @@ namespace CarRentalDAL.Migrations
 
                     b.HasIndex("OwnerUserId");
 
-                    b.ToTable("Rentals", (string)null);
+                    b.ToTable("Rentals");
 
                     b.HasData(
                         new
@@ -410,7 +410,7 @@ namespace CarRentalDAL.Migrations
 
                     b.HasIndex("CustomerUserId");
 
-                    b.ToTable("Reviews", (string)null);
+                    b.ToTable("Reviews");
 
                     b.HasData(
                         new
@@ -448,7 +448,7 @@ namespace CarRentalDAL.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.ToTable("UserDocuments", (string)null);
+                    b.ToTable("UserDocuments");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
