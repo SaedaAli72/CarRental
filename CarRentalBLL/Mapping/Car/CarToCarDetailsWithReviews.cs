@@ -23,6 +23,8 @@ namespace CarRentalBLL.Mapping.Car
                 PricePerDay = car.PricePerDay,
                 Status = car.Status,
                 Category = car.Category,
+                Capacity = car.Capacity,
+                
                 CarImages =car.CarImages?.Select(ci => new ViewModels.CarImage.CarImageVM
                 {
                     Id = ci.Id,

@@ -16,6 +16,7 @@ namespace CarRentalBLL.ViewModels.Car
         public string Brand { get; set; }
         public int ModelYear { get; set; }
         public string Color { get; set; }
+        public int Capacity { get; set; }
         public decimal PricePerDay { get; set; }
         public CarStatus Status { get; set; } //Enum
         public ICollection<CarImageVM> CarImages { get; set; }
