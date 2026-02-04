@@ -241,5 +241,36 @@ namespace CarRentalBLL.Services
                 return null;
             return car.Status;
         }
+
+        public PagedResult<CarCardVM> GetAllCarsPaged(
+    Func<Car, bool>? func = null,
+    int pageNumber = 1,
+    int pageSize = 12)
+        {
+            var query = _unitOfWork.cars
+                .GetAll()
+                .Include(c => c.Category)
+                .Include(c => c.CarImages)
+                .AsQueryable();
+
+            if (func != null)
+                query = query.Where(func).AsQueryable();
+
+            var totalCount = query.Count();
+
+            var items = query
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .Select(c => c.ToCarCard())
+                .ToList();
+
+            return new PagedResult<CarCardVM>
+            {
+                Items = items,
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                TotalCount = totalCount
+            };
+        }
     }
 }
