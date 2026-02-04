@@ -20,34 +20,68 @@ namespace CarRentalPL.Controllers
 
 
 
-        public IActionResult Index(string? searchTerm,int? minPrice,Guid CategoryId)
+        public IActionResult Index(
+    string? searchTerm,
+    string? Brands,
+    Guid? CategoryId,
+    int pageNumber = 1)
         {
-            
-
             searchTerm = searchTerm?.Trim().ToLower();
-            Func<Car,bool>? func = null;
-            if (!string.IsNullOrEmpty(searchTerm) && minPrice.HasValue)
-            {
-                func = c => (c.Name.Trim().ToLower().Contains(searchTerm) || c.Brand.Trim().ToLower().Contains(searchTerm)) && c.PricePerDay >= minPrice.Value;
-            }
-            else if (!string.IsNullOrEmpty(searchTerm))
-            {
-                func = c => c.Name.Trim().ToLower().Contains(searchTerm) || c.Brand.Trim().ToLower().Contains(searchTerm);
-            }
-            else if (minPrice.HasValue)
-            {
-                func = c => c.PricePerDay >= minPrice.Value;
-            }
+            Brands = Brands?.Trim().ToLower();
+
+            Func<Car, bool>? filter = c =>
+                (string.IsNullOrEmpty(searchTerm) ||
+                    c.Name.ToLower().Contains(searchTerm) ||
+                    c.Brand.ToLower().Contains(searchTerm))
+                &&
+                (string.IsNullOrEmpty(Brands) ||
+                    c.Brand.ToLower() == Brands)
+                &&
+                (!CategoryId.HasValue ||
+                    c.CategoryId == CategoryId.Value);
+
+            // ===== حفظ القيم =====
             ViewData["SearchTerm"] = searchTerm;
-            ViewData["MinPrice"] = minPrice;
-            var Categories = _categoryService.GetAllCategories(null);
-            ViewData["Categories"] = Categories;
-            var brands = _carService.GetAllCars(null).Select(c => c.Brand).Distinct().ToList();
-            ViewData["Brands"] = brands;
+            ViewData["SelectedBrand"] = Brands;
+            ViewData["SelectedCategory"] = CategoryId;
+
+            // ===== Dropdowns =====
+            ViewBag.Categories = _categoryService.GetAllCategories(null);
+            ViewBag.BrandsList = _carService.GetAllCars(null)
+                .Select(c => c.Brand)
+                .Distinct()
+                .ToList();
+
+            // ===== Pagination =====
+            var carsPaged = _carService.GetAllCarsPaged(filter, pageNumber, 12);
+
+            return View(carsPaged);
 
 
-            var cars = _carService.GetAllCars(func);
-            return View("index",cars);
+            //searchTerm = searchTerm?.Trim().ToLower();
+            //Func<Car,bool>? func = null;
+            //if (!string.IsNullOrEmpty(searchTerm) && !string.IsNullOrEmpty(Brands))
+            //{
+            //    func = c => (c.Name.Trim().ToLower().Contains(searchTerm) || c.Brand.Trim().ToLower().Contains(searchTerm)) && c.Brand.Trim().ToLower().Contains(Brands);
+            //}
+            //else if (!string.IsNullOrEmpty(searchTerm))
+            //{
+            //    func = c => c.Name.Trim().ToLower().Contains(searchTerm) || c.Brand.Trim().ToLower().Contains(searchTerm);
+            //}
+            //else if (!string.IsNullOrEmpty(Brands))
+            //{
+            //    func = c => c.Brand.Trim().ToLower().Contains(Brands);
+            //}
+            //ViewData["SearchTerm"] = searchTerm;
+            //ViewData["Brands"] = Brands;
+            //var Categories = _categoryService.GetAllCategories(null);
+            //ViewData["Categories"] = Categories;
+            //var brands = _carService.GetAllCars(null).Select(c => c.Brand).Distinct().ToList();
+            //ViewData["Brands"] = brands;
+
+
+            //var cars = _carService.GetAllCars(func);
+            //return View("index",cars);
         }
 
         // change return type from carcardvm to CarDetailsWithReviewVM

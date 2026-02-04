@@ -20,5 +20,6 @@ namespace CarRentalBLL.Services.Interface
         EditCarVM GetCarByIdForEdit(Guid carId);
         bool ChangeCarStatus(Guid CarId, CarStatus carStatus);
         CarStatus? GetCarStatus(Guid CarId);
+        PagedResult<CarCardVM> GetAllCarsPaged(Func<Car, bool>? func = null, int pageNumber = 1, int pageSize = 12);
     }
 }
