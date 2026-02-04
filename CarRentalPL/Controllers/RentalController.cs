@@ -98,5 +98,39 @@ namespace CarRentalPL.Controllers
             }
             return View("Edit", rentalVm);
         }
+
+        public IActionResult ExtendRental(EditRentalVM rentalVm)
+        {
+            if (ModelState.IsValid)
+            {
+                bool isUpdated = _rentalService.UpdateRental(rentalVm);
+                if (isUpdated)
+                {
+                    return RedirectToAction("MyRentals");
+                }
+                else
+                {
+                    return RedirectToAction("Error", "Home");
+                }
+            }
+            return View("Edit", rentalVm);
+        }
+
+        public IActionResult CancelRental(Guid rentalId)
+        {
+            if (ModelState.IsValid)
+            {
+                bool isUpdated = _rentalService.CancelRental(rentalId);
+                if (isUpdated)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return RedirectToAction("Error", "Home");
+                }
+            }
+            return RedirectToAction("Error", "Home");
+        }
     }
 }

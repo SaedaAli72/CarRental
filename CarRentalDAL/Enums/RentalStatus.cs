@@ -6,6 +6,7 @@ namespace CarRentalDAL.Enums
     {
         Active,
         Completed,
-        Late
+        Late,
+        Cancelled
     }
 }

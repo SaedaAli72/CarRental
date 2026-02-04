@@ -46,6 +46,7 @@ namespace CarRentalBLL.Services
         {
             ICollection<RentalCardVM> rentalCardVMs = _unitOfWork.rentals.GetAll()
                 .Include(r => r.Car)
+                .ThenInclude(c => c.CarImages)
                 .Include(r => r.CustomerUser)
                 .Include(r => r.OwnerUser)
                 .Where(r => r.CarId == carId)
@@ -102,6 +103,18 @@ namespace CarRentalBLL.Services
             _unitOfWork.rentals.Delete(rental);
             return _unitOfWork.Save() > 0;
         }
+
+        public bool CancelRental(Guid id)
+        {
+            Rental rental = _unitOfWork.rentals.GetById(r => r.Id == id);
+            rental.Status = RentalStatus.Cancelled;
+            _unitOfWork.rentals.Update(rental);
+            Car car = _unitOfWork.cars.GetById(c => c.Id == rental.CarId);
+            car.Status = CarStatus.Available;
+            _unitOfWork.cars.Update(car);
+            return _unitOfWork.Save() > 1;
+        }
+
         public bool UpdateRental(EditRentalVM rentalVm)
         {
             Rental rental = _unitOfWork.rentals.GetById(r => r.Id == rentalVm.Id);
