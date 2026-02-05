@@ -1,78 +1,112 @@
 ﻿@model CarRentalBLL.ViewModels.Review.CreateReviewVM
+
 @section Styles {
     <link rel="stylesheet" href="~/css/add-review.css" />
 }
+
 @{
-    ViewData["Title"] = "AddReview";
+    ViewData["Title"] = "Reviews";
 }
 
-<h1>AddReview</h1>
+<!-- Page Header -->
+<section class="page-header">
+    <div class="container">
+        <h1 class="page-title">Customer Reviews</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a asp-controller="Home" asp-action="Index"
+                       style="color: rgba(255,255,255,0.8); text-decoration:none;">
+                        Home
+                    </a>
+                </li>
+                <li class="breadcrumb-item active">Reviews</li>
+            </ol>
+        </nav>
+    </div>
+</section>
 
-<h4>CreateReviewVM</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="AddReview">
-            <div asp-validation-summary="All" class="text-danger"></div>
-            @* <div class="form-group">
-                <label asp-for="Score" class="control-label"></label>
-                <input asp-for="Score" class="form-control" />
-                <span asp-validation-for="Score" class="text-danger"></span>
-            </div> *@
-            <div class="form-group">
-                <label class="control-label">Rating</label>
+<!-- Reviews Section -->
+<section class="reviews-section">
+    <div class="container">
+        <div class="row">
 
-                <div class="star-rating">
-                    <input type="radio" id="star5" name="Score" value="5" />
-                    <label for="star5"><i class="bi bi-star-fill"></i></label>
+            <!-- LEFT -->
+            <div class="col-lg-8">
 
-                    <input type="radio" id="star4" name="Score" value="4" />
-                    <label for="star4"><i class="bi bi-star-fill"></i></label>
+                <!-- Add Review Card -->
+                <div class="add-review-card">
+                    <h3 class="card-title">Write a Review</h3>
 
-                    <input type="radio" id="star3" name="Score" value="3" />
-                    <label for="star3"><i class="bi bi-star-fill"></i></label>
+                    <form asp-action="AddReview" method="post">
 
-                    <input type="radio" id="star2" name="Score" value="2" />
-                    <label for="star2"><i class="bi bi-star-fill"></i></label>
+                        <div asp-validation-summary="All" class="text-danger mb-3"></div>
 
-                    <input type="radio" id="star1" name="Score" value="1" />
-                    <label for="star1"><i class="bi bi-star-fill"></i></label>
+                        <!-- Rating -->
+                        <div class="mb-3">
+                            <label class="form-label">Your Rating</label>
+
+                            <div class="star-rating" id="starRating">
+                                @for (int i = 1; i <= 5; i++)
+                                {
+                                    <i class="fas fa-star star" data-rating="@i"></i>
+                                }
+                            </div>
+
+                            <input asp-for="Score" type="hidden" id="ratingInput" />
+                            <span asp-validation-for="Score" class="text-danger"></span>
+                        </div>
+
+                        <!-- Title -->
+                        <div class="mb-3">
+                            <label asp-for="Title" class="form-label"></label>
+                            <input asp-for="Title" class="form-control"
+                                   placeholder="Summarize your experience" />
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+
+                        <!-- Text -->
+                        <div class="mb-3">
+                            <label asp-for="Text" class="form-label"></label>
+                            <textarea asp-for="Text" rows="5" class="form-control"
+                                      placeholder="Share your experience with this car..."></textarea>
+                            <span asp-validation-for="Text" class="text-danger"></span>
+                        </div>
+
+                        <!-- Hidden -->
+                        <input asp-for="CustomerId" type="hidden" />
+                        <input asp-for="CarId" type="hidden" />
+
+                        <button type="submit" class="btn btn-primary-custom">
+                            Submit Review
+                        </button>
+                    </form>
                 </div>
 
-                <span asp-validation-for="Score" class="text-danger"></span>
-            </div>
+               
 
-            <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Text" class="control-label"></label>
-                <input asp-for="Text" class="form-control" />
-                <span asp-validation-for="Text" class="text-danger"></span>
-            </div>
-            @* <div class="form-group"> *@
-                @* <label asp-for="CustomerId" class="control-label"></label> *@
-                <input asp-for="CustomerId" class="form-control" hidden/>
-                @* <span asp-validation-for="CustomerId" class="text-danger"></span> *@
-            @* </div> *@
-            @* <div class="form-group"> *@
-                @* <label asp-for="CarId" class="control-label"></label> *@
-                <input asp-for="CarId" class="form-control" hidden/>
-                @* <span asp-validation-for="CarId" class="text-danger"></span> *@
-            @* </div> *@
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+            
+
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+</section>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        const stars = document.querySelectorAll('.star');
+        const ratingInput = document.getElementById('ratingInput');
+
+        stars.forEach(star => {
+            star.addEventListener('click', function () {
+                const rating = this.dataset.rating;
+                ratingInput.value = rating;
+
+                stars.forEach(s => {
+                    s.classList.toggle('active', s.dataset.rating <= rating);
+                });
+            });
+        });
+    </script>
 }
