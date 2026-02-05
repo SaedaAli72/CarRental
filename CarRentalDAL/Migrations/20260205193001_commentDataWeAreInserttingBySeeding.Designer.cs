@@ -4,6 +4,7 @@ using CarRentalDAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarRentalDAL.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    partial class AppDBContextModelSnapshot : ModelSnapshot
+    [Migration("20260205193001_commentDataWeAreInserttingBySeeding")]
+    partial class commentDataWeAreInserttingBySeeding
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -140,7 +143,7 @@ namespace CarRentalDAL.Migrations
 
                     b.HasIndex("OwnerUserId");
 
-                    b.ToTable("Cars", (string)null);
+                    b.ToTable("Cars");
                 });
 
             modelBuilder.Entity("CarRentalDAL.Entities.CarImage", b =>
@@ -166,7 +169,7 @@ namespace CarRentalDAL.Migrations
 
                     b.HasIndex("CarId");
 
-                    b.ToTable("CarImages", (string)null);
+                    b.ToTable("CarImages");
                 });
 
             modelBuilder.Entity("CarRentalDAL.Entities.Category", b =>
@@ -182,7 +185,7 @@ namespace CarRentalDAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("CarRentalDAL.Entities.Payment", b =>
@@ -215,7 +218,7 @@ namespace CarRentalDAL.Migrations
 
                     b.HasIndex("RentalId");
 
-                    b.ToTable("Payments", (string)null);
+                    b.ToTable("Payments");
                 });
 
             modelBuilder.Entity("CarRentalDAL.Entities.Rental", b =>
@@ -258,7 +261,7 @@ namespace CarRentalDAL.Migrations
 
                     b.HasIndex("OwnerUserId");
 
-                    b.ToTable("Rentals", (string)null);
+                    b.ToTable("Rentals");
                 });
 
             modelBuilder.Entity("CarRentalDAL.Entities.Review", b =>
@@ -294,7 +297,7 @@ namespace CarRentalDAL.Migrations
 
                     b.HasIndex("CustomerUserId");
 
-                    b.ToTable("Reviews", (string)null);
+                    b.ToTable("Reviews");
                 });
 
             modelBuilder.Entity("CarRentalDAL.Entities.UserDocument", b =>
@@ -321,7 +324,7 @@ namespace CarRentalDAL.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.ToTable("UserDocuments", (string)null);
+                    b.ToTable("UserDocuments");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

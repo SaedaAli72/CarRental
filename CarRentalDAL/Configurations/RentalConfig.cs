@@ -1,11 +1,6 @@
 ﻿using CarRentalDAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CarRentalDAL.Configurations
 {
@@ -23,15 +18,6 @@ namespace CarRentalDAL.Configurations
 
             builder.Property(r => r.Id)
                 .HasDefaultValueSql("NEWID()");
-
-            builder.ToTable(option =>
-            {
-                option.HasCheckConstraint("status_rental_constr", "UPDATE r " +
-                    "SET r.Status = 'Late' " +
-                    "FROM Rentals r " +
-                    "WHERE r.ActualDate IS NULL AND r.ReturnDate <= GETDATE() " +
-                    "AND r.Status <> 'Late';");
-            });
         }
     }
 }
