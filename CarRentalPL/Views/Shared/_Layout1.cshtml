@@ -324,10 +324,23 @@
                         <a class="nav-link" href="#">Contact</a>
                     </li>
                 </ul>
-                <div class="d-flex gap-2">
-                    <button class="btn btn-outline-dark">Sign In</button>
-                    <button class="btn btn-primary-custom">Sign Up</button>
-                </div>
+                @if (!User.Identities.Any(i => i.IsAuthenticated))
+                {
+                    <div class="d-flex gap-2">
+
+                        <a class="btn btn-outline-dark" asp-action="login" asp-controller="Auth">Sign In</a>
+                        <a class="btn btn-primary-custom" asp-action="Register" asp-controller="Auth" asp-route-role="Owner">SignUp Owner</a>
+                        <a class="btn btn-primary-custom" asp-action="Register" asp-controller="Auth" asp-route-role="Customer">SignUp Customer</a>
+                    </div>
+                }
+                else
+                {
+                    <div class="d-flex gap-2">
+
+                        <a class="btn btn-primary-custom" asp-action="logout" asp-controller="Auth">Log Out</a>
+                        </div>
+                }
+
             </div>
         </div>
     </nav>
