@@ -129,173 +129,173 @@ namespace CarRentalDAL.Context
             #endregion
 
             // =================== Roles ===================
-            var adminRoleId = "11111111-1111-1111-1111-111111111111";
-            var ownerRoleId = "22222222-2222-2222-2222-222222222222";
-            var customerRoleId = "33333333-3333-3333-3333-333333333333";
+            //var adminRoleId = "11111111-1111-1111-1111-111111111111";
+            //var ownerRoleId = "22222222-2222-2222-2222-222222222222";
+            //var customerRoleId = "33333333-3333-3333-3333-333333333333";
 
-            builder.Entity<AppRole>().HasData(
-                new AppRole { Id = adminRoleId, Name = "Admin", NormalizedName = "ADMIN" },
-                new AppRole { Id = ownerRoleId, Name = "Owner", NormalizedName = "OWNER" },
-                new AppRole { Id = customerRoleId, Name = "Customer", NormalizedName = "CUSTOMER" }
-            );
+            //builder.Entity<AppRole>().HasData(
+            //    new AppRole { Id = adminRoleId, Name = "Admin", NormalizedName = "ADMIN" },
+            //    new AppRole { Id = ownerRoleId, Name = "Owner", NormalizedName = "OWNER" },
+            //    new AppRole { Id = customerRoleId, Name = "Customer", NormalizedName = "CUSTOMER" }
+            //);
 
             // =================== Users ===================
-            var adminUserId = "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa";
-            var ownerUserId = "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb";
-            var customerUserId = "cccccccc-cccc-cccc-cccc-cccccccccccc";
+            //var adminUserId = "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa";
+            //var ownerUserId = "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb";
+            //var customerUserId = "cccccccc-cccc-cccc-cccc-cccccccccccc";
 
-            builder.Entity<AppUser>().HasData(
-    new AppUser
-    {
-        Id = adminUserId,
-        UserName = "admin@system.com",
-        NormalizedUserName = "ADMIN@SYSTEM.COM",
-        Email = "admin@system.com",
-        NormalizedEmail = "ADMIN@SYSTEM.COM",
-        EmailConfirmed = true,
-
-        PasswordHash = "AQAAAAIAAYagAAAAEOl6JGZ198pti7st7mJa1W3L0b8KVHVlMGLiiytti9xCL4XI1nRWhe8l4u/QJqLwDQ==",
-
-        SecurityStamp = "11111111-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
-        ConcurrencyStamp = "11111111-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
-    },
-
-    new AppUser
-    {
-        Id = ownerUserId,
-        UserName = "owner@system.com",
-        NormalizedUserName = "OWNER@SYSTEM.COM",
-        Email = "owner@system.com",
-        NormalizedEmail = "OWNER@SYSTEM.COM",
-        EmailConfirmed = true,
-
-        PasswordHash = "AQAAAAIAAYagAAAAEBYwFmzVidPhWNw1v2E8afkWSRpELnVYYU/7vKpa3gaXAR8b7EDvgq79Mz7yFGV0KA==",
-
-        SecurityStamp = "22222222-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
-        ConcurrencyStamp = "22222222-cccc-cccc-cccc-cccccccccccc"
-    },
-
-    new AppUser
-    {
-        Id = customerUserId,
-        UserName = "customer@system.com",
-        NormalizedUserName = "CUSTOMER@SYSTEM.COM",
-        Email = "customer@system.com",
-        NormalizedEmail = "CUSTOMER@SYSTEM.COM",
-        EmailConfirmed = true,
-
-        PasswordHash = "AQAAAAIAAYagAAAAELJ1/UFD9Y1BhqFWI+dbif+nQapSLxpuROK1dx70bO7Qk193rSbwDSdxLMslVVrnEw==",
-
-        SecurityStamp = "33333333-cccc-cccc-cccc-cccccccccccc",
-        ConcurrencyStamp = "33333333-dddd-dddd-dddd-dddddddddddd"
-    }
-);
+            //builder.Entity<AppUser>().HasData(
+            //    new AppUser
+            //    {
+            //        Id = adminUserId,
+            //        UserName = "admin@system.com",
+            //        NormalizedUserName = "ADMIN@SYSTEM.COM",
+            //        Email = "admin@system.com",
+            //        NormalizedEmail = "ADMIN@SYSTEM.COM",
+            //        EmailConfirmed = true,
+                
+            //        PasswordHash = "AQAAAAIAAYagAAAAEOl6JGZ198pti7st7mJa1W3L0b8KVHVlMGLiiytti9xCL4XI1nRWhe8l4u/QJqLwDQ==",
+                
+            //        SecurityStamp = "11111111-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+            //        ConcurrencyStamp = "11111111-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
+            //    },
+                
+            //    new AppUser
+            //    {
+            //        Id = ownerUserId,
+            //        UserName = "owner@system.com",
+            //        NormalizedUserName = "OWNER@SYSTEM.COM",
+            //        Email = "owner@system.com",
+            //        NormalizedEmail = "OWNER@SYSTEM.COM",
+            //        EmailConfirmed = true,
+                
+            //        PasswordHash = "AQAAAAIAAYagAAAAEBYwFmzVidPhWNw1v2E8afkWSRpELnVYYU/7vKpa3gaXAR8b7EDvgq79Mz7yFGV0KA==",
+                
+            //        SecurityStamp = "22222222-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+            //        ConcurrencyStamp = "22222222-cccc-cccc-cccc-cccccccccccc"
+            //    },
+                
+            //    new AppUser
+            //    {
+            //        Id = customerUserId,
+            //        UserName = "customer@system.com",
+            //        NormalizedUserName = "CUSTOMER@SYSTEM.COM",
+            //        Email = "customer@system.com",
+            //        NormalizedEmail = "CUSTOMER@SYSTEM.COM",
+            //        EmailConfirmed = true,
+                
+            //        PasswordHash = "AQAAAAIAAYagAAAAELJ1/UFD9Y1BhqFWI+dbif+nQapSLxpuROK1dx70bO7Qk193rSbwDSdxLMslVVrnEw==",
+                
+            //        SecurityStamp = "33333333-cccc-cccc-cccc-cccccccccccc",
+            //        ConcurrencyStamp = "33333333-dddd-dddd-dddd-dddddddddddd"
+            //    }
+            //);
 
             // =================== Assign Roles to Users ===================
-            builder.Entity<IdentityUserRole<string>>().HasData(
-                new IdentityUserRole<string> { UserId = adminUserId, RoleId = adminRoleId },
-                new IdentityUserRole<string> { UserId = ownerUserId, RoleId = ownerRoleId },
-                new IdentityUserRole<string> { UserId = customerUserId, RoleId = customerRoleId }
-            );
+            //builder.Entity<IdentityUserRole<string>>().HasData(
+            //    new IdentityUserRole<string> { UserId = adminUserId, RoleId = adminRoleId },
+            //    new IdentityUserRole<string> { UserId = ownerUserId, RoleId = ownerRoleId },
+            //    new IdentityUserRole<string> { UserId = customerUserId, RoleId = customerRoleId }
+            //);
             // =================== Categories ===================
-            var sedanCategoryId = new Guid("dddddddd-1111-1111-1111-111111111111");
-            var suvCategoryId = new Guid("eeeeeeee-2222-2222-2222-222222222222");
+            //var sedanCategoryId = new Guid("dddddddd-1111-1111-1111-111111111111");
+            //var suvCategoryId = new Guid("eeeeeeee-2222-2222-2222-222222222222");
 
 
-            builder.Entity<Category>().HasData(
-                new Category
-                {
-                    Id = sedanCategoryId,
-                    Name = "Sedan",
-                },
-                new Category
-                {
-                    Id = suvCategoryId,
-                    Name = "SUV",
-                }
+            //builder.Entity<Category>().HasData(
+            //    new Category
+            //    {
+            //        Id = sedanCategoryId,
+            //        Name = "Sedan",
+            //    },
+            //    new Category
+            //    {
+            //        Id = suvCategoryId,
+            //        Name = "SUV",
+            //    }
 
-            );
+            //);
 
 
             // =================== Cars ===================
 
-            var car1Id = new Guid("aaaaaaaa-3333-3333-3333-333333333333");
-            var car2Id = new Guid("bbbbbbbb-4444-4444-4444-444444444444");
-            builder.Entity<Car>().HasData(
-                new Car
-                {
-                    Id = car1Id,
-                    Name = "Toyota Corolla",
-                    Brand = "Toyota",
-                    ModelYear = 2021,
-                    PlateNumber = "ABC-123",
-                    Color = "White",
-                    Capacity = 5,
-                    Rate = 50,
-                    Status = CarStatus.Available,
-                    OwnerUserId = ownerUserId,
-                    CategoryId = sedanCategoryId
-                },
-                new Car
-                {
-                    Id = car2Id,
-                    Name = "Honda Civic",
-                    Brand = "Honda",
-                    ModelYear = 2022,
-                    PlateNumber = "XYZ-456",
-                    Color = "Black",
-                    Capacity = 5,
-                    Rate = 60,
-                    Status = CarStatus.Available,
-                    OwnerUserId = ownerUserId
-                    ,
-                    CategoryId = suvCategoryId
-                }
-            );
+            //var car1Id = new Guid("aaaaaaaa-3333-3333-3333-333333333333");
+            //var car2Id = new Guid("bbbbbbbb-4444-4444-4444-444444444444");
+            //builder.Entity<Car>().HasData(
+            //    new Car
+            //    {
+            //        Id = car1Id,
+            //        Name = "Toyota Corolla",
+            //        Brand = "Toyota",
+            //        ModelYear = 2021,
+            //        PlateNumber = "ABC-123",
+            //        Color = "White",
+            //        Capacity = 5,
+            //        Rate = 50,
+            //        Status = CarStatus.Available,
+            //        OwnerUserId = ownerUserId,
+            //        CategoryId = sedanCategoryId
+            //    },
+            //    new Car
+            //    {
+            //        Id = car2Id,
+            //        Name = "Honda Civic",
+            //        Brand = "Honda",
+            //        ModelYear = 2022,
+            //        PlateNumber = "XYZ-456",
+            //        Color = "Black",
+            //        Capacity = 5,
+            //        Rate = 60,
+            //        Status = CarStatus.Available,
+            //        OwnerUserId = ownerUserId
+            //        ,
+            //        CategoryId = suvCategoryId
+            //    }
+            //);
 
             // =================== Rentals ===================
-            var rental1Id = new Guid("aaaaaaaa-5555-5555-5555-555555555555");
+            //var rental1Id = new Guid("aaaaaaaa-5555-5555-5555-555555555555");
 
-            builder.Entity<Rental>().HasData(
-                new Rental
-                {
-                    Id = rental1Id,
-                    CarId = car1Id,
-                    CustomerUserId = customerUserId,
-                    OwnerUserId = ownerUserId,
-                    RentalDate = new DateTime(2026, 1, 20),
-                    ReturnDate = new DateTime(2026, 1, 25),
-                    ActualDate = null,
-                    Status = RentalStatus.Active
-                }
-            );
+            //builder.Entity<Rental>().HasData(
+            //    new Rental
+            //    {
+            //        Id = rental1Id,
+            //        CarId = car1Id,
+            //        CustomerUserId = customerUserId,
+            //        OwnerUserId = ownerUserId,
+            //        RentalDate = new DateTime(2026, 1, 20),
+            //        ReturnDate = new DateTime(2026, 1, 25),
+            //        ActualDate = null,
+            //        Status = RentalStatus.Active
+            //    }
+            //);
 
             // =================== Payments ===================
-            var payment1Id = new Guid("aaaaaaaa-6666-6666-6666-666666666666");
-            builder.Entity<Payment>().HasData(
-                new Payment
-                {
-                    Id = payment1Id,
-                    RentalId = rental1Id,
-                    Amount = 150,
-                    PaymentDate = new DateTime(2026, 1, 20),
-                    PaymentType = PaymentType.Deposit,
-                }
-            );
+            //var payment1Id = new Guid("aaaaaaaa-6666-6666-6666-666666666666");
+            //builder.Entity<Payment>().HasData(
+            //    new Payment
+            //    {
+            //        Id = payment1Id,
+            //        RentalId = rental1Id,
+            //        Amount = 150,
+            //        PaymentDate = new DateTime(2026, 1, 20),
+            //        PaymentType = PaymentType.Deposit,
+            //    }
+            //);
 
             // =================== Reviews ===================
-            var review1Id = new Guid("aaaaaaaa-7777-7777-7777-777777777777");
-            builder.Entity<Review>().HasData(
-                new Review
-                {
-                    Id = review1Id,
-                    CarId = car1Id,
-                    CustomerUserId = customerUserId,
-                    Title = "Great car!",
-                    Score = 5,
-                    Date = new DateTime(2026, 1, 22)
-                }
-            );
+            //var review1Id = new Guid("aaaaaaaa-7777-7777-7777-777777777777");
+            //builder.Entity<Review>().HasData(
+            //    new Review
+            //    {
+            //        Id = review1Id,
+            //        CarId = car1Id,
+            //        CustomerUserId = customerUserId,
+            //        Title = "Great car!",
+            //        Score = 5,
+            //        Date = new DateTime(2026, 1, 22)
+            //    }
+            //);
         }
     }
 }

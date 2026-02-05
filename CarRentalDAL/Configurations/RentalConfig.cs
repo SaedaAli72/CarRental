@@ -23,6 +23,15 @@ namespace CarRentalDAL.Configurations
 
             builder.Property(r => r.Id)
                 .HasDefaultValueSql("NEWID()");
+
+            builder.ToTable(option =>
+            {
+                option.HasCheckConstraint("status_rental_constr", "UPDATE r " +
+                    "SET r.Status = 'Late' " +
+                    "FROM Rentals r " +
+                    "WHERE r.ActualDate IS NULL AND r.ReturnDate <= GETDATE() " +
+                    "AND r.Status <> 'Late';");
+            });
         }
     }
 }

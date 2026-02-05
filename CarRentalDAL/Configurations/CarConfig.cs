@@ -22,6 +22,16 @@ namespace CarRentalDAL.Configurations
 
             builder.Property(c => c.Id)
                 .HasDefaultValueSql("NEWID()");
+
+            builder.ToTable(option =>
+            {
+                option.HasCheckConstraint("status_car_constr", "UPDATE c " +
+                    "SET c.Status = 'Available' " +
+                    "FROM Cars c " +
+                    "INNER JOIN Rentals r " +
+                    "ON c.Id = r.CarId " +
+                    "WHERE r.ActualDate IS NOT NULL AND c.Status <> 'Available';");
+            });
         }
     }
 }
