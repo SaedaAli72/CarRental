@@ -1,5 +1,6 @@
 using CarRentalBLL.Services;
 using CarRentalBLL.Services.Interface;
+using CarRentalDAL.BackgroundJobs;
 using CarRentalDAL.Context;
 using CarRentalDAL.Entities;
 using CarRentalDAL.UnitOfWork;
@@ -25,13 +26,17 @@ namespace CarRentalPL
             builder.Services.AddScoped<ICaregotyService, CategoryService>();
             builder.Services.AddScoped<IRentalService, RentalService>();
             builder.Services.AddScoped<IReviewService, ReviewService>();
+
             builder.Services.AddIdentity<AppUser, AppRole>()
                .AddEntityFrameworkStores<AppDBContext>();
+
             builder.Services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = "/Auth/Login";
                 options.AccessDeniedPath = "/Auth/AccessDenied";
             });
+
+            builder.Services.AddHostedService<RentalStatusUpdater>();
 
 
             var app = builder.Build();
