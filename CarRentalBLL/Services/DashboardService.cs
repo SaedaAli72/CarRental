@@ -50,7 +50,7 @@ namespace CarRentalBLL.Services
             }
 
 
-            var cars = _unitOfWork.cars.GetAll().Include(c => c.Rentals).Include(c=>c.Category);
+            var cars = _unitOfWork.cars.GetAll().Include(c => c.Rentals).Include(c=>c.Category).Include(c => c.CarImages);
             var mostRentedCars = cars
                 .OrderByDescending(c => c.Rentals.Count())
                 .Select(c => c.MapToCarVM())
