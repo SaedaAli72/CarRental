@@ -26,6 +26,7 @@ namespace CarRentalPL
             builder.Services.AddScoped<ICaregotyService, CategoryService>();
             builder.Services.AddScoped<IRentalService, RentalService>();
             builder.Services.AddScoped<IReviewService, ReviewService>();
+            builder.Services.AddScoped<IDashboardService, DashboardService>();
 
             builder.Services.AddIdentity<AppUser, AppRole>()
                .AddEntityFrameworkStores<AppDBContext>();

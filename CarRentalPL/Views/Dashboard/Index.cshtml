@@ -1,0 +1,165 @@
+﻿@using CarRentalBLL.ViewModels.Dashboard
+@using CarRentalDAL.Enums
+@model DashboardHomeVm
+@{
+    ViewData["Title"] = "Home";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/dashboard.css">
+}
+<div class="dashboard-content">
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1 class="page-title">Dashboard</h1>
+        <p class="page-subtitle">Welcome back! Here's what's happening today.</p>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-info">
+                <h3>@Model.TotalRentals</h3>
+                <div class="stat-label">Total Rentals</div>
+                @* <div class="stat-change positive">
+                    <i class="fas fa-arrow-up"></i> 12% from last month
+                </div> *@
+            </div>
+            <div class="stat-icon primary">
+                <i class="fas fa-calendar-check"></i>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-info">
+                <h3>@Model.ActiveRentals</h3>
+                <div class="stat-label">Active Rentals</div>
+                @* <div class="stat-change positive">
+                    <i class="fas fa-arrow-up"></i> 8% increase
+                </div> *@
+            </div>
+            <div class="stat-icon success">
+                <i class="fas fa-car"></i>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-info">
+                <h3>@Model.TotalRevenue</h3>
+                <div class="stat-label">Total Revenue (EGP)</div>
+                @* <div class="stat-change positive">
+                    <i class="fas fa-arrow-up"></i> 15% from last month
+                </div> *@
+            </div>
+            <div class="stat-icon warning">
+                <i class="fas fa-dollar-sign"></i>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-info">
+                <h3>@Model.TotalCustomers</h3>
+                <div class="stat-label">Total Customers</div>
+                @* <div class="stat-change positive">
+                    <i class="fas fa-arrow-up"></i> 24 new this week
+                </div> *@
+            </div>
+            <div class="stat-icon danger">
+                <i class="fas fa-users"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts & Lists -->
+    <div class="content-grid">
+        <!-- Revenue Chart -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Revenue Overview</h3>
+                <select class="form-select" style="width: auto;">
+                    <option>Last 7 Days</option>
+                    <option>Last 30 Days</option>
+                    <option>Last 3 Months</option>
+                    <option>Last Year</option>
+                </select>
+            </div>
+            <div class="chart-container">
+                <i class="fas fa-chart-line" style="font-size: 3rem;"></i>
+            </div>
+        </div>
+
+        <!-- Popular Cars -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Popular Cars</h3>
+                <a href="/admin/vehicles" class="card-action">View All</a>
+            </div>
+            @foreach (var car in Model.MostRentedCars)
+            {
+                
+            <div class="car-item">
+                <img src="@car.ImagePath" alt="@car.Name" class="car-thumb">
+                <div class="car-details">
+                    <div class="car-name">@car.Name</div>
+                    <div class="car-category">@car.Category</div>
+                </div>
+                <div class="car-rentals">
+                    <div class="rental-count">@car.RentalCount</div>
+                    <div class="rental-label">Rentals</div>
+                </div>
+            </div>
+            }
+
+        </div>
+    </div>
+
+    <!-- Recent Rentals Table -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Recent Rentals</h3>
+            <a href="/admin/rentals" class="card-action">View All</a>
+        </div>
+
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Booking ID</th>
+                        <th>Customer</th>
+                        <th>Car</th>
+                        <th>Pick-up Date</th>
+                        <th>Return Date</th>
+                        @* <th>Total</th> *@
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var rental in Model.RecentRentals)
+                    {
+                        
+                    <tr>
+                        <td>@rental.Id</td>
+                        <td>
+                            <div class="customer-info">
+                                <div class="customer-avatar">CS</div>
+                                <span>@rental.CustomerName</span>
+                            </div>
+                        </td>
+                        <td>@rental.CarName</td>
+                        <td>@rental.RentalDate.ToString("MMM dd, yyyy")</td>
+                        <td>@rental.ReturnDate.ToString("MMM dd, yyyy")</td>
+                        @* <td>8,400 EGP</td> *@
+                            <td><span class="status-badge @(rental.Status == RentalStatus.Cancelled ? "status-Cancelled" : "") @(rental.Status == RentalStatus.Late ? "status-pending" : "") @(rental.Status == RentalStatus.Active ? "status-active" : "")  @(rental.Status == RentalStatus.Completed ? "status-completed" : "") ">@rental.Status</span></td>
+                        <td>
+                            <button class="btn btn-sm" style="background: var(--light-bg); border: none;">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
