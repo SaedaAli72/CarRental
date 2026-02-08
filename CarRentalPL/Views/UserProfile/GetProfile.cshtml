@@ -1,0 +1,203 @@
+﻿@model CarRentalBLL.ViewModels.UserDocument.UserProfileVM
+
+@{
+    ViewData["Title"] = "GetProfile";
+}
+
+<style>
+    .mySwiper {
+        width: 100%;
+        padding: 20px 0;
+    }
+
+    .swiper-slide img {
+        width: 100%;
+        border-radius: 10px;
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+        color: #fff !important;
+    }
+
+    .swiper-slide {
+        position: relative;
+    }
+
+    .delete-form {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        z-index: 10;
+    }
+</style>
+
+<div class="container">
+
+<h1>Profile</h1>
+
+<hr />
+
+
+<div class="row ">
+    <div class="col-md-8">
+       
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="form-group">
+                    <input asp-for="Id" class="form-control" hidden />
+                </div>
+
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                    <input asp-for="FirstName" class="form-control" disabled />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" disabled />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" disabled />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" disabled />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+         
+
+
+            <div class="form-group">
+                <label asp-for="Phone" class="control-label"></label>
+                <input asp-for="Phone" class="form-control" disabled />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+
+            @* <div class="form-group"> *@
+            @*     <label asp-for="UserDocuments" class="control-label"></label> *@
+            @*     <input asp-for="UserDocuments" class="form-control" disabled type="file"  /> *@
+            @*     <span asp-validation-for="UserDocuments" class="text-danger"></span> *@
+            @* </div> *@
+            <div>
+                    @if (Model.UserDocuments?.Any() == true)
+                    {
+                        <div class="swiper mySwiper">
+                            <div class="swiper-wrapper">
+
+                                @foreach (var doc in Model.UserDocuments)
+                                {
+                                    <div class="swiper-slide position-relative text-center">
+
+                                        @if ( doc.FilePath.EndsWith(".jpg") ||
+                                              doc.FilePath.EndsWith(".png") ||
+                                              doc.FilePath.EndsWith(".jpeg"))
+                                        {
+                                            <img src="/@doc.FilePath"
+                                             style="height:250px;width:100%;object-fit:cover;border-radius:10px;" />
+
+
+                                                 @* delete button img *@
+
+
+                                            <form asp-action="DeleteDocument"
+                                                  asp-controller="UserProfile"
+                                                  method="post"
+                                                  class="delete-form">
+
+                                                <input type="hidden" name="documentId" value="@doc.Id" />
+
+                                                <button type="submit"
+                                                        class="btn btn-danger btn-sm"
+                                                        onclick="return confirm('Are you sure?');">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        }
+                                        else
+                                        {
+                                            <a href="/@doc.FilePath"
+                                               target="_blank"
+                                               class="btn btn-outline-primary">
+                                                Open Document
+                                            </a>
+                                        }
+
+                                    </div>
+                                }
+
+
+                            </div>
+
+                            <!-- Arrows -->
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+
+                            <!-- Dots -->
+                            <div class="swiper-pagination"></div>
+                        </div>
+                    }
+
+                </div>
+
+            <a asp-action="EditProfile"
+               asp-controller="UserProfile"
+               class="btn btn-primary my-3">
+                Edit
+            </a>
+          
+    </div>
+</div>
+
+
+
+<div>
+    <a class="btn btn-danger mb-5" asp-action="Index" asp-controller="Car">Back to List</a>
+</div>
+
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: 1,
+            spaceBetween: 15,
+            loop: true,
+
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+
+            breakpoints: {
+                768: {
+                    slidesPerView: 2
+                },
+                1024: {
+                    slidesPerView: 3
+                }
+            }
+        });
+    </script>
+}
+
+
+
+
+
+

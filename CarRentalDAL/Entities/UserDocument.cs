@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CarRentalDAL.Enums;
 
 namespace CarRentalDAL.Entities
 {
@@ -10,7 +11,7 @@ namespace CarRentalDAL.Entities
     {
         public Guid Id { get; set; }
         public string FilePath { get; set; }
-        public string DocumentType { get; set; } //enum
+        public DocumentType DocumentType { get; set; } 
 
         #region User
         public string AppUserId { get; set; }

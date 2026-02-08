@@ -4,6 +4,13 @@ namespace CarRentalDAL.Entities
 {
     public class AppUser:IdentityUser
     {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string? Address { get; set; }
+
+
+
+
         public ICollection<Car> Cars { get; set; } = default!;
         public ICollection<Rental> OwnerRentals { get; set; } = default!;
         public ICollection<Rental> CustomerRentals { get; set; } = default!;
