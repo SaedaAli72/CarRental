@@ -310,13 +310,13 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Home</a>
+                        <a class="nav-link active" asp-controller="test" asp-action="index">Home</a>
                     </li>
                     
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="car" asp-action="index">Cars</a>
                     </li>
-                    <li class="nav-item">
+                    @* <li class="nav-item">
                         <a class="nav-link" href="#">Offers</a>
                     </li>
                     <li class="nav-item">
@@ -324,15 +324,22 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Contact</a>
-                    </li>
+                    </li> *@
 					@if (User.Identities.Any(i => i.IsAuthenticated))
 					{
                         <li class="nav-item">
                             <a class="nav-link" asp-action="GetProfile" asp-controller="UserProfile">profile</a>
                         </li>
 					}
+                    @* is user admin *@
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-action="Index" asp-controller="dashboard">dashboard</a>
+                        </li>
+                    }
+                    
                  
-
                 </ul>
                 @if (!User.Identities.Any(i => i.IsAuthenticated))
                 {
