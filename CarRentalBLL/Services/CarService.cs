@@ -133,11 +133,11 @@ namespace CarRentalBLL.Services
                 return false;
             }
         }
-        public bool UpdateCar(EditCarVM carvm)
+        public async Task<bool> UpdateCar(EditCarVM carvm)
         {
             try
             {
-                Car car = _unitOfWork.cars.GetAll().Include(c => c.CarImages).FirstOrDefault(c => c.Id == carvm.Id);
+                Car car = await _unitOfWork.cars.GetAll().Include(c => c.CarImages).FirstOrDefaultAsync(c => c.Id == carvm.Id);
 
                 if (car == null)
                     return false;
