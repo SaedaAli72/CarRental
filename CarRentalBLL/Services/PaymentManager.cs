@@ -24,6 +24,9 @@ namespace CarRentalBLL.Services
         // إنشاء Payment جديد
         public Payment CreatePayment(Payment payment)
         {
+            if (payment.Id == Guid.Empty)
+                payment.Id = Guid.NewGuid(); // مهم جداً
+
             _unitOfWork.payments.Add(payment);
             _unitOfWork.Save();
 
@@ -33,7 +36,7 @@ namespace CarRentalBLL.Services
         // جلب Payment بالـ ID
         public Payment GetPaymentById(Guid id)
         {
-            return _unitOfWork.payments.GetById(p=>p.Id==id);
+            return _unitOfWork.payments.GetAll().FirstOrDefault(p => p.Id == id);
         }
 
         // تحديث Payment

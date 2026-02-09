@@ -1,6 +1,7 @@
 ﻿using CarRentalBLL.Services;
 using CarRentalBLL.Services.Interface;
 using CarRentalBLL.ViewModels;
+using CarRentalBLL.ViewModels.Payment;
 using CarRentalDAL.Entities;
 using CarRentalDAL.Enums;
 using Microsoft.AspNetCore.Mvc;
@@ -104,34 +105,28 @@ namespace CarRentalPL.Controllers
 
 
         [HttpPost]
-        public IActionResult ConfirmPayment(Guid paymentId, string paymentIntentId)
+        public IActionResult ConfirmPayment([FromBody] ConfirmPaymentRequest request)
         {
-            try
+            var payment = _paymentManager.GetPaymentById(request.PaymentId);
+            if (payment == null)
+                return NotFound(new { error = "Payment not found" });
+
+            var isSuccess = _stripeService.ConfirmPayment(request.PaymentIntentId);
+
+            if (isSuccess)
             {
-                var payment = _paymentManager.GetPaymentById(paymentId);
-                if (payment == null)
-                    return NotFound(new { error = "Payment not found" });
-
-                var isSuccess = _stripeService.ConfirmPayment(paymentIntentId);
-
-                if (isSuccess)
-                {
-                    payment.Status = PaymentStatus.Completed;
-                    _paymentManager.UpdatePayment(payment);
-                    return Ok(new { success = true });
-                }
-                else
-                {
-                    payment.Status = PaymentStatus.Failed;
-                    _paymentManager.UpdatePayment(payment);
-                    return BadRequest(new { error = "Payment failed" });
-                }
+                payment.Status = PaymentStatus.Completed;
+                _paymentManager.UpdatePayment(payment);
+                return Ok(new { success = true });
             }
-            catch (Exception ex)
+            else
             {
-                return BadRequest(new { error = ex.Message });
+                payment.Status = PaymentStatus.Failed;
+                _paymentManager.UpdatePayment(payment);
+                return BadRequest(new { error = "Payment failed" });
             }
         }
+
 
         public IActionResult Success() => View();
         public IActionResult Failed() => View();
