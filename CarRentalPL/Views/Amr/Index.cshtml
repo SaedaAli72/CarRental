@@ -1,0 +1,70 @@
+﻿@using CarRentalBLL.ViewModels.Car
+@using CarRentalDAL.Enums
+@model List<CarCardVM>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/dashboardVehicles.css">
+}
+
+
+
+    <!-- Page Header -->
+    <div class="page-header p-3">
+        <div>
+            <h1 class="page-title">Vehicles</h1>
+            <p class="page-subtitle">Manage your fleet of vehicles</p>
+        </div>
+        @* <button class="btn btn-primary">
+            <i class="fas fa-plus me-2"></i>Add New Vehicle
+        </button> *@
+    </div>
+
+    <!-- Vehicles Table -->
+    <div class="card">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Make & Model</th>
+                            <th>Year</th>
+                            <th>Category</th>
+                            <th>Price/Day</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach(var car in Model){
+                        <tr>
+                            <td>
+                                <img src="/@car.CarImage"
+                                     alt="@car.Name"
+                                     style="width: 80px; height: 60px; object-fit: cover; border-radius: 8px;">
+                            </td>
+                            <td><strong>@car.Name</strong></td>
+                            <td>@car.ModelYear</td>
+                            <td>@car.Category.Name</td>
+                            <td><strong>@car.PricePerDay EGP</strong></td>
+                            <td><span class="badge @(car.Status == CarStatus.Available ? "badge-success" : "") @(car.Status == CarStatus.binding ? "badge-pending" : "") @(car.Status == CarStatus.Maintenance ? "badge-danger" : "")  @(car.Status == CarStatus.Rented ? "badge-rented" : "")">@car.Status</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-primary me-1">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+

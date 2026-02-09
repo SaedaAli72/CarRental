@@ -15,7 +15,7 @@ namespace CarRentalBLL.Mapping.Dashboard
                 {
                     Id = rental.Id,
                     CarName = rental.Car.Name,
-                    CustomerName = rental.CustomerUser.UserName ?? "Unknown",
+                    CustomerName = rental.CustomerUser.FirstName ?? "Unknown",
                     RentalDate = rental.RentalDate,
                     ReturnDate = rental.ReturnDate,
                     Status = rental.Status
