@@ -1,9 +1,12 @@
-﻿using CarRentalBLL.Services;
+﻿using CarRentalBLL.Mapping.Rental;
+using CarRentalBLL.Services;
 using CarRentalBLL.Services.Interface;
 using CarRentalBLL.ViewModels;
 using CarRentalBLL.ViewModels.Payment;
+using CarRentalBLL.ViewModels.Rental;
 using CarRentalDAL.Entities;
 using CarRentalDAL.Enums;
+using CarRentalDAL.UnitOfWork;
 using Microsoft.AspNetCore.Mvc;
 using Stripe;
 
@@ -15,17 +18,20 @@ namespace CarRentalPL.Controllers
         private readonly IRentalService _rentalService;
         private readonly IConfiguration _configuration;
         private readonly StripeService _stripeService;
+        private readonly IUnitOfWork _unitOfWork;
 
         public PaymentController(
             IConfiguration configuration,
             IPaymentManager paymentManager,
             StripeService stripeService,
-            IRentalService rentalService)
+            IRentalService rentalService,
+            IUnitOfWork unitOfWork)
         {
             _configuration = configuration;
             _paymentManager = paymentManager;
             _stripeService = stripeService;
             _rentalService = rentalService;
+            _unitOfWork = unitOfWork;
         }
 
         // GET: Payment/Checkout?rentalId=xxx
@@ -37,10 +43,6 @@ namespace CarRentalPL.Controllers
 
             if (rental.Car == null)
                 return BadRequest("Car info missing for this rental");
-
-            Console.WriteLine($"DEBUG: RentalId: {rental.Id}");
-            Console.WriteLine($"DEBUG: RentalDate: {rental.RentalDate}, ReturnDate: {rental.ReturnDate}");
-            Console.WriteLine($"DEBUG: Car.PricePerDay: {rental.Car.PricePerDay}");
 
             var days = (rental.ReturnDate - rental.RentalDate).Days;
             if (days <= 0) days = 1;
@@ -107,6 +109,15 @@ namespace CarRentalPL.Controllers
             {
                 payment.Status = PaymentStatus.Completed;
                 _paymentManager.UpdatePayment(payment);
+
+                Rental rental = _unitOfWork.rentals.GetById(r => r.Id == payment.RentalId);
+                if (rental != null)
+                {
+                    rental.Status = RentalStatus.Completed; 
+                    _unitOfWork.rentals.Update(rental);
+                    _unitOfWork.Save();
+                }
+
                 return Ok(new { success = true });
             }
             else
