@@ -21,10 +21,10 @@ namespace CarRentalPL.Controllers
 
 
         public IActionResult Index(
-    string? searchTerm,
-    string? Brands,
-    Guid? CategoryId,
-    int pageNumber = 1)
+            string? searchTerm,
+            string? Brands,
+            Guid? CategoryId,
+            int pageNumber = 1)
         {
             searchTerm = searchTerm?.Trim().ToLower();
             Brands = Brands?.Trim().ToLower();

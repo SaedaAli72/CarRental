@@ -22,7 +22,7 @@ namespace CarRentalBLL.Services
             _unitOfWork = unitOfWork;
         }
 
-        public bool AddRental(CreateRentalVm rentalVm, string userId)
+        public Rental? AddRental(CreateRentalVm rentalVm, string userId)
         {
             Rental rental = rentalVm.MapToRental();
 
@@ -30,7 +30,7 @@ namespace CarRentalBLL.Services
             if (car == null)
             {
                 
-                return false;
+                return null;
             }
 
             string OwnerId = car.OwnerUserId;
@@ -38,7 +38,9 @@ namespace CarRentalBLL.Services
             rental.OwnerUserId = OwnerId;
             //car.Status =CarStatus.Rented;
             _unitOfWork.rentals.Add(rental);
-            return _unitOfWork.Save() > 0;
+            if (_unitOfWork.Save() > 0)
+                return rental;
+            return null;
 
         }
 

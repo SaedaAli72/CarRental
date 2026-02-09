@@ -1,5 +1,6 @@
 ﻿using CarRentalBLL.Services;
 using CarRentalBLL.Services.Interface;
+using CarRentalBLL.ViewModels.Dashboard;
 using CarRentalBLL.ViewModels.Rental;
 using CarRentalDAL.Entities;
 using CarRentalDAL.Enums;
@@ -14,9 +15,10 @@ namespace CarRentalPL.Controllers
         private readonly IRentalService _rentalService;
         private readonly ICarService _carService;
 
-        public RentalController(IRentalService rentalService)
+        public RentalController(IRentalService rentalService, ICarService carService)
         {
             _rentalService = rentalService;
+            _carService = carService;
         }
 
         public IActionResult Index()
@@ -32,13 +34,13 @@ namespace CarRentalPL.Controllers
         }
         [HttpGet]
         [Authorize(Roles ="Customer")]
-        public IActionResult Create(Guid carId)
+        public IActionResult Create(Guid id)
         {
             var rentalVm = new CreateRentalVm
             {
-                CarId = carId
+                CarId = id,
             };
-            return View("Create", rentalVm);
+            return View("_CarRent", rentalVm);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -51,12 +53,12 @@ namespace CarRentalPL.Controllers
             {
                 return RedirectToAction("Error", "Home");
             }
-            bool isCreated = _rentalService.AddRental(rentalVm, userId);
-            if (isCreated)
+            Rental? createdRental = _rentalService.AddRental(rentalVm, userId);
+            if (createdRental is not null)
             {
                 bool carstatus = _carService.ChangeCarStatus(rentalVm.CarId, CarStatus.Rented);
                 if (carstatus)
-                    return RedirectToAction("Index", "Car");
+                    return RedirectToAction("Checkout", "Payment",new {rentalId = createdRental.Id});
                 return RedirectToAction("Error", "Home");
             }
             else

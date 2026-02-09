@@ -16,7 +16,7 @@ namespace CarRentalBLL.Services.Interface
         ICollection<CarCardVM> GetAllAvailableCars(Func<Car, bool>? func);
         bool AddCar(CreateCarVM car,string OwnerId);
         bool RemoveCar(Guid id);
-        bool UpdateCar(EditCarVM carvm);
+        Task<bool> UpdateCar(EditCarVM carvm);
         EditCarVM GetCarByIdForEdit(Guid carId);
         bool ChangeCarStatus(Guid CarId, CarStatus carStatus);
         CarStatus? GetCarStatus(Guid CarId);

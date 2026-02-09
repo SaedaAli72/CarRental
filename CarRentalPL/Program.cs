@@ -28,6 +28,8 @@ namespace CarRentalPL
             builder.Services.AddScoped<IReviewService, ReviewService>();
             builder.Services.AddScoped<IUserProfileService, UserProfileService>();
             builder.Services.AddScoped<IDashboardService, DashboardService>();
+            builder.Services.AddScoped<IPaymentManager, PaymentManager>();
+            builder.Services.AddScoped<StripeService>();
 
             builder.Services.AddIdentity<AppUser, AppRole>()
                .AddEntityFrameworkStores<AppDBContext>();
@@ -42,6 +44,7 @@ namespace CarRentalPL
 
 
             var app = builder.Build();
+           
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
