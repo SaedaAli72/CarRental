@@ -119,7 +119,6 @@
                     throw new Error('Amount must be greater than zero');
                 }
 
-                // 1️⃣ إنشاء PaymentIntent في السيرفر
                 const response = await fetch('/Payment/CreatePaymentIntent', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -134,12 +133,11 @@
 
                 console.log("DEBUG: PaymentIntent created", data);
 
-                // 2️⃣ تأكيد الدفع على Stripe
                 const { error, paymentIntent } = await stripe.confirmCardPayment(data.clientSecret, {
                     payment_method: {
                         card: cardElement,
                         billing_details: {
-                            name: "Test User" // مهم للتأكيد
+                            name: "Test User" 
                         }
                     }
                 });
@@ -151,7 +149,6 @@
                     throw new Error(error.message);
                 }
 
-                // 3️⃣ تأكيد الدفع على السيرفر
                 const confirmResponse = await fetch('/Payment/ConfirmPayment', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
