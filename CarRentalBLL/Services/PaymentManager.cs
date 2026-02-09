@@ -15,17 +15,14 @@ namespace CarRentalBLL.Services
         private readonly IUnitOfWork _unitOfWork;
 
 
-        // الـ Constructor
         public PaymentManager(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        // إنشاء Payment جديد
         public Payment CreatePayment(Payment payment)
         {
-            if (payment.Id == Guid.Empty)
-                payment.Id = Guid.NewGuid(); // مهم جداً
+          
 
             _unitOfWork.payments.Add(payment);
             _unitOfWork.Save();
@@ -33,13 +30,11 @@ namespace CarRentalBLL.Services
             return payment;
         }
 
-        // جلب Payment بالـ ID
         public Payment GetPaymentById(Guid id)
         {
             return _unitOfWork.payments.GetAll().FirstOrDefault(p => p.Id == id);
         }
 
-        // تحديث Payment
         public Payment UpdatePayment(Payment payment)
         {
             _unitOfWork.payments.Update(payment);
@@ -48,7 +43,6 @@ namespace CarRentalBLL.Services
             return payment;
         }
 
-        // جلب كل الـ Payments الخاصة بـ Rental معين
         public List<Payment> GetPaymentsByRentalId(Guid rentalId)
         {
             return _unitOfWork.payments.GetAll()

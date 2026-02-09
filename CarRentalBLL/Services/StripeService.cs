@@ -19,12 +19,11 @@ namespace CarRentalBLL.Services
         }
         public string CreatePaymentIntent(decimal amount)
         {
-            // تحويل الدولار لسنت (Stripe بيتعامل بالسنت)
             long amountInCents = (long)(amount * 100);
 
             var options = new PaymentIntentCreateOptions
             {
-                Amount = amountInCents, // القيمة بالسينت
+                Amount = amountInCents,
                 Currency = "usd",
                 PaymentMethodTypes = new List<string> { "card" }
             };
@@ -37,7 +36,6 @@ namespace CarRentalBLL.Services
 
 
 
-        // دي الـ Method اللي بتتأكد إن الدفع تم بنجاح
         public bool ConfirmPayment(string paymentIntentId)
         {
             var service = new PaymentIntentService();
