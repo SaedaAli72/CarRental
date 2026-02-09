@@ -1,6 +1,7 @@
 ﻿using CarRentalBLL.Services;
 using CarRentalBLL.Services.Interface;
 using CarRentalBLL.ViewModels;
+using CarRentalBLL.ViewModels.Payment;
 using CarRentalDAL.Entities;
 using CarRentalDAL.Enums;
 using Microsoft.AspNetCore.Mvc;
@@ -30,7 +31,6 @@ namespace CarRentalPL.Controllers
         // GET: Payment/Checkout?rentalId=xxx
         public IActionResult Checkout(Guid rentalId)
         {
-            // جلب الـ Rental مع الـ Car
             var rental = _rentalService.GetRentalById(rentalId);
             if (rental == null)
                 return NotFound("Rental not found");
@@ -38,26 +38,17 @@ namespace CarRentalPL.Controllers
             if (rental.Car == null)
                 return BadRequest("Car info missing for this rental");
 
-            // التأكد من البيانات
             Console.WriteLine($"DEBUG: RentalId: {rental.Id}");
             Console.WriteLine($"DEBUG: RentalDate: {rental.RentalDate}, ReturnDate: {rental.ReturnDate}");
             Console.WriteLine($"DEBUG: Car.PricePerDay: {rental.Car.PricePerDay}");
 
-            // حساب عدد الأيام
             var days = (rental.ReturnDate - rental.RentalDate).Days;
             if (days <= 0) days = 1;
 
-            // حساب المبلغ
             var amount = rental.Car.PricePerDay * days;
 
-            // تأكد إن المبلغ أكبر من صفر
-            if (amount <= 0)
-            {
-                amount = 1; // بدل ما يرجع صفر
-                Console.WriteLine("DEBUG: Amount was zero, forced to 1");
-            }
+           
 
-            // تمرير البيانات للـ View
             ViewBag.RentalId = rental.Id;
             ViewBag.Amount = amount.ToString(System.Globalization.CultureInfo.InvariantCulture);
             ViewBag.StripePublishableKey = _configuration["Stripe:PublishableKey"];
@@ -104,34 +95,28 @@ namespace CarRentalPL.Controllers
 
 
         [HttpPost]
-        public IActionResult ConfirmPayment(Guid paymentId, string paymentIntentId)
+        public IActionResult ConfirmPayment([FromBody] ConfirmPaymentRequest request)
         {
-            try
+            var payment = _paymentManager.GetPaymentById(request.PaymentId);
+            if (payment == null)
+                return NotFound(new { error = "Payment not found" });
+
+            var isSuccess = _stripeService.ConfirmPayment(request.PaymentIntentId);
+
+            if (isSuccess)
             {
-                var payment = _paymentManager.GetPaymentById(paymentId);
-                if (payment == null)
-                    return NotFound(new { error = "Payment not found" });
-
-                var isSuccess = _stripeService.ConfirmPayment(paymentIntentId);
-
-                if (isSuccess)
-                {
-                    payment.Status = PaymentStatus.Completed;
-                    _paymentManager.UpdatePayment(payment);
-                    return Ok(new { success = true });
-                }
-                else
-                {
-                    payment.Status = PaymentStatus.Failed;
-                    _paymentManager.UpdatePayment(payment);
-                    return BadRequest(new { error = "Payment failed" });
-                }
+                payment.Status = PaymentStatus.Completed;
+                _paymentManager.UpdatePayment(payment);
+                return Ok(new { success = true });
             }
-            catch (Exception ex)
+            else
             {
-                return BadRequest(new { error = ex.Message });
+                payment.Status = PaymentStatus.Failed;
+                _paymentManager.UpdatePayment(payment);
+                return BadRequest(new { error = "Payment failed" });
             }
         }
+
 
         public IActionResult Success() => View();
         public IActionResult Failed() => View();

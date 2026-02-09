@@ -1,0 +1,84 @@
+﻿@model CarRentalBLL.ViewModels.Rental.CreateRentalVm
+
+@section Styles {
+
+    <link rel="stylesheet" href="~/css/car-details.css" />
+    <link rel="stylesheet" href="~/css/CarDetails2.css" />
+    <link rel="stylesheet" href="~/css/reviews_cars.css" />
+}
+
+@{
+    ViewData["Title"] = "_CarRent";
+}
+
+<section class="page-header">
+    <div class="container">
+        <h1 class="page-title">Booking Car</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-action="index" asp-controller="test" style="color: rgba(255,255,255,0.8); text-decoration: none;">Home</a></li>
+                <li class="breadcrumb-item"><a asp-action="index" asp-controller="car" style="color: rgba(255,255,255,0.8); text-decoration: none;">Vehicles</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Car Booking</li>
+            </ol>
+        </nav>
+    </div>
+</section>
+
+<div class="container">
+<div class="row">
+    <div class="col-lg-12 my-4">
+        <div class="booking-card">
+            <h3 class="booking-title">Book This Car</h3>
+
+            <div class="price-section">
+                <div class="price-label">Rental Price</div>
+                <div class="price">@Model.RentalPricePerDay EGP <span>/ day</span></div>
+            </div>
+
+            <form asp-action="Create" asp-controller="Rental" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group">
+                    <input type="hidden" asp-for="CarId" value="@Model?.CarId" />
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="RentalDate" class="control-label"></label>
+                    <input asp-for="RentalDate" class="form-control" />
+                    <span asp-validation-for="RentalDate" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="ReturnDate" class="control-label"></label>
+                    <input asp-for="ReturnDate" class="form-control" />
+                    <span asp-validation-for="ReturnDate" class="text-danger"></span>
+                </div>
+
+                <div class="total-section">
+                    <hr>
+                    <div class="total-row">
+                        <span class="total-label">Total</span>
+                        <span class="total-final">@Model?.AllRentalPrice EGP</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-book">Book Now</button>
+            </form>
+
+            <div class="mt-3 text-center">
+                <small class="text-muted">Free cancellation up to 24 hours before pick-up</small>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-outline-secondary ms-4" asp-controller="rental">Go to all rentals</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+

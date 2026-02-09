@@ -18,6 +18,9 @@ namespace CarRentalDAL.Configurations
 
             builder.Property(r => r.Id)
                 .HasDefaultValueSql("NEWID()");
+
+            builder.Property(r => r.IsDeleted)
+                .HasDefaultValueSql("0");
         }
     }
 }

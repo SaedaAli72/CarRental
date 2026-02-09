@@ -578,7 +578,12 @@
                             <div class="rental-footer">
                                 <div class="total-price">@rentalCar.Car.PricePerDay EGP</div>
                                 <div class="rental-actions">
-                                    <button class="btn-action btn-view">View Details</button>
+                                    <a class="btn-action btn-extend"
+                                       asp-action="CompleteRental"
+                                       asp-controller="Rental"
+                                       asp-route-rentalId="@rentalCar.Id">
+                                        Return Car
+                                    </a>
                                     <a class="btn-action btn-extend"
                                        asp-action="ExtendRental"
                                        asp-controller="Rental"
@@ -676,8 +681,8 @@
                         <div class="rental-footer">
                             <div class="total-price">@rentalCar.Car.PricePerDay EGP</div>
                             <div class="rental-actions">
-                                <button class="btn-action btn-view">View Details</button>
-                                <button class="btn-action btn-review">Write Review</button>
+                                @* <button class="btn-action btn-view">Remove</button> *@
+                                <a asp-action="AddReview" asp-controller="Review" asp-route-carId="@rentalCar.Car.Id" class="btn-action btn-review">Write Review</a>
                             </div>
                         </div>
                     </div>
@@ -760,7 +765,7 @@
                         <div class="rental-footer">
                             <div class="total-price">@rentalCar.Car.PricePerDay EGP</div>
                             <div class="rental-actions">
-                                <button class="btn-action btn-view">View Details</button>
+                                    <a asp-action="RemoveRental" asp-controller="Rental" asp-route-rentalId="@rentalCar.Id" class="btn-action btn-review">Remove</a>
                             </div>
                         </div>
                     </div>
