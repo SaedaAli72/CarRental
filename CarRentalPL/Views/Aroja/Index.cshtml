@@ -1,0 +1,79 @@
+﻿@using CarRentalBLL.ViewModels.Review
+@{
+    ViewData["Title"] = "Review";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/dashboardReview.css">
+}
+@model dashBoardReviewVM
+
+    <div class="page-header mb-4">
+        <h1 class="page-title">Reviews</h1>
+        <p class="page-subtitle">Manage customer reviews and ratings</p>
+    </div>
+    <div class="row mb-4 justify-content-around" >
+        <div class="col-md-6">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h3 class="text-primary">@Model.averageReviewsTotal</h3>
+                    <p class="text-muted mb-0">Average Rating</p>
+                    <div class="text-warning">
+                    @for (var i=0;i<Model.averageReviewsTotal;i++){
+                        <i class="fas fa-star"></i>
+                    }
+              
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card text-center">
+                @* <div class="card-body">
+                    <h3>@Model.totalReviews</h3>
+                    <p class="text-muted mb-0">Total Reviews</p>
+                </div> *@
+            <div class="card-body">
+                <h3 class="text-primary">@Model.totalReviews</h3>
+                <p class="text-muted mb-0">Total Reviews</p>
+                <div class="text-warning">
+                    @for (var i = 0; i < 5; i++)
+                    {
+                        <i class="fas fa-star"></i>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            @foreach(var item in Model.allReviews){
+            <div class="border-bottom pb-3 mb-3">
+                <div class="d-flex justify-content-between align-items-start mb-2">
+                    <div>
+                        <strong>@item.CustomerName</strong>
+                           
+
+
+                        <div class="text-warning">
+                            @for(var r=0;r<item.Score;r++){
+                            <i class="fas fa-star"></i>}
+                           
+                           
+                        </div>
+                            <div> <strong class="text-muted">@item.CarName</strong></div>
+                    </div>
+                    <small class="text-muted">@item.Date</small>
+                </div>
+                <p class="text-muted mb-2"><strong>@item.Title</strong></p>
+                <p class="mb-2">@item.Text</p>
+                @* <div>
+                    <span class="badge badge-warning">Pending</span>
+                    <button class="btn btn-sm btn-primary ms-2">Approve</button>
+                    <button class="btn btn-sm btn-outline-danger ms-2">Delete</button>
+                </div> *@
+            </div>
+        }
+        </div>
+    </div>

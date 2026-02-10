@@ -12,6 +12,6 @@ namespace CarRentalBLL.Services.Interface
     {
         List<ReviewVM> GetCarDetailReviews(Guid carId);
         bool AddReview(CreateReviewVM reviewVm);
-
+        dashBoardReviewVM GetDashBoardReview();
     }
 }
