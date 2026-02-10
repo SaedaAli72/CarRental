@@ -9,6 +9,7 @@ namespace CarRentalDAL.Entities
         public DateTime? ActualDate { get; set; }
         public DateTime ReturnDate { get; set; }
         public RentalStatus Status { get; set; } //enum
+        public bool IsDeleted { get; set; }
 
         #region CustomerUser
         public string CustomerUserId { get; set; }

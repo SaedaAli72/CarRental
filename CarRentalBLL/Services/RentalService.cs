@@ -51,7 +51,7 @@ namespace CarRentalBLL.Services
                 .ThenInclude(c => c.CarImages)
                 .Include(r => r.CustomerUser)
                 .Include(r => r.OwnerUser)
-                .Where(r => r.CarId == carId)
+                .Where(r => r.CarId == carId && r.IsDeleted == false)
                 .Select(r => r.MapToRentalCardVM())
                 .ToList();
 
@@ -64,6 +64,7 @@ namespace CarRentalBLL.Services
                 .Include(r => r.Car)
                 .Include(r => r.CustomerUser)
                 .Include(r=> r.OwnerUser)
+                .Where(r => r.IsDeleted == false)
                 .Select(r => r.MapToRentalCardVM())
                 .ToList();
 
@@ -73,7 +74,7 @@ namespace CarRentalBLL.Services
         public RentalCardVM GetRentalById(Guid id)
         {
             RentalCardVM rentalCardVM = _unitOfWork.rentals
-                                .GetById(r => r.Id == id, r => r.Car, r => r.CustomerUser)
+                                .GetById((r => r.Id == id && r.IsDeleted == false), r => r.Car, r => r.CustomerUser)
                                 .MapToRentalCardVM();
 
             return rentalCardVM;
@@ -81,7 +82,7 @@ namespace CarRentalBLL.Services
         public EditRentalVM GetRentalByIdForEdit(Guid id)
         {
             EditRentalVM editRentalVM = _unitOfWork.rentals
-                                .GetById(r => r.Id == id, r => r.Car, r => r.CustomerUser)
+                                .GetById((r => r.Id == id && r.IsDeleted == false), r => r.Car, r => r.CustomerUser)
                                 .MapToEditRentalVM();
 
             return editRentalVM;
@@ -92,7 +93,7 @@ namespace CarRentalBLL.Services
             ICollection<RentalCardVM> rentalCardVMs = _unitOfWork.rentals.GetAll()
                 .Include(r => r.Car)
                 .Include(r => r.CustomerUser)
-                .Where(r => r.CustomerUserId == userId)
+                .Where(r => r.CustomerUserId == userId && r.IsDeleted == false)
                 .Select(r => r.MapToRentalCardVM())
                 .ToList();
 
@@ -102,7 +103,8 @@ namespace CarRentalBLL.Services
         public bool RemoveRental(Guid id)
         {
             Rental rental = _unitOfWork.rentals.GetById(r => r.Id == id);
-            _unitOfWork.rentals.Delete(rental);
+            rental.IsDeleted = true;
+            _unitOfWork.rentals.Update(rental);
             return _unitOfWork.Save() > 0;
         }
 
@@ -110,6 +112,21 @@ namespace CarRentalBLL.Services
         {
             Rental rental = _unitOfWork.rentals.GetById(r => r.Id == id);
             rental.Status = RentalStatus.Cancelled;
+            _unitOfWork.rentals.Update(rental);
+            Car car = _unitOfWork.cars.GetById(c => c.Id == rental.CarId);
+            car.Status = CarStatus.Available;
+            _unitOfWork.cars.Update(car);
+            return _unitOfWork.Save() > 1;
+        }
+
+        public bool CompleteRental(Guid id)
+        {
+            Rental rental = _unitOfWork.rentals.GetById(r => r.Id == id,r => r.Payments);
+            bool isRentalPaid = rental.Payments.FirstOrDefault().Status == PaymentStatus.Completed;
+            if (!isRentalPaid)
+                return false;
+            rental.ActualDate = DateTime.Now;
+            rental.Status = RentalStatus.Completed;
             _unitOfWork.rentals.Update(rental);
             Car car = _unitOfWork.cars.GetById(c => c.Id == rental.CarId);
             car.Status = CarStatus.Available;

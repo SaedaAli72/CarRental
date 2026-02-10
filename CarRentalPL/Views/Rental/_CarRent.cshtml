@@ -1,13 +1,32 @@
 ﻿@model CarRentalBLL.ViewModels.Rental.CreateRentalVm
 
+@section Styles {
+
+    <link rel="stylesheet" href="~/css/car-details.css" />
+    <link rel="stylesheet" href="~/css/CarDetails2.css" />
+    <link rel="stylesheet" href="~/css/reviews_cars.css" />
+}
+
 @{
     ViewData["Title"] = "_CarRent";
 }
 
-<h4>Rental</h4>
-<hr />
+<section class="page-header">
+    <div class="container">
+        <h1 class="page-title">Booking Car</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-action="index" asp-controller="test" style="color: rgba(255,255,255,0.8); text-decoration: none;">Home</a></li>
+                <li class="breadcrumb-item"><a asp-action="index" asp-controller="car" style="color: rgba(255,255,255,0.8); text-decoration: none;">Vehicles</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Car Booking</li>
+            </ol>
+        </nav>
+    </div>
+</section>
+
+<div class="container">
 <div class="row">
-    <div class="col-lg-4">
+    <div class="col-lg-12 my-4">
         <div class="booking-card">
             <h3 class="booking-title">Book This Car</h3>
 
@@ -39,7 +58,7 @@
                     <hr>
                     <div class="total-row">
                         <span class="total-label">Total</span>
-                        <span class="total-final">@Model.AllRentalPrice EGP</span>
+                        <span class="total-final">@Model?.AllRentalPrice EGP</span>
                     </div>
                 </div>
 
@@ -52,9 +71,10 @@
         </div>
     </div>
 </div>
+</div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="btn btn-outline-secondary ms-4" asp-controller="rental">Go to all rentals</a>
 </div>
 
 @section Scripts {

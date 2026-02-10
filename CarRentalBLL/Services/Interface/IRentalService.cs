@@ -16,6 +16,7 @@ namespace CarRentalBLL.Services.Interface
         Rental? AddRental(CreateRentalVm rentalVm, string userId);
         bool RemoveRental(Guid id);
         bool CancelRental(Guid id);
+        bool CompleteRental(Guid id);
         ICollection<RentalCardVM> GetUserRentals(string userId);
         ICollection<RentalCardVM> GetAllCarRentals(Guid carId);
         public bool UpdateRental(EditRentalVM rentalVm);

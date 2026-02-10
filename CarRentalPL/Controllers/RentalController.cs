@@ -66,6 +66,7 @@ namespace CarRentalPL.Controllers
                 return RedirectToAction("Error", "Home");
             }
         }
+        
         [HttpGet]
         [Authorize(Roles = "Customer")]
         public IActionResult MyRentals() {
@@ -76,12 +77,14 @@ namespace CarRentalPL.Controllers
             List<RentalCardVM> rentals = _rentalService.GetUserRentals(userId).ToList();
             return View("MyRentals", rentals);
         }
+        
         [HttpGet]
         public IActionResult Edit(Guid id)
         {
             var rentalVm = _rentalService.GetRentalByIdForEdit(id);
             return View("Edit", rentalVm);
         }
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(EditRentalVM rentalVm)
@@ -123,6 +126,40 @@ namespace CarRentalPL.Controllers
             if (ModelState.IsValid)
             {
                 bool isUpdated = _rentalService.CancelRental(rentalId);
+                if (isUpdated)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return RedirectToAction("Error", "Home");
+                }
+            }
+            return RedirectToAction("Error", "Home");
+        }
+
+        public IActionResult CompleteRental(Guid rentalId)
+        {
+            if (ModelState.IsValid)
+            {
+                bool isCompleted = _rentalService.CompleteRental(rentalId);
+                if (isCompleted)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return RedirectToAction("Error", "Home");
+                }
+            }
+            return RedirectToAction("Error", "Home");
+        }
+
+        public IActionResult RemoveRental(Guid rentalId)
+        {
+            if (ModelState.IsValid)
+            {
+                bool isUpdated = _rentalService.RemoveRental(rentalId);
                 if (isUpdated)
                 {
                     return RedirectToAction("Index");
