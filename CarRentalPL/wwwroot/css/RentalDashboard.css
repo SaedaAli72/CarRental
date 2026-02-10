@@ -76,11 +76,11 @@ body {
         font-size: 1.1rem;
     }
 
-.main-content {
+/*.main-content {
     margin-left: var(--sidebar-width);
     min-height: 100vh;
     padding: 2rem;
-}
+}*/
 
 .page-header {
     margin-bottom: 2rem;
