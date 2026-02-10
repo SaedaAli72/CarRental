@@ -34,5 +34,20 @@ namespace CarRentalBLL.Services
             List<ReviewVM> reviews = _unitOfWork.reviews.GetAll().Include(r=>r.CustomerUser).Where(r=>r.CarId == carId).Select(r=>r.MapToReviewVM()).ToList();
             return reviews;
         }
+       public  dashBoardReviewVM GetDashBoardReview()
+        {
+           
+            List<AllReviewsVM> reviews = _unitOfWork.reviews.GetAll().Include(r => r.CustomerUser).Include(c=>c.Car).Select(r => r.MapToAllReviewsVM()).ToList();
+           int total = reviews.Count;
+            decimal average = reviews.Sum(r => r.Score)/(decimal)total;
+            dashBoardReviewVM result = new dashBoardReviewVM()
+            {
+                averageReviewsTotal = average,
+                totalReviews = total,
+                allReviews = reviews
+            };
+            return result;
+            
+        }
     }
 }
