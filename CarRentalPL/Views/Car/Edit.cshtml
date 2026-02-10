@@ -2,11 +2,15 @@
 
 @model CarRentalBLL.ViewModels.Car.EditCarVM
 
+@section Styles{
+<link rel="stylesheet" href="~/css/edit-car.css" />
+}
+
 @{
     ViewData["Title"] = "Edit";
     SelectList options = new SelectList(Model.Categories, "Id", "Name");
 }
-
+@*
 <h1>Edit</h1>
 
 <h4>EditCarVM</h4>
@@ -96,7 +100,7 @@
                 @* <label asp-for="CategoryId" class="control-label"></label>
                 <select asp-for="CategoryId" class="form-control" />
                 <span asp-validation-for="CategoryId" class="text-danger"></span> *@
-                <label asp-for="CategoryId"></label>
+@* <label asp-for="CategoryId"></label>
                 <select asp-for="CategoryId" class="form form-control" asp-items="options">
                     <option value="">-- Select Category --</option>
                 </select>
@@ -113,7 +117,416 @@
 
 <div>
     <a asp-action="Index">Back to List</a>
-</div>
+ </div> *@
+
+
+
+    
+
+  
+    <!-- Main Content -->
+    <div class=" main-content ">
+    <div class="container p-0">
+        <!-- Page Header -->
+        <div class="page-header d-flex justify-content-between align-items-center">
+            <div>
+                <h1 class="page-title">Edit Car</h1>
+                <p class="page-subtitle">Update vehicle information</p>
+            </div>
+            <a asp-action="index" asp-controller="Car" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left me-2"></i>Back to List
+            </a>
+        </div>
+
+        <!-- Edit Form -->
+        <form asp-action="Edit" asp-controller="Car" method="post" enctype="multipart/form-data" id="editCarForm">
+            <div class="row">
+                <!-- Left Column -->
+                <div class="col-lg-8">
+                    <!-- Basic Information -->
+                     <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">
+                                <i class="fas fa-info-circle me-2"></i>Basic Information
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+
+                                <div class="col-md-12 mb-3">
+                                    
+
+                                        <div class="mb-3">
+                                            <label>Existing Images</label>
+                                            <div>
+                                                @if (Model.ExistingImages != null && Model.ExistingImages.Any())
+                                                {
+                                                    foreach (var img in Model.ExistingImages)
+                                                    {
+                                                        <div style="display:inline-block; margin:10px;">
+                                                            <img src="@Url.Content("~/" + img.ImagePath)" width="150" height="120" />
+
+                                                            <div>
+                                                                <input type="checkbox"
+                                                                       name="DeletedImageIds"
+                                                                       value="@img.Id" />
+                                                                <label>Delete</label>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                }
+                                            </div>
+
+
+
+                                        </div>
+                                </div>
+                                        <input asp-for="Id" type="hidden" class="form-control" />
+
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="Name" class="form-label"></label>
+                                    <input asp-for="Name"
+                                           class="form-control"   
+                                    >
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+
+                              
+
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="Brand" class="form-label">Brand</label>
+                                    <input asp-for="Brand"
+                                           class="form-control"
+                                         />
+                                    <span asp-validation-for="Brand" class="text-danger"></span>
+                                </div>
+                               
+
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="ModelYear" class="form-label"></label>
+                                    <input asp-for="ModelYear"
+                                           class="form-control" 
+                                            />
+                                    <span asp-validation-for="ModelYear" class="text-danger"></span>
+                                </div> 
+
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="PlateNumber" class="form-label"></label>
+                                    <input asp-for="PlateNumber"
+                                           class="form-control"  
+                                          />
+                                    <span asp-validation-for="PlateNumber" class="text-danger"></span>
+                                </div>
+
+
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="Color" class="form-label"></label>
+                                    <div class="input-group">
+                                        <input asp-for="Color"
+                                               class="form-control"
+                                               />
+                                        <span asp-validation-for="Color" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                
+
+
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="Capacity" class="form-label"></label>
+                                    <input asp-for="Capacity"
+                                           class="form-control"
+                                           min="2"
+                                           max="12"
+                                           placeholder="5"
+                                          />
+                                    <span asp-validation-for="Capacity" class="text-danger"></span>
+                                </div>
+
+                               
+
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="CategoryId" class="form-label"></label>
+                                    <select asp-for="CategoryId" class="form form-control" asp-items="options">
+                                        <option value="">-- Select Category --</option>
+                                    </select>
+                                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+                                </div>
+
+
+                                
+
+
+
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="PricePerDay" class="form-label"></label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-dollar-sign"></i>
+                                        </span>
+                                        <input asp-for="PricePerDay"
+                                               class="form-control"
+                                                />
+                                        <span asp-validation-for="PricePerDay" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="Status" class="form-label"></label>
+                                    <select asp-for="Status"
+                                            class="form-control"
+                                            asp-items="Html.GetEnumSelectList<CarStatus>()">
+                                    </select>
+                                    <span asp-validation-for="Status" class="text-danger"></span>
+                                </div>
+
+
+                             
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Car Images -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">
+                                <i class="fas fa-images me-2"></i>Car Images
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="upload-area" id="uploadArea">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <h5>Click to upload images</h5>
+                                <p class="text-muted mb-0">or drag and drop</p>
+                                <small class="text-muted">PNG, JPG up to 5MB each</small>
+                            </div>
+                            <input type="file"
+                                   asp-for="CarImages"
+                                   id="carImagesInput"
+                                   multiple
+                                   accept="image/*"
+                                   style="display: none" />
+
+                          
+
+                            <div id="imagePreviewContainer"
+                                 class="image-preview-container"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- Right Column -->
+                <div class="col-lg-4">
+                    <div class="card" style="position: sticky; top: 20px">
+                        <div class="card-header">
+                            <h5 class="mb-0">
+                                <i class="fas fa-clipboard-check me-2"></i>Quick Summary
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-3 pb-3 border-bottom">
+                                <span class="text-muted">Car Name:</span>
+                                <strong id="summaryName">@Model.Name</strong>
+                            </div>
+                            <div class="d-flex justify-content-between mb-3 pb-3 border-bottom">
+                                <span class="text-muted">Brand:</span>
+                                <strong id="summaryBrand">@Model.Brand</strong>
+                            </div>
+                            <div class="d-flex justify-content-between mb-3 pb-3 border-bottom">
+                                <span class="text-muted">Model Year:</span>
+                                <strong id="summaryYear">@Model.ModelYear</strong>
+                            </div>
+                            <div class="d-flex justify-content-between mb-3 pb-3 border-bottom">
+                                <span class="text-muted">Capacity:</span>
+                                <strong id="summaryCapacity">@Model.Capacity</strong>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span class="text-muted">Price/Day:</span>
+                                <strong class="text-primary" id="summaryPrice">@Model.PricePerDay</strong>
+                            </div>
+                        </div>
+
+                        <div class="card-body border-top">
+
+                            <button type="submit" class="btn btn-primary w-100 mb-2">
+                                <i class="fas fa-save me-2"></i>Save Changes
+                            </button>
+                  
+
+                            <button type="button"
+                                    class="btn btn-outline-danger w-100"
+                                    onclick="resetForm()">
+                                <i class="fas fa-redo me-2"></i>Reset Form
+                            </button>
+                        </div>
+
+                        <div class="card-body border-top">
+                            <h6><i class="fas fa-question-circle me-2"></i>Need Help?</h6>
+                            <small class="text-muted">
+                                Make sure all required fields are filled. Upload at least one
+                                image of the vehicle.
+                            </small>
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+        </form>
+
+
+    </div>
+
+    </div>
+   
+
+    <script>
+        let selectedFiles = [];
+
+        // Upload Area Click
+        document
+          .getElementById("uploadArea")
+          .addEventListener("click", function () {
+            document.getElementById("carImagesInput").click();
+          });
+
+        // File Input Change
+        document
+          .getElementById("carImagesInput")
+          .addEventListener("change", function (e) {
+            const files = Array.from(e.target.files);
+            files.forEach((file) => {
+              if (file && file.type.startsWith("image/")) {
+                selectedFiles.push(file);
+              }
+            });
+            updateImagePreviews();
+          });
+
+        // Drag and Drop
+        const uploadArea = document.getElementById("uploadArea");
+
+        uploadArea.addEventListener("dragover", function (e) {
+          e.preventDefault();
+          this.style.background = "rgba(93, 95, 239, 0.05)";
+        });
+
+        uploadArea.addEventListener("dragleave", function (e) {
+          e.preventDefault();
+          this.style.background = "#F8F9FB";
+        });
+
+        uploadArea.addEventListener("drop", function (e) {
+          e.preventDefault();
+          this.style.background = "#F8F9FB";
+
+          const files = Array.from(e.dataTransfer.files);
+          files.forEach((file) => {
+            if (file && file.type.startsWith("image/")) {
+              selectedFiles.push(file);
+            }
+          });
+          updateImagePreviews();
+        });
+
+        // Update Image Previews
+        function updateImagePreviews() {
+          const container = document.getElementById("imagePreviewContainer");
+          container.innerHTML = "";
+
+          selectedFiles.forEach((file, index) => {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+              const div = document.createElement("div");
+              div.className = "image-preview-item";
+              div.innerHTML = `
+                          <img src="${e.target.result}" alt="Preview">
+                          <button type="button" class="remove-image" onclick="removeImage(${index})">
+                              <i class="fas fa-times"></i>
+                          </button>
+                      `;
+              container.appendChild(div);
+            };
+            reader.readAsDataURL(file);
+          });
+        }
+
+        // Remove Image
+        function removeImage(index) {
+          selectedFiles.splice(index, 1);
+          updateImagePreviews();
+        }
+
+        // Color Picker Sync
+        const colorText = document.getElementById("colorText");
+        const colorPicker = document.getElementById("colorPicker");
+
+        colorPicker.addEventListener("input", function () {
+          colorText.value = this.value;
+        });
+
+        // Live Summary Update
+        function updateSummary() {
+          const name = document.querySelector('[name="name"]');
+          const brand = document.querySelector('[name="brand"]');
+          const year = document.querySelector('[name="year"]');
+          const capacity = document.querySelector('[name="capacity"]');
+          const price = document.querySelector('[name="price"]');
+
+          if (name)
+            document.getElementById("summaryName").textContent =
+              name.value || "-";
+          if (brand)
+            document.getElementById("summaryBrand").textContent =
+              brand.value || "-";
+          if (year)
+            document.getElementById("summaryYear").textContent =
+              year.value || "-";
+          if (capacity) {
+            document.getElementById("summaryCapacity").textContent =
+              capacity.value ? capacity.value + " Seats" : "-";
+          }
+          if (price) {
+            document.getElementById("summaryPrice").textContent = price.value
+              ? price.value + " EGP"
+              : "- EGP";
+          }
+        }
+
+        // Add event listeners
+        document.querySelectorAll("input, select").forEach((input) => {
+          input.addEventListener("input", updateSummary);
+          input.addEventListener("change", updateSummary);
+        });
+
+        // Reset form
+        function resetForm() {
+          if (confirm("Are you sure you want to reset all changes?")) {
+            document.getElementById("editCarForm").reset();
+            selectedFiles = [];
+            document.getElementById("imagePreviewContainer").innerHTML = "";
+            updateSummary();
+          }
+        }
+
+        // Form Submit
+        // document
+        //   .getElementById("editCarForm")
+        //   .addEventListener("submit", function (e) {
+        //     e.preventDefault();
+        //     alert("Car updated successfully! ✅");
+        //   });
+    </script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

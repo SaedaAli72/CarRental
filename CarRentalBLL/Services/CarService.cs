@@ -179,6 +179,7 @@ namespace CarRentalBLL.Services
 
 
                 _unitOfWork.cars.Update(car);
+               
                 return _unitOfWork.Save() > 0;
             }
             catch (Exception)

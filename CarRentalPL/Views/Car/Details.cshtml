@@ -77,7 +77,7 @@
                 <!-- Car Info -->
                 <div class="info-section">
                     <div class="car-category">@Model.Category.Name </div>
-                    <h2 class="car-name">@Model.Name @Model.ModelYear</h2>
+                    <h2 class="car-name d-flex justify-content-between">@Model.Name @Model.ModelYear   <a class="btn btn-primary" asp-controller="car" asp-action="edit" asp-route-id="@Model.Id">Edit</a> </h2>
                     <div class="rating">
                         <div class="stars">
                             <i class="fas fa-star"></i>
@@ -150,6 +150,8 @@
                             </div>
                         </div>
                     </div>
+
+
                 </div>
 
                 <!-- Features -->
