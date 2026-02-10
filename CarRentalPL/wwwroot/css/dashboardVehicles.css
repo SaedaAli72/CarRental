@@ -4,8 +4,8 @@
 }
 
 :root {
-    --primary-color: #5D5FEF;
-    --secondary-color: #7879F1;
+    --primary-color: #1572d3;
+    --secondary-color: #3d8fd9;
     --dark-color: #2C2D3F;
     --light-bg: #F8F9FB;
     --text-gray: #8B8D97;
@@ -53,7 +53,7 @@ body {
 }
 
     .btn-primary:hover {
-        background: #4a4cd4;
+        background: #0d5cb5;
     }
 
 .card {

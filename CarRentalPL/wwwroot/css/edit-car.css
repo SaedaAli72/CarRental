@@ -4,8 +4,8 @@
 }
 
 :root {
-    --primary-color: #5d5fef;
-    --secondary-color: #7879f1;
+    --primary-color: #1572d3;
+    --secondary-color: #3d8fd9;
     --dark-color: #2c2d3f;
     --light-bg: #f8f9fb;
     --text-gray: #8b8d97;
@@ -70,7 +70,7 @@ body {
     .form-control:focus,
     .form-select:focus {
         border-color: var(--primary-color);
-        box-shadow: 0 0 0 0.2rem rgba(93, 95, 239, 0.25);
+        box-shadow: 0 0 0 0.2rem rgba(21, 114, 211, 0.25);
     }
 
 .btn-primary {
@@ -82,7 +82,7 @@ body {
 }
 
     .btn-primary:hover {
-        background: #4a4cd4;
+        background: #0d5cb5;
     }
 
 .btn-outline-secondary {
@@ -150,8 +150,8 @@ body {
 }
 
     .upload-area:hover {
-        background: rgba(93, 95, 239, 0.05);
-        border-color: #4a4cd4;
+        background: rgba(21, 114, 211, 0.05));
+        border-color: #0d5cb5;
     }
 
     .upload-area i {

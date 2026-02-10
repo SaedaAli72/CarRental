@@ -3,8 +3,8 @@
 }
 
 :root {
-    --primary-color: #5D5FEF;
-    --secondary-color: #7879F1;
+    --primary-color: #1572d3;
+    --secondary-color: #3d8fd9;
     --dark-color: #2C2D3F;
     --light-bg: #F8F9FB;
     --text-gray: #8B8D97;
@@ -67,7 +67,7 @@ body {
 
     .sidebar-link:hover,
     .sidebar-link.active {
-        background: rgba(93, 95, 239, 0.1);
+        background: rgba(21, 114, 211, 0.1);
         color: var(--primary-color);
     }
 
@@ -149,7 +149,7 @@ body {
 }
 
 .badge-primary {
-    background: rgba(93, 95, 239, 0.1);
+    background: rgba(21, 114, 211, 0.1);
     color: var(--primary-color);
 }
 

@@ -3,8 +3,8 @@
 }
 
 :root {
-    --primary-color: #5D5FEF;
-    --secondary-color: #7879F1;
+    --primary-color: #1572d3;
+    --secondary-color: #3d8fd9;
     --dark-color: #2C2D3F;
     --light-bg: #F8F9FB;
     --text-gray: #8B8D97;
@@ -49,7 +49,7 @@ body {
 
     .btn-primary-custom:hover {
         transform: translateY(-2px);
-        background: #4a4cd4;
+        background: #0d5cb5;
     }
 
 .btn-outline-primary {
@@ -71,7 +71,7 @@ body {
 
 /* Page Header */
 .page-header {
-    background: linear-gradient(135deg, #5D5FEF 0%, #7879F1 100%);
+    background: linear-gradient(135deg, #1572d3 0%, #3d8fd9 100%);
     padding: 4rem 0 2rem;
     color: white;
 }
@@ -222,7 +222,7 @@ body {
     .form-control:focus,
     .form-select:focus {
         border-color: var(--primary-color);
-        box-shadow: 0 0 0 0.2rem rgba(93, 95, 239, 0.25);
+        box-shadow: 0 0 0 0.2rem rgba(21, 114, 211, 0.25);
     }
 
 /* Reviews List */
