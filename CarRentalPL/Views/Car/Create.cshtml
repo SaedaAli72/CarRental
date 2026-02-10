@@ -1,84 +1,100 @@
 ﻿@model CarRentalBLL.ViewModels.Car.CreateCarVM
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create Car";
     SelectList options = new SelectList(Model.Categories, "Id", "Name");
 }
 
-<h1>Create</h1>
+<div class="container py-5">
+    <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-header  text-white text-center rounded-top-4" style="background-color:#1572d3">
+            <h3 class="mb-0">Add New Car</h3>
+        </div>
 
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create" enctype="multipart/form-data">
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Brand" class="control-label"></label>
-                <input asp-for="Brand" class="form-control" />
-                <span asp-validation-for="Brand" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ModelYear" class="control-label"></label>
-                <input asp-for="ModelYear" class="form-control" />
-                <span asp-validation-for="ModelYear" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PlateNumber" class="control-label"></label>
-                <input asp-for="PlateNumber" class="form-control" />
-                <span asp-validation-for="PlateNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Color" class="control-label"></label>
-                <input asp-for="Color" class="form-control" />
-                <span asp-validation-for="Color" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Capacity" class="control-label"></label>
-                <input asp-for="Capacity" class="form-control" />
-                <span asp-validation-for="Capacity" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PricePerDay" class="control-label"></label>
-                <input asp-for="PricePerDay" class="form-control" />
-                <span asp-validation-for="PricePerDay" class="text-danger"></span>
-            </div>
-           @*  <div class="form-group">
-                <label asp-for="OwnerUserId" class="control-label"></label>
-                <input asp-for="OwnerUserId" class="form-control" />
-                <span asp-validation-for="OwnerUserId" class="text-danger"></span>
-            </div> *@
-            <div class="form-group">
-                @* <label asp-for="CategoryId" class="control-label"></label>
-                <select asp-for="CategoryId" class="form-control" />
-                <span asp-validation-for="CategoryId" class="text-danger"></span> *@
-                <label asp-for="CategoryId"></label>
-                <select asp-for="CategoryId" class="form form-control" asp-items="options">
-                    <option value="">-- Select Category --</option>
-                </select>
-                <span asp-validation-for="CategoryId" class="text-danger"></span>
+        <div class="card-body p-4">
 
-            </div>
-            <div class="form-group">
-                <label asp-for="CarImages" class="control-label"></label>
-                <input asp-for="CarImages" type="file" class="form-control" multiple />
-            </div>
+            <form asp-action="Create" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="All" class="text-danger mb-3"></div>
 
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Name" class="form-label fw-semibold"></label>
+                        <input asp-for="Name" class="form-control rounded-3" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Brand" class="form-label fw-semibold"></label>
+                        <input asp-for="Brand" class="form-control rounded-3" />
+                        <span asp-validation-for="Brand" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="ModelYear" class="form-label fw-semibold"></label>
+                        <input asp-for="ModelYear" class="form-control rounded-3" />
+                        <span asp-validation-for="ModelYear" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="PlateNumber" class="form-label fw-semibold"></label>
+                        <input asp-for="PlateNumber" class="form-control rounded-3" />
+                        <span asp-validation-for="PlateNumber" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="Color" class="form-label fw-semibold"></label>
+                        <input asp-for="Color" class="form-control rounded-3" />
+                        <span asp-validation-for="Color" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="Capacity" class="form-label fw-semibold"></label>
+                        <input asp-for="Capacity" class="form-control rounded-3" />
+                        <span asp-validation-for="Capacity" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="PricePerDay" class="form-label fw-semibold"></label>
+                        <input asp-for="PricePerDay" class="form-control rounded-3" />
+                        <span asp-validation-for="PricePerDay" class="text-danger"></span>
+                    </div>
+
+                    <!-- Category Dropdown -->
+                    <div class="col-md-4 mb-3">
+                        <label asp-for="CategoryId" class="form-label fw-semibold"></label>
+                        <select asp-for="CategoryId" class="form-select rounded-3" asp-items="options">
+                            <option value="">-- Select Category --</option>
+                        </select>
+                        <span asp-validation-for="CategoryId" class="text-danger"></span>
+                    </div>
+
+                    <!-- Upload Images -->
+                    <div class="col-12 mb-3">
+                        <label asp-for="CarImages" class="form-label fw-semibold"></label>
+                        <input asp-for="CarImages" type="file" class="form-control rounded-3" multiple />
+                    </div>
+
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <a asp-action="Index" class="btn btn-outline-secondary rounded-3 px-4">
+                        ⬅ Back
+                    </a>
+
+                    <button type="submit" class="btn  rounded-3 px-4" style="background-color:#1572d3">
+                        ➕ Create Car
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
