@@ -5,6 +5,7 @@ using CarRentalDAL.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace CarRentalPL.Controllers
 {
@@ -130,11 +131,11 @@ namespace CarRentalPL.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Guid id , EditCarVM carvm)
+        public async Task<IActionResult> Edit(Guid id , EditCarVM carvm)
         {
             if (ModelState.IsValid)
             {
-                _carService.UpdateCar(carvm);
+               await  _carService.UpdateCar(carvm);
                 return RedirectToAction("Index");
             }
             carvm.Categories = _categoryService.GetAllCategories(null);
