@@ -1,0 +1,226 @@
+﻿.my-header {
+    font-family: Poppins;
+    font-size: 48px;
+    font-weight: 600;
+    line-height: 48px;
+    text-align: left;
+}
+
+.my-frame {
+    top: 0;
+    right: 0;
+    z-index: -10;
+}
+
+.blue-text {
+    color: #1572d3;
+    position: relative;
+}
+
+.my-vector {
+    position: absolute;
+    bottom: -5px;
+    right: 0;
+}
+
+.my-p {
+    font-family: Poppins;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 27px;
+    text-align: left;
+    color: #272727;
+}
+
+.car {
+    right: 0;
+    bottom: 0;
+    width: inherit;
+    height: inherit;
+}
+
+.other {
+    height: auto;
+    margin: 0;
+    padding: 0;
+}
+/*/////////////////////////////*/
+.my-title {
+    font-family: Poppins;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    background: #1572D31A;
+    color: #1572D3;
+    width: fit-content;
+    border-radius: 5px;
+}
+
+
+
+.popular-deals h2 {
+    font-family: Poppins;
+    font-size: 38px;
+    font-weight: 500;
+    line-height: 49.4px;
+    text-align: left;
+}
+.show-all .btn {
+    border-radius: 25px;
+    padding: 10px 30px;
+    font-size: 1rem;
+}
+
+@import "//netdna.bootstrapcdn.com/font-awesome/3.0/css/font-awesome.css";
+
+
+
+.mainLoginInput::-webkit-input-placeholder {
+    font-family: FontAwesome;
+    font-weight: normal;
+    overflow: visible;
+    vertical-align: top;
+    display: inline-block !important;
+    padding-left: 5px;
+    padding-top: 2px;
+}
+
+.mainLoginInput::-moz-placeholder {
+    font-family: FontAwesome;
+    font-weight: normal;
+    overflow: visible;
+    vertical-align: top;
+    display: inline-block !important;
+    padding-left: 5px;
+    padding-top: 2px;
+    color: hsl(9, 40%, 60%);
+}
+
+.mainLoginInput:-ms-input-placeholder {
+    font-family: FontAwesome;
+    font-weight: normal;
+    overflow: visible;
+    vertical-align: top;
+    display: inline-block !important;
+    padding-left: 5px;
+    padding-top: 2px;
+    color: hsl(9, 40%, 60%);
+}
+/*//////////////*/
+.my-title {
+    font-family: Poppins;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    background: #1572D31A;
+    color: #1572D3;
+    width: fit-content;
+    border-radius: 5px;
+}
+
+.my-h2 {
+    font-family: Poppins;
+    font-size: 38px;
+    font-weight: 500;
+    line-height: 49.4px;
+    text-align: left;
+}
+
+.sm-title {
+    font-family: Poppins;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 30px;
+    text-align: center;
+    color: #000;
+}
+
+.my-details {
+    font-family: Poppins;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    text-align: center;
+    color: #6D6D6D;
+}
+
+/*/////////////////////////////*/
+
+.car-1 {
+    top: 25%;
+    left: 0;
+    height: inherit;
+    width: inherit;
+}
+
+.my-title {
+    font-family: Poppins;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    background: #1572D31A;
+    color: #1572D3;
+    width: fit-content;
+    border-radius: 5px;
+}
+
+.my-h2 {
+    font-family: Poppins;
+    font-size: 38px;
+    font-weight: 500;
+    line-height: 49.4px;
+    text-align: left;
+}
+
+.sm-title {
+    font-family: Poppins;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 30px;
+    text-align: start;
+    color: #000;
+}
+
+.my-details {
+    font-family: Poppins;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    text-align: start;
+    color: #6D6D6D;
+}
+
+/*/////////////////////////////*/
+.my-vector-2 {
+    z-index: -1;
+}
+
+.my-row {
+    min-height: 645px;
+}
+
+.my-header {
+    font-family: Poppins;
+    font-size: 48px;
+    font-weight: 600;
+    line-height: 48px;
+    text-align: left;
+}
+
+.blue-text {
+    color: #1572d3;
+    position: relative;
+}
+
+.my-p {
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: left;
+    color: #3e3e3e;
+}
+
+.my-input {
+    background: #CEDCFF;
+}

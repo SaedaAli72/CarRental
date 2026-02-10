@@ -4,8 +4,11 @@
 @{
     ViewData["Title"] = "Index";
 }
+@section Styles {
+    <link rel="stylesheet" href="~/css/home.css" />
+}
 
-<!-- Hero Section -->
+@* <!-- Hero Section -->
 <section class="hero-section" >
     <div class="container">
         <div class="row align-items-center">
@@ -68,5 +71,235 @@
            
         </div>
     </div>
-</section>
+</section> *@
+@* ////////////////////////////////////////////////////////////////// *@
+@* ////////////////////////////////////////////////////////////////// *@
+@* ////////////////////////////////////////////////////////////////// *@
+@* ////////////////////////////////////////////////////////////////// *@
+@* ////////////////////////////////////////////////////////////////// *@
+@* ////////////////////////////////////////////////////////////////// *@
+@* ////////////////////////////////////////////////////////////////// *@
 
+@* header *@
+<header>
+    <div class="container-fluid pe-0 position-relative w-100">
+        <div class="row pe-0 w-100 mx-0">
+            <div class="container-fluid py-4 pe-0 w-100">
+                <div class="row py-4 w-100 mx-0">
+                    <div class="col-lg-4 d-flex align-items-center justify-content-end the-header px-4 " style="height: 460px;">
+
+                        <div>
+                            <h2 class="my-header px-4">Find, book and rent a car <span class="blue-text">Easily <img class="my-vector" src="~/DesignImades/Vector 1.png" alt="vector"></span></h2>
+
+                            <p class="my-p py-4 px-4">Get a car wherever and whenever you need it with your IOS and Android device.</p>
+                            <div class="d-flex my-gap-1 px-4">
+                                <img src="~/DesignImades/image 2.png" alt="google-play">
+                                <img src="~/DesignImades/image 3.png" alt="app-store">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 position-relative other" style="height: 460px;">
+
+                        <img class="car position-absolute" src="~/DesignImades/car 2 1.png" alt="car-header">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <img class="position-absolute my-frame"  src="~/DesignImades/Frame.png" alt="Frame">
+    </div>
+</header>
+  
+<main>
+
+    @* cars *@
+    
+    <div class="container mb-4 pb-4">
+        <div class="row">
+
+            <!-- Popular Rental Deals Section -->
+            <section class="popular-deals">
+                <div class="container-fluid">
+                    <div class="text-center mb-4 d-flex flex-column align-items-center my-gap-2">
+                        <p class="my-title m-0 p-2">POPULAR RENTAL DEALS</p>
+
+                        <h2>Most popular cars rental deals</h2>
+                    </div>
+                    <div class="row">
+                        @foreach (var item in Model){
+                        <partial name="_CarList" model="item" />
+                        }
+                    </div>
+                </div>
+                <!-- Repeat for other car cards -->
+        </div>
+    </div>
+    <!-- Show All Vehicles Section -->
+    <section class="show-all py-4 text-center mb-4 ">
+        <a asp-action="Index" asp-controller="Car" class="btn btn-outline-secondary" style="border-radius: 10px;">
+            Show all vehicles <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" />
+            </svg>
+        </a>
+    </section>
+
+
+    @* how it work section *@
+    <div class="container py-4">
+        <div class="row">
+            <div class="text-center mb-4 d-flex flex-column align-items-center my-gap-2">
+                <p class="my-title m-0 p-2">HOW IT WORK</p>
+
+                <h2 class="my-h2">Rent with following 3 working steps</h2>
+            </div>
+        </div>
+        <div class="row py-5">
+            <div class="col-md-4 text-center">
+                <div class="py-5"><img src="~/DesignImades/icon _car_.png" alt="" /></div>
+                <h3 class="sm-title">Choose location</h3>
+                <p class="my-details">Choose your and find your best car</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="py-5"><img src="~/DesignImades/icon _car_2.png" alt="" /></div>
+                <h3 class="sm-title">Pick-up date</h3>
+                <p class="my-details">
+                    Select your pick up date and
+                    time to book your car
+                </p>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="py-5"><img src="~/DesignImades/icon _car_3.png" alt="" /></div>
+                <h3 class="sm-title">Book your car</h3>
+                <p class="my-details">
+                    Book your car and we will deliver
+                    it directly to you
+                </p>
+            </div>
+        </div>
+        <div class="row align-items-center py-5">
+            <div class="col-lg-3 col-md-6 d-flex justify-content-center py-3">
+                <img src="~/DesignImades/Group (1).png" alt="car">
+            </div>
+            <div class="col-lg-3 col-md-6 d-flex justify-content-center py-3">
+                <img src="~/DesignImades/Frame 25.png" alt="car">
+            </div>
+            <div class="col-lg-3 col-md-6 d-flex justify-content-center py-3">
+                <img src="~/DesignImades/Frame 26.png" alt="car">
+            </div>
+            <div class="col-lg-3 col-md-6 d-flex justify-content-center py-3">
+                <img src="~/DesignImades/Frame 27.png" alt="car">
+            </div>
+        </div>
+    </div>
+
+    @* why choose us section *@
+    <div class="container-fluid py-5">
+        <div class="row position-relative">
+            <div class="col-lg-6 ps-0">
+                <img src="~/DesignImades/Vector.png" alt="bg-vector">
+                <img src="~/DesignImades/Audi 1.png" alt="sec-car" class="position-absolute car-1">
+            </div>
+            <div class="col-lg-6">
+                <div class="text-center mb-4 d-flex flex-column align-items-start my-gap-2">
+                    <p class="my-title m-0 p-2">WHY CHOOSE US</p>
+
+                    <h2 class="my-h2">We offer the best experience with our rental deals</h2>
+                </div>
+                <div class="container">
+                    <div class="row align-items-center py-2">
+                        <div class="col-2"><img src="~/DesignImades/Frame 35.png" alt="icon"></div>
+                        <div class="col-10 text-srart">
+                            <h3 class="sm-title">Best price guaranteed</h3>
+                            <p class="my-details">
+                                Find a lower price? We’ll refund you 100%
+                                of the difference.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row align-items-center py-2">
+                        <div class="col-2"><img src="~/DesignImades/frame30.png" alt="icon"></div>
+                        <div class="col-10 text-srart">
+                            <h3 class="sm-title">Experience driver</h3>
+                            <p class="my-details">
+                                Don’t have driver? Don’t worry, we have many
+                                experienced driver for you.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row align-items-center py-2">
+                        <div class="col-2"><img src="~/DesignImades/24h.png" alt="icon"></div>
+                        <div class="col-10 text-srart">
+                            <h3 class="sm-title">24 hour car delivery</h3>
+                            <p class="my-details">
+                                Book your car anytime and we will deliver it
+                                directly to you..
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row align-items-center py-2">
+                        <div class="col-2"><img src="~/DesignImades/supp.png" alt="icon"></div>
+                        <div class="col-10 text-srart">
+                            <h3 class="sm-title">24/7 technical support</h3>
+                            <p class="my-details">
+                                Have a question? Contact Rentcars support
+                                any time when you have problem.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @* downloads *@
+
+    <div class="container-fluid pt-5">
+        <div class="row my-row">
+            <div class="col-lg-6 ps-0 d-flex flex-column justify-content-around">
+                <img src="~/DesignImades/Vector (1).png"
+                     alt="Vector"
+                     class="my-vector-2 position-absolute" />
+                <div class="d-flex flex-column justify-content-around align-items-center">
+                    <h2 class="my-header px-4 w-75">
+                        Find, book and rent a car <span class="blue-text">Easily </span>
+                    </h2>
+
+                    <p class="my-p py-4 px-4  w-75">
+                        For faster, easier booking and exclusive deals.
+                    </p>
+                    <div class="d-flex my-gap-1 px-4  w-75">
+                        <img src="~/DesignImades/image 2.png" alt="google-play" />
+                        <img src="~/DesignImades/image 3.png" alt="app-store" />
+                    </div>
+                </div>
+                <div class="py-5">
+                    <div class="py-2 d-flex justify-content-center">
+                        <input type="text"
+                               class="form-control my-input w-50 py-2 rounded-pill"
+                               placeholder="Name" />
+                    </div>
+                    <div class="py-2 d-flex justify-content-center">
+                        <input type="text"
+                               class="form-control my-input w-50 py-2 rounded-pill"
+                               placeholder="Phone Number" />
+                    </div>
+                    <div class="py-2 d-flex justify-content-center">
+                        <input type="text"
+                               class="form-control my-input w-50 py-2 rounded-pill"
+                               placeholder="Email" />
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button class="btn btn-primary px-5" type="button">
+                            Send
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-6 d-flex justify-content-center align-items-end">
+                <img src="~/DesignImades/iPhone 14 Pro Space Black Mockup.png" alt="iPhone">
+            </div>
+
+
+        </div>
+    </div>
+</main>

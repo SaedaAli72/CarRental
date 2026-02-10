@@ -19,7 +19,7 @@ namespace CarRentalPL.Controllers
         public IActionResult Index()
         {
 
-            var cars = _carService.GetAllCars(null).Take(3);
+            var cars = _carService.GetAllAvailableCars(null).Take(3);
             return View("index", cars);
         }
     }

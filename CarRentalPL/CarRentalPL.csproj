@@ -19,4 +19,8 @@
     <ProjectReference Include="..\CarRentalBLL\CarRentalBLL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\DesignImades\" />
+  </ItemGroup>
+
 </Project>

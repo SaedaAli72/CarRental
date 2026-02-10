@@ -250,6 +250,7 @@ namespace CarRentalBLL.Services
         {
             var query = _unitOfWork.cars
                 .GetAll()
+                .Where(c => c.Status == CarStatus.Available)
                 .Include(c => c.Category)
                 .Include(c => c.CarImages)
                 .AsQueryable();
