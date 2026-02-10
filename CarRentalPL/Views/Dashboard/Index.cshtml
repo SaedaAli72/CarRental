@@ -76,18 +76,17 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Revenue Overview</h3>
-                <select class="form-select" style="width: auto;">
+                <select class="form-select" id="revenueFilter" style="width: auto;">
                     <option>Last 7 Days</option>
                     <option>Last 30 Days</option>
                     <option>Last 3 Months</option>
                     <option>Last Year</option>
                 </select>
             </div>
-            <div class="chart-container">
-                <i class="fas fa-chart-line" style="font-size: 3rem;"></i>
+            <div class="chart-container" style="position: relative; height: 300px; padding: 1.5rem;">
+                <canvas id="revenueChart"></canvas>
             </div>
         </div>
-
         <!-- Popular Cars -->
         <div class="card">
             <div class="card-header">
@@ -163,3 +162,71 @@
         </div>
     </div>
 </div>
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script>
+        const ctx = document.getElementById('revenueChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [{
+                    label: 'Revenue (EGP)',
+                    data: [4200, 5800, 3200, 6500, 7200, 8900, 5400],
+                    borderColor: '#667eea',
+                    backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 5,
+                    pointHoverRadius: 7,
+                    pointBackgroundColor: '#667eea',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                        padding: 12,
+                        titleFont: {
+                            size: 14
+                        },
+                        bodyFont: {
+                            size: 13
+                        },
+                        callbacks: {
+                            label: function(context) {
+                                return 'Revenue: ' + context.parsed.y.toLocaleString() + ' EGP';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return value.toLocaleString() + ' EGP';
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.05)'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+}

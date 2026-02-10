@@ -1,4 +1,5 @@
-﻿using CarRentalDAL.Entities;
+﻿using CarRentalBLL.ViewModels.Payment;
+using CarRentalDAL.Entities;
 using CarRentalDAL.Enums;
 using System;
 using System.Collections.Generic;
@@ -14,5 +15,6 @@ namespace CarRentalBLL.Services.Interface
         Payment GetPaymentById(Guid id);
         Payment UpdatePayment(Payment payment);
         List<Payment> GetPaymentsByRentalId(Guid rentalId);
+        IQueryable<Paymentcard> GetAllPayments();
     }
 }

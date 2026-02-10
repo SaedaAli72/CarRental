@@ -1,7 +1,10 @@
-﻿using CarRentalBLL.Services.Interface;
+﻿using CarRentalBLL.Mapping.Payment;
+using CarRentalBLL.Services.Interface;
+using CarRentalBLL.ViewModels.Payment;
 using CarRentalDAL.Entities;
 using CarRentalDAL.Enums;
 using CarRentalDAL.UnitOfWork;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +45,13 @@ namespace CarRentalBLL.Services
 
             return payment;
         }
+        public IQueryable<Paymentcard> GetAllPayments()
+        {
+            return _unitOfWork.payments.GetAll().Include(p => p.Rental)
+            .ThenInclude(r => r.CustomerUser)
+            .Include(p => p.Rental)
+            .ThenInclude(r => r.Car).Select(p=>p.MapToPaymentCardVM());
+        }
 
         public List<Payment> GetPaymentsByRentalId(Guid rentalId)
         {
@@ -50,5 +60,7 @@ namespace CarRentalBLL.Services
                 .OrderByDescending(p => p.PaymentDate)
                 .ToList();
         }
+
+       
     }
 }

@@ -1,0 +1,126 @@
+﻿@model IEnumerable<CarRentalBLL.ViewModels.Rental.RentalCardVM>
+
+@{
+    ViewData["Title"] = "GetRentalDashboard";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+   
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/RentalDashboard.css">
+}
+
+<!-- Main Content -->
+<div class="my-3">
+    <div class="page-header">
+        <h1 class="page-title">Rentals</h1>
+        <p class="page-subtitle">Manage all rental bookings</p>
+    </div>
+
+    <!-- Filter Tabs -->
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link active" href="#">All Rentals</a>
+        </li>
+        @* <li class="nav-item">
+            <a class="nav-link" href="#">Active</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Completed</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Pending</a>
+        </li> *@
+    </ul>
+
+    <!-- Rentals Table -->
+    <div class="card">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Rental ID</th>
+                            <th>Customer</th>
+                            <th>Car</th>
+                            <th>Pick-up Date</th>
+                            <th>Return Date</th>
+                            <th>Days</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+
+                            <tr>
+                                <td ><strong>@item.Id</strong></td>
+                                <td>@item.CustomerUserId</td>
+                                <td>@item.Car.Name</td>
+                                <td>@item.RentalDate</td>
+                                <td>@item.ReturnDate</td>
+                                <td>@((item.ReturnDate - item.RentalDate).Days) days</td>
+                                <td><strong>@( (item.ReturnDate - item.RentalDate).Days * item.Car.PricePerDay ) EGP</strong></td>
+                                <td>
+                                    @if (item.Status.ToString() == "Active")
+                                    {
+                                        <span class="badge badge-success">Active</span>
+                                    }
+                                    else if (item.Status.ToString() == "Completed")
+                                    {
+                                        <span class="badge badge-primary">Completed</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-warning">Pending</span>
+                                    }
+                                </td>
+                                <td>
+                                    <a asp-action="Details" asp-route-id="@item.Id"
+                                       class="btn btn-sm btn-outline-primary">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                       
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -17,6 +17,7 @@ namespace CarRentalBLL.ViewModels.UserDocument
         public string? Address { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
+       
 
         public List<CarRentalDAL.Entities.UserDocument>? UserDocuments { get; set; } = default!;
 

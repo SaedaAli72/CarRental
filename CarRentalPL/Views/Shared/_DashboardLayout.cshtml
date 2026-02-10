@@ -510,9 +510,16 @@
             <h3><i class="fas fa-car"></i> Car Rental</h3>
         </div>
 
+        @{
+            var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+            var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+        }
+
+
         <ul class="sidebar-menu">
             <li>
-                <a href="/admin/dashboard" class="sidebar-link active">
+                <a asp-action="index" asp-controller="Dashboard" 
+                class="sidebar-link @(currentController == "Dashboard" ? "active" : "")">
                     <i class="fas fa-home"></i>
                     <span>Dashboard</span>
                 </a>
@@ -524,13 +531,15 @@
                 </a>
             </li>
             <li>
-                <a href="/admin/rentals" class="sidebar-link">
+                <a asp-action="GetRentalDashboard" asp-controller="RentalDashboard"
+                   class="sidebar-link @(currentController == "RentalDashboard" ? "active" : "")">
                     <i class="fas fa-calendar-check"></i>
                     <span>Rentals</span>
                 </a>
             </li>
             <li>
-                <a href="/admin/customers" class="sidebar-link">
+                <a href="/admin/customers"
+                class="sidebar-link">
                     <i class="fas fa-users"></i>
                     <span>Customers</span>
                 </a>
@@ -542,7 +551,8 @@
                 </a>
             </li>
             <li>
-                <a href="/admin/payments" class="sidebar-link">
+                <a asp-action="Index" asp-controller="Paymentdashboard"
+                   class="sidebar-link @(currentController == "Paymentdashboard" ? "active" :"")">
                     <i class="fas fa-credit-card"></i>
                     <span>Payments</span>
                 </a>
